@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get in Touch | EveryTool.tech</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background: var(--bg-secondary, #f9fafb);
+        }
+        .contact-container {
+            max-width: 900px;
+            margin: 3rem auto;
+            background: var(--glass-bg, rgba(255,255,255,0.7));
+            border-radius: 2rem;
+            box-shadow: 0 8px 32px rgba(67,97,238,0.10);
+            padding: 2.5rem 2rem;
+            display: flex;
+            gap: 3rem;
+            flex-wrap: wrap;
+            animation: fadeInUp 0.7s cubic-bezier(0.4,0,0.2,1);
+        }
+        .contact-form-section {
+            flex: 2 1 340px;
+            min-width: 0;
+        }
+        .contact-info-section {
+            flex: 1 1 220px;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            gap: 2.5rem;
+            background: rgba(255,255,255,0.5);
+            border-radius: 1.5rem;
+            padding: 2rem 1.5rem;
+            box-shadow: 0 2px 12px rgba(67,97,238,0.06);
+            margin-top: 2.5rem;
+            height: fit-content;
+        }
+        .contact-title {
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--primary, #4361EE);
+            margin-bottom: 0.5rem;
+        }
+        .contact-subtitle {
+            color: #4B5563;
+            font-size: 1.1rem;
+            margin-bottom: 2.5rem;
+        }
+        .contact-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            animation: slideUp 0.7s cubic-bezier(0.4,0,0.2,1);
+        }
+        .contact-form label {
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 0.4rem;
+        }
+        .contact-form input, .contact-form textarea {
+            width: 100%;
+            padding: 1rem 1.2rem;
+            border-radius: 1.2rem;
+            border: 1.5px solid #dfe1e5;
+            background: rgba(255,255,255,0.85);
+            font-size: 1rem;
+            color: #333;
+            transition: border 0.2s, box-shadow 0.2s, background 0.2s;
+            outline: none;
+            resize: none;
+        }
+        .contact-form input:focus, .contact-form textarea:focus {
+            border: 1.5px solid var(--primary, #4361EE);
+            box-shadow: 0 2px 12px rgba(67,97,238,0.10);
+            background: #f3f6fd;
+        }
+        .contact-form input:hover, .contact-form textarea:hover {
+            border: 1.5px solid var(--primary-light, #6b83f1);
+        }
+        .contact-form textarea {
+            min-height: 120px;
+            max-height: 300px;
+        }
+        .contact-form .form-error {
+            color: #e74c3c;
+            font-size: 0.97rem;
+            margin-top: -1rem;
+            margin-bottom: 0.5rem;
+            display: none;
+        }
+        .contact-form .form-error.visible {
+            display: block;
+        }
+        .contact-form button[type="submit"] {
+            background: linear-gradient(135deg, var(--primary, #4361EE), var(--primary-dark, #3F37C9));
+            color: #fff;
+            font-weight: 700;
+            font-size: 1.1rem;
+            border: none;
+            border-radius: 2rem;
+            padding: 1rem 2.5rem;
+            margin-top: 0.5rem;
+            box-shadow: 0 2px 8px rgba(67,97,238,0.10);
+            cursor: pointer;
+            transition: background 0.2s, box-shadow 0.2s, transform 0.18s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.7rem;
+        }
+        .contact-form button[type="submit"]:hover, .contact-form button[type="submit"]:focus {
+            background: linear-gradient(135deg, var(--primary-dark, #3F37C9), var(--primary, #4361EE));
+            transform: scale(1.045);
+            box-shadow: 0 4px 16px rgba(67,97,238,0.18);
+        }
+        .contact-info-section h3 {
+            color: var(--primary, #4361EE);
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .contact-info-section .info-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1.05rem;
+            color: #333;
+        }
+        .contact-info-section .info-item i {
+            color: var(--primary, #4361EE);
+            font-size: 1.3rem;
+        }
+        @media (max-width: 900px) {
+            .contact-container {
+                flex-direction: column;
+                gap: 2rem;
+                padding: 2rem 0.5rem;
+            }
+            .contact-info-section {
+                margin-top: 0;
+                padding: 1.5rem 1rem;
+            }
+        }
+        @media (max-width: 600px) {
+            .contact-title {
+                font-size: 1.5rem;
+            }
+            .contact-container {
+                padding: 1rem 0.2rem;
+            }
+        }
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header__container">
+            <a href="/" class="header__logo">
+                <img src="assets/logo-icon.png" alt="Everytool" class="header__logo-img">
+            </a>
+            <nav class="header__nav">
+                <button class="header__mobile-menu" aria-label="Toggle menu" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="header__nav-list">
+                    <li><a href="/" class="header__nav-link">Home</a></li>
+                    <li><a href="/categories" class="header__nav-link">Categories</a></li>
+                    <li><a href="/contact" class="header__nav-link">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <div class="contact-container">
+            <section class="contact-form-section">
+                <h1 class="contact-title">Get in Touch</h1>
+                <p class="contact-subtitle">We'd love to hear your feedback or questions!</p>
+                <form class="contact-form" id="contactForm" novalidate autocomplete="off">
+                    <div>
+                        <label for="contact-name">Name</label>
+                        <input type="text" id="contact-name" name="name" required autocomplete="off" placeholder="Your Name">
+                        <div class="form-error" id="error-name"></div>
+                    </div>
+                    <div>
+                        <label for="contact-email">Email</label>
+                        <input type="email" id="contact-email" name="email" required autocomplete="off" placeholder="you@email.com">
+                        <div class="form-error" id="error-email"></div>
+                    </div>
+                    <div>
+                        <label for="contact-message">Message</label>
+                        <textarea id="contact-message" name="message" required placeholder="Type your message..."></textarea>
+                        <div class="form-error" id="error-message"></div>
+                    </div>
+                    <button type="submit"><i class="fas fa-paper-plane"></i>Send Message</button>
+                </form>
+            </section>
+            <aside class="contact-info-section">
+                <div>
+                    <h3>Contact Info</h3>
+                    <div class="info-item"><i class="fas fa-envelope"></i> <span>support@everytool.tech</span></div>
+                    <div class="info-item"><i class="fas fa-map-marker-alt"></i> <span>India</span></div>
+                </div>
+            </aside>
+        </div>
+    </main>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="faq-header">
+                <h2 class="faq-title">Frequently Asked Questions</h2>
+                <p class="faq-subtitle">Find quick answers to common questions about contacting us.</p>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How quickly will I receive a response?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>I typically respond to all inquiries within 24-48 hours during business days. For urgent matters, please include "URGENT" in your subject line.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What information should I include in my message?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>To help us assist you better, please include:</p>
+                        <ul>
+                            <li>Your name and contact information</li>
+                            <li>Clear description of your question or issue</li>
+                            <li>Any relevant screenshots or error messages</li>
+                            <li>Browser and device information if reporting a technical issue</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Can I report a bug or suggest a feature?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! We welcome all feedback. When reporting a bug, please include:</p>
+                        <ul>
+                            <li>Steps to reproduce the issue</li>
+                            <li>Expected vs actual behavior</li>
+                            <li>Screenshots or screen recordings if possible</li>
+                            <li>Your browser and device information</li>
+                        </ul>
+                        <p>For feature suggestions, please explain how it would benefit users. You can also check our <a href="/tools-page">Tools page</a> to see what's already available.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Do you offer technical support?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes, we provide technical support for all our tools. Our support team can help with:</p>
+                        <ul>
+                            <li>Tool usage questions</li>
+                            <li>Technical issues</li>
+                            <li>Browser compatibility problems</li>
+                            <li>General troubleshooting</li>
+                        </ul>
+                        <p>For specific tool issues, please visit the tool's page on our <a href="/tools-page">Tools page</a> for detailed documentation.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How can I stay updated about new features?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>You can stay updated by:</p>
+                        <ul>
+                            <li>Following us on social media</li>
+                            <li>Subscribing to our newsletter</li>
+                            <li>Checking our <a href="/tools-page">Tools page</a> for new additions</li>
+                            <li>Visiting our website regularly</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer__container">
+            <div class="footer__content">
+                <div class="footer__brand">
+                    <a href="/" class="footer__logo">Everytool</a>
+                    <p class="footer__tagline">Your all-in-one solution for everyday tools</p>
+                </div>
+                <nav class="footer__nav">
+                    <ul class="footer__nav-list">
+                        <li><a href="/about" class="footer__nav-link">About</a></li>
+                        <li><a href="/contact" class="footer__nav-link">Contact</a></li>
+                        <li><a href="/privacy" class="footer__nav-link">Privacy Policy</a></li>
+                        <li><a href="/terms" class="footer__nav-link">Terms of Service</a></li>
+                    </ul>
+                </nav>
+                <div class="footer__social">
+                    <a href="#" class="footer__social-link" aria-label="Follow us on Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="footer__social-link" aria-label="Follow us on LinkedIn">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="#" class="footer__social-link" aria-label="Follow us on GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p class="footer__copyright">
+                    © <span class="current-year">2024</span> Everytool.tech. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+    <script>
+    // Micro-animation for form elements
+    document.addEventListener('DOMContentLoaded', () => {
+        const form = document.querySelector('.contact-form');
+        if (form) {
+            Array.from(form.elements).forEach((el, i) => {
+                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.tagName === 'BUTTON') {
+                    el.style.opacity = 0;
+                    el.style.transform = 'translateY(30px)';
+                    setTimeout(() => {
+                        el.style.transition = 'opacity 0.5s cubic-bezier(0.4,0,0.2,1), transform 0.5s cubic-bezier(0.4,0,0.2,1)';
+                        el.style.opacity = 1;
+                        el.style.transform = 'translateY(0)';
+                    }, 200 + i * 90);
+                }
+            });
+        }
+    });
+    // Client-side validation
+    document.getElementById('contactForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        let valid = true;
+        const name = document.getElementById('contact-name');
+        const email = document.getElementById('contact-email');
+        const message = document.getElementById('contact-message');
+        const errorName = document.getElementById('error-name');
+        const errorEmail = document.getElementById('error-email');
+        const errorMessage = document.getElementById('error-message');
+        // Reset errors
+        [errorName, errorEmail, errorMessage].forEach(e => { e.textContent = ''; e.classList.remove('visible'); });
+        // Name validation
+        if (!name.value.trim()) {
+            errorName.textContent = 'Please enter your name.';
+            errorName.classList.add('visible');
+            valid = false;
+        }
+        // Email validation
+        if (!email.value.trim()) {
+            errorEmail.textContent = 'Please enter your email.';
+            errorEmail.classList.add('visible');
+            valid = false;
+        } else if (!/^\S+@\S+\.\S+$/.test(email.value.trim())) {
+            errorEmail.textContent = 'Please enter a valid email address.';
+            errorEmail.classList.add('visible');
+            valid = false;
+        }
+        // Message validation
+        if (!message.value.trim()) {
+            errorMessage.textContent = 'Please enter your message.';
+            errorMessage.classList.add('visible');
+            valid = false;
+        }
+        if (valid) {
+            // Simulate successful submission
+            this.reset();
+            alert('Thank you for contacting us! We will get back to you soon.');
+        }
+    });
+    </script>
+    <script src="script.js" defer></script>
+    <script src="faq.js" defer></script>
+</body>
+</html> 

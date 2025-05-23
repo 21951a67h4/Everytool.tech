@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About EveryTool.tech</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            background: var(--bg-secondary, #f9fafb);
+        }
+        .about-hero {
+            background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(240,242,245,0.9));
+            padding: 5rem 0 3rem 0;
+            text-align: center;
+            margin-bottom: 2.5rem;
+        }
+        .about-hero-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary, #4361EE);
+            margin-bottom: 1rem;
+            opacity: 0;
+            animation: fadeInUp 0.7s 0.1s forwards;
+        }
+        .about-hero-subtitle {
+            color: #4B5563;
+            font-size: 1.25rem;
+            margin-bottom: 0;
+            opacity: 0;
+            animation: fadeInUp 0.7s 0.3s forwards;
+        }
+        .about-section {
+            max-width: 800px;
+            margin: 0 auto 3.5rem auto;
+            background: var(--glass-bg, rgba(255,255,255,0.7));
+            border-radius: 1.5rem;
+            box-shadow: 0 4px 24px rgba(67,97,238,0.08);
+            padding: 2.5rem 2rem;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1), transform 0.7s cubic-bezier(0.4,0,0.2,1);
+        }
+        .about-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .about-section-title {
+            color: var(--primary, #4361EE);
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.2rem;
+        }
+        .about-section-content {
+            color: #333;
+            font-size: 1.08rem;
+            line-height: 1.7;
+            margin-bottom: 0.5rem;
+        }
+        .about-mission-list {
+            margin: 1.5rem 0 0 0;
+            padding-left: 1.2rem;
+        }
+        .about-mission-list li {
+            color: var(--primary-dark, #3F37C9);
+            font-weight: 600;
+            margin-bottom: 0.7rem;
+            font-size: 1.08rem;
+            position: relative;
+            opacity: 0;
+            left: -20px;
+            animation: slideInLeft 0.7s forwards;
+        }
+        .about-mission-list li:nth-child(1) { animation-delay: 0.2s; }
+        .about-mission-list li:nth-child(2) { animation-delay: 0.4s; }
+        .about-mission-list li:nth-child(3) { animation-delay: 0.6s; }
+        .about-section-behind {
+            background: rgba(67,97,238,0.07);
+            border-radius: 1rem;
+            padding: 1.5rem 1.2rem;
+            margin-top: 1.5rem;
+            color: #333;
+            font-size: 1.05rem;
+            box-shadow: 0 2px 8px rgba(67,97,238,0.06);
+        }
+        .about-who-section {
+            max-width: 800px;
+            margin: 0 auto 3.5rem auto;
+            background: var(--glass-bg, rgba(255,255,255,0.7));
+            border-radius: 1.5rem;
+            box-shadow: 0 4px 24px rgba(67,97,238,0.08);
+            padding: 2.5rem 2rem;
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1), transform 0.7s cubic-bezier(0.4,0,0.2,1);
+        }
+        .about-who-section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .about-profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            object-position: 50% 35%;
+            box-shadow: 0 2px 12px rgba(67,97,238,0.13);
+            border: 3px solid var(--primary, #4361EE);
+            background: #fff;
+        }
+        .about-profile-content {
+            flex: 1;
+        }
+        .about-profile-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--primary-dark, #3F37C9);
+            margin-bottom: 0.3rem;
+        }
+        .about-profile-role {
+            color: #4B5563;
+            font-size: 1.05rem;
+            margin-bottom: 0.7rem;
+        }
+        .about-profile-story {
+            color: #333;
+            font-size: 1.08rem;
+            line-height: 1.7;
+        }
+        @media (max-width: 600px) {
+            .about-hero-title { font-size: 1.5rem; }
+            .about-section { padding: 1.2rem 0.7rem; }
+        }
+        @media (max-width: 700px) {
+            .about-who-section {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 1.5rem;
+                padding: 1.5rem 0.7rem;
+            }
+            .about-profile-img {
+                width: 120px;
+                height: 120px;
+                border-radius: 50%;
+                object-fit: cover;
+                object-position: 50% 60%; /* Default: center */
+   }
+            }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes slideInLeft {
+            from { opacity: 0; left: -20px; }
+            to { opacity: 1; left: 0; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header__container">
+            <a href="/" class="header__logo">
+                <img src="assets/logo-icon.png" alt="Everytool" class="header__logo-img">
+            </a>
+            <nav class="header__nav">
+                <button class="header__mobile-menu" aria-label="Toggle menu" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+                <ul class="header__nav-list">
+                    <li><a href="/" class="header__nav-link">Home</a></li>
+                    <li><a href="/categories" class="header__nav-link">Categories</a></li>
+                    <li><a href="/contact" class="header__nav-link">Contact</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <main>
+        <section class="about-hero">
+            <h1 class="about-hero-title">About EveryTool.tech</h1>
+            <p class="about-hero-subtitle">Simple, free tools built for everyone.</p>
+        </section>
+        <section class="about-who-section" id="about-who">
+            <img src="assets/profile-placeholder.jpg" alt="Your Name" class="about-profile-img">
+            <div class="about-profile-content">
+                <div class="about-profile-name">Gubba Varshith</div>
+                <div class="about-profile-role">Founder & Builder</div>
+                <div class="about-profile-story">
+                    Hi! I'm varshith, the creator of EveryTool.tech. I'm passionate about building simple, useful tools that help people get things done faster. <br><br>
+                    My background is in web development and product design, and I love turning ideas into real, user-friendly products. This site is my way of sharing that passion with the world.<br><br>
+                    (You can update this story with your real bio and achievements!)
+                </div>
+            </div>
+        </section>
+        <section class="about-section" id="about-story">
+            <h2 class="about-section-title">Our Story</h2>
+            <div class="about-section-content">
+                EveryTool.tech was started with a simple idea: <b>make daily tools accessible, fast, and frustration-free</b>.<br>
+                <br>
+                Tired of cluttered, ad-heavy, and slow online utilities, we set out to build a platform where <b>anyone</b> can get things done—without distractions.<br>
+                <br>
+                Our focus is on a clean UI, zero ads, and lightning-fast performance. We believe everyone deserves tools that just work.
+            </div>
+        </section>
+        <section class="about-section" id="about-mission">
+            <h2 class="about-section-title">Our Mission</h2>
+            <ul class="about-mission-list">
+                <li>Empower users with daily-use tools</li>
+                <li>100% free and privacy-friendly</li>
+                <li>Continuously expanding with new tools</li>
+            </ul>
+        </section>
+        <section class="about-section" id="about-behind">
+            <h2 class="about-section-title">Behind the Scenes</h2>
+            <div class="about-section-behind">
+                EveryTool.tech is built using a mix of <b>AI-assisted development</b> and real user feedback. We're always improving—so your suggestions help shape the future of our platform!
+            </div>
+        </section>
+    </main>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="faq-header">
+                <h2 class="faq-title">Frequently Asked Questions</h2>
+                <p class="faq-subtitle">Learn more about EveryTool.tech and our mission.</p>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What is EveryTool.tech?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>EveryTool.tech is a comprehensive platform offering a wide range of free online tools designed to help you with various tasks. From text manipulation to file conversion, we provide easy-to-use tools that make your work more efficient. Check out our <a href="/tools-page">Tools page</a> to explore all available tools.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>What is our mission?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Our mission is to provide high-quality, free tools that help people work more efficiently. We believe in making technology accessible to everyone, regardless of their technical expertise. Visit our <a href="/tools-page">Tools page</a> to see how we're achieving this mission.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>Who is behind EveryTool.tech?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>EveryTool.tech is built and maintained by a team of passionate developers and designers who are committed to creating useful tools for the community. Our team has extensive experience in web development and user experience design. Learn more about our team on our <a href="/about">About page</a>.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How can I contribute?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>There are several ways you can contribute:</p>
+                        <ul>
+                            <li>Report bugs or suggest improvements through our <a href="/contact">Contact page</a></li>
+                            <li>Share our tools with others</li>
+                            <li>Provide feedback on existing tools</li>
+                            <li>Suggest new tools or features</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <h3>How can I get in touch with the team?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>You can reach us through our <a href="/contact">Contact page</a>. We're always happy to hear from our users and respond to all inquiries as quickly as possible.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer__container">
+            <div class="footer__content">
+                <div class="footer__brand">
+                    <a href="/" class="footer__logo">Everytool</a>
+                    <p class="footer__tagline">Your all-in-one solution for everyday tools</p>
+                </div>
+                <nav class="footer__nav">
+                    <ul class="footer__nav-list">
+                        <li><a href="/about" class="footer__nav-link">About</a></li>
+                        <li><a href="/contact" class="footer__nav-link">Contact</a></li>
+                        <li><a href="/privacy" class="footer__nav-link">Privacy Policy</a></li>
+                        <li><a href="/terms" class="footer__nav-link">Terms of Service</a></li>
+                    </ul>
+                </nav>
+                <div class="footer__social">
+                    <a href="#" class="footer__social-link" aria-label="Follow us on Twitter">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#" class="footer__social-link" aria-label="Follow us on LinkedIn">
+                        <i class="fab fa-linkedin"></i>
+                    </a>
+                    <a href="#" class="footer__social-link" aria-label="Follow us on GitHub">
+                        <i class="fab fa-github"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="footer__bottom">
+                <p class="footer__copyright">
+                    © <span class="current-year">2024</span> Everytool.tech. All rights reserved.
+                </p>
+            </div>
+        </div>
+    </footer>
+    <script src="script.js" defer></script>
+    <script src="faq.js" defer></script>
+    <script>
+    // Section fade/slide-in on scroll
+    document.addEventListener('DOMContentLoaded', () => {
+        const sections = document.querySelectorAll('.about-section, .about-who-section');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.2 });
+        sections.forEach(section => observer.observe(section));
+    });
+    </script>
+</body>
+</html> 
