@@ -2,6 +2,12 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="author" content="Varshith Gubba">
+    <meta name="keywords" content="EveryTool, EveryTool.tech, Varshith Gubba, creator, EveryTool.tech creator, EveryTool.tech founder">
+    <meta name="robots" content="index, follow">
+    <link rel="icon" type="image/png" href="assets/SVG/favicon.svg">
+    <link rel="apple-touch-icon" href="assets/SVG/favicon.svg">
+    <meta name="description" content="Meet the creator of EveryTool.tech, Varshith Gubba, a normal student who loves to code and build websites & tools that make life easier for everyone.">
     <title>Meet the creator | EveryTool.tech</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -20,6 +26,7 @@
             --text-primary: #1F2937;
             --text-secondary: #4B5563;
             --text-light: #9CA3AF;
+            --text-yellow: #ffd700;
             --bg-primary: #FFFFFF;
             --bg-secondary: #F9FAFB;
             --bg-accent: #F3F4F6;
@@ -398,7 +405,14 @@
 
         .highlight-yellow {
             font-weight: 900;
-            background: linear-gradient(90deg, #fff -20%, #ffe066 100%);
+            background: var(--text-yellow);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text; 
+        }
+        .highlight-yellow-creator {
+            font-weight: 900;
+            background: var(--text-yellow);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -411,8 +425,8 @@
     <div class="founder-hero">
         <div class="founder-hero__content">
             <div class="founder-hero__text">
-                <h1 class="founder-hero__title">Hi, I'm <span class="highlight-yellow">Varshith</span> — the creator of EveryTool.tech</h1>
-                <p class="founder-hero__subtitle">A student, a developer, and a problem-solver who turned a simple idea into a growing toolkit for everyone.</p>
+                <h1 class="founder-hero__title">Hi, I'm <span class="highlight-yellow">Varshith</span> — the <span class="highlight-yellow-creator">creator</span> of EveryTool.tech</h1>
+                <p class="founder-hero__subtitle">A normal student who loves to code and build websites & tools that make life easier for everyone.</p>
             </div>
             <div class="hero__profile-card">
                 <div class="hero__profile-img-wrap">

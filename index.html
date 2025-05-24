@@ -6,11 +6,10 @@
     
     <!-- Content Security Policy -->
     <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval';">
-    image.png
     <title>Everytool - Your All-in-One Solution</title>
     
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="icon" type="image/png" href="assets/SVG/favicon.svg">
     
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -87,11 +86,11 @@
                                 </a>
                                 <a href="/tools-page/image-editor" class="hero__popular-tag">
                                     <i class="fas fa-image"></i>
-                                    Image Editor
+                                    Image Compressor
                                 </a>
                                 <a href="/tools-page/code-formatter" class="hero__popular-tag">
                                     <i class="fas fa-code"></i>
-                                    Code Formatter
+                                    Password Generator
                                 </a>
                             </div>
                         </div>
@@ -150,9 +149,9 @@
                         <h3 class="category-card__title">Calculators</h3>
                         <p class="category-card__description">Financial, health, and math solutions for everyday calculations</p>
                         <div class="category-card__tools">
-                            <span class="category-card__tool">Mortgage</span>
-                            <span class="category-card__tool">BMI</span>
-                            <span class="category-card__tool">Currency</span>
+                            <a href="/tools/mortgage" class="category-card__tool">Mortgage</a>
+                            <a href="/tools/bmi" class="category-card__tool">BMI</a>
+                            <a href="/tools/currency" class="category-card__tool">Currency</a>
                         </div>
                         <a href="/calculators" class="category-card__button">Explore Tools</a>
                     </article>
@@ -164,9 +163,9 @@
                         <h3 class="category-card__title">Converters</h3>
                         <p class="category-card__description">Transform files and formats with precision and ease</p>
                         <div class="category-card__tools">
-                            <span class="category-card__tool">PDF to Word</span>
-                            <span class="category-card__tool">Image Format</span>
-                            <span class="category-card__tool">Unit Converter</span>
+                            <a href="/tools/pdf-to-word" class="category-card__tool">PDF to Word</a>
+                            <a href="/tools/image-format" class="category-card__tool">Image Format</a>
+                            <a href="/tools/unit-converter" class="category-card__tool">Unit Converter</a>
                         </div>
                         <a href="/converters" class="category-card__button">Explore Tools</a>
                     </article>
@@ -178,9 +177,9 @@
                         <h3 class="category-card__title">Generators</h3>
                         <p class="category-card__description">Create passwords, QR codes, and more with advanced options</p>
                         <div class="category-card__tools">
-                            <span class="category-card__tool">Password</span>
-                            <span class="category-card__tool">QR Code</span>
-                            <span class="category-card__tool">Lorem Ipsum</span>
+                            <a href="/tools/password-generator" class="category-card__tool">Password</a>
+                            <a href="/tools/qr-code" class="category-card__tool">QR Code</a>
+                            <a href="/tools/lorem-ipsum" class="category-card__tool">Lorem Ipsum</a>
                         </div>
                         <a href="/generators" class="category-card__button">Explore Tools</a>
                     </article>
@@ -192,9 +191,9 @@
                         <h3 class="category-card__title">Developer Tools</h3>
                         <p class="category-card__description">Essential utilities for developers and programmers</p>
                         <div class="category-card__tools">
-                            <span class="category-card__tool">JSON Formatter</span>
-                            <span class="category-card__tool">Code Minifier</span>
-                            <span class="category-card__tool">Color Picker</span>
+                            <a href="/tools/json-formatter" class="category-card__tool">JSON Formatter</a>
+                            <a href="/tools/code-minifier" class="category-card__tool">Code Minifier</a>
+                            <a href="/tools/color-picker" class="category-card__tool">Color Picker</a>
                         </div>
                         <a href="/developer-tools" class="category-card__button">Explore Tools</a>
                     </article>
@@ -206,9 +205,9 @@
                         <h3 class="category-card__title">SEO Tools</h3>
                         <p class="category-card__description">Optimize your online presence and improve rankings</p>
                         <div class="category-card__tools">
-                            <span class="category-card__tool">Meta Tags</span>
-                            <span class="category-card__tool">Keyword Density</span>
-                            <span class="category-card__tool">Sitemap</span>
+                            <a href="/tools/meta-tags" class="category-card__tool">Meta Tags</a>
+                            <a href="/tools/keyword-density" class="category-card__tool">Keyword Density</a>
+                            <a href="/tools/sitemap" class="category-card__tool">Sitemap</a>
                         </div>
                         <a href="/seo-tools" class="category-card__button">Explore Tools</a>
                     </article>
@@ -220,9 +219,9 @@
                         <h3 class="category-card__title">Text & File Tools</h3>
                         <p class="category-card__description">Edit, format, and manage your documents efficiently</p>
                         <div class="category-card__tools">
-                            <span class="category-card__tool">Text Editor</span>
-                            <span class="category-card__tool">File Compressor</span>
-                            <span class="category-card__tool">PDF Tools</span>
+                            <a href="/tools/text-editor" class="category-card__tool">Text Editor</a>
+                            <a href="/tools/file-compressor" class="category-card__tool">File Compressor</a>
+                            <a href="/tools/pdf-tools" class="category-card__tool">PDF Tools</a>
                         </div>
                         <a href="/text-tools" class="category-card__button">Explore Tools</a>
                     </article>
@@ -448,7 +447,9 @@
             <div class="footer__container">
                 <div class="footer__content">
                     <div class="footer__col footer__brand-col">
-                        <a href="/" class="footer__logo">EveryTool</a>
+                        <a href="/" class="footer__logo">
+                            <img src="assets/SVG/favicon.svg" alt="EveryTool" class="footer__logo-img">
+                        </a>
                         <p class="footer__tagline">Your all-in-one solution for everyday tools</p>
                     </div>
                     <div class="footer__col footer__nav-col">
