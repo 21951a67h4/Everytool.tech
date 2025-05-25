@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Calculators | Everytool</title>
-    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="icon" type="image/svg+xml" href="../assets/SVG/favicon.svg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="tools-page/styles.css">
@@ -85,13 +85,9 @@
         }
 
         .header__logo-img {
-            display: flex;
-            align-items: center;
-            text-decoration: none;
-            position: relative;
-            padding: 0.5rem;
-            border-radius: 12px;
-            transition: none;
+            height: 40px;
+            width: auto;
+            display: block;
         }
 
         .header__logo-text {
@@ -762,23 +758,47 @@
             align-items: center;
             gap: 0.5rem;
             background: rgba(255, 255, 255, 0.1);
-            padding: 0.5rem 1rem;
+            padding: 0.75rem 1.25rem;
             border-radius: 2rem;
             margin-bottom: 1.5rem;
             backdrop-filter: blur(8px);
             border: 1px solid rgba(255, 255, 255, 0.2);
             animation: fadeUp 0.8s ease-out;
+            transform-origin: center;
         }
 
         .hero__badge-icon {
+            margin-right: 0.5rem;
             font-size: 1.2rem;
             color: #FFD700;
+            animation: pulseGlow 1.5s ease-in-out infinite;
+            display: inline-block;
+            filter: drop-shadow(0 0 2px rgba(255, 215, 0, 0.3));
+        }
+
+        @keyframes pulseGlow {
+            0% {
+                transform: scale(1);
+                text-shadow: 0 0 0 rgba(255, 215, 0, 0);
+                filter: drop-shadow(0 0 2px rgba(255, 215, 0, 0.3));
+            }
+            50% {
+                transform: scale(1.3);
+                text-shadow: 0 0 20px rgba(255, 215, 0, 0.8);
+                filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6));
+            }
+            100% {
+                transform: scale(1);
+                text-shadow: 0 0 0 rgba(255, 215, 0, 0);
+                filter: drop-shadow(0 0 2px rgba(255, 215, 0, 0.3));
+            }
         }
 
         .hero__badge-text {
             color: white;
             font-weight: 500;
             font-size: 0.9rem;
+            letter-spacing: 0.5px;
         }
 
         .improved-badge {
@@ -792,31 +812,25 @@
             box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
             background: linear-gradient(135deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0.1));
         }
+
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+                opacity: 1;
+            }
+            50% {
+                transform: scale(1.2);
+                opacity: 0.8;
+            }
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
     </style>
 </head>
 <body>
-    <header class="header">
-        <div class="header__container">
-            <a href="/" class="header__logo">
-                <img src="assets/logo-icon.png" alt="Everytool" class="header__logo-img">
-                <span class="header__logo-text">EveryTool</span>
-            </a>
-            <nav class="header__nav">
-                <button class="header__mobile-menu" aria-label="Toggle menu" aria-expanded="false">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-                <ul class="header__nav-list">
-                    <li><a href="/" class="header__nav-link">Home</a></li>
-                    <li><a href="/tools-page" class="header__nav-link">Tools</a></li>
-                    <li><a href="/about" class="header__nav-link">About</a></li>
-                    <li><a href="/contact" class="header__nav-link">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-
+    <div id="header-placeholder"></div>
     <main class="main-content">
         <section class="hero-section">
             <div class="hero-content">
@@ -939,51 +953,64 @@
             </div>
         </section>
     </main>
-
-    <footer class="footer">
-        <div class="footer__container">
-            <div class="footer__content">
-                <div class="footer__col footer__brand-col">
-                    <a href="/" class="footer__logo">
-                        <img src="assets/favicon.png" alt="Everytool">
-                    </a>
-                    <div class="footer__tagline">Your all-in-one solution for everyday tools</div>
-                </div>
-                <div class="footer__col">
-                    <div class="footer__col-title">Navigation</div>
-                    <ul class="footer__nav-list">
-                        <li><a href="/" class="footer__nav-link">Home</a></li>
-                        <li><a href="/tools-page" class="footer__nav-link">Tools</a></li>
-                        <li><a href="/about" class="footer__nav-link">About</a></li>
-                        <li><a href="/contact" class="footer__nav-link">Contact</a></li>
-                        <li><a href="/privacy-policy" class="footer__nav-link">Privacy Policy</a></li>
-                        <li><a href="/terms" class="footer__nav-link">Terms of Service</a></li>
-                    </ul>
-                </div>
-                <div class="footer__col">
-                    <div class="footer__col-title">Categories</div>
-                    <ul class="footer__nav-list">
-                        <li><a href="/calculators" class="footer__nav-link">Calculators</a></li>
-                        <li><a href="/converters" class="footer__nav-link">Converters</a></li>
-                        <li><a href="/generators" class="footer__nav-link">Generators</a></li>
-                        <li><a href="/developer-tools" class="footer__nav-link">Developer Tools</a></li>
-                        <li><a href="/seo-tools" class="footer__nav-link">SEO Tools</a></li>
-                        <li><a href="/text-tools" class="footer__nav-link">Text & File Tools</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div class="footer__social">
-                <a href="#" class="footer__social-link" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                <a href="#" class="footer__social-link" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                <a href="#" class="footer__social-link" aria-label="Github"><i class="fab fa-github"></i></a>
-            </div>
-            <div class="footer__bottom">
-                &copy; 2024 Everytool. All rights reserved.
-            </div>
-        </div>
-    </footer>
-
+    <div id="footer-placeholder"></div>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <script>
+        // Load Header
+        fetch('../header.html')
+            .then(res => res.text())
+            .then(html => {
+                document.getElementById('header-placeholder').innerHTML = html;
+            });
+        // Load Footer
+        fetch('../footer.html')
+            .then(res => res.text())
+            .then(html => {
+                document.getElementById('footer-placeholder').innerHTML = html;
+                // Now initialize particles.js
+                if (window.particlesJS) {
+                    particlesJS('particles-js', {
+                        particles: {
+                            number: { value: 50, density: { enable: true, value_area: 800 } },
+                            color: { value: '#ffd700' },
+                            shape: { type: 'circle' },
+                            opacity: { value: 0.3, random: false, anim: { enable: false } },
+                            size: { value: 2, random: true, anim: { enable: false } },
+                            line_linked: {
+                                enable: true,
+                                distance: 150,
+                                color: '#ffd700',
+                                opacity: 0.2,
+                                width: 1
+                            },
+                            move: {
+                                enable: true,
+                                speed: 1,
+                                direction: 'none',
+                                random: false,
+                                straight: false,
+                                out_mode: 'out',
+                                bounce: false,
+                                attract: { enable: false, rotateX: 600, rotateY: 1200 }
+                            }
+                        },
+                        interactivity: {
+                            detect_on: 'canvas',
+                            events: {
+                                onhover: { enable: true, mode: 'grab' },
+                                onclick: { enable: true, mode: 'push' },
+                                resize: true
+                            },
+                            modes: {
+                                grab: { distance: 140, line_linked: { opacity: 0.5 } },
+                                push: { particles_nb: 3 }
+                            }
+                        },
+                        retina_detect: true
+                    });
+                }
+            });
+
         // Search functionality
         const searchInput = document.querySelector('.search-input');
         const toolCards = document.querySelectorAll('.tool-card');
