@@ -408,11 +408,12 @@
     };
 })();
 
-#errorHandler = {
-    errors: new Map(),
-    logError: (error, context = {}) => {
+class ErrorHandler {
+    #errors = new Map();
+    
+    logError(error, context = {}) {
         const errorId = Date.now();
-        this.#errorHandler.errors.set(errorId, {
+        this.#errors.set(errorId, {
             message: error.message,
             stack: error.stack,
             context,
@@ -421,5 +422,7 @@
         console.error(`[MenuManager] Error ${errorId}:`, error);
         return errorId;
     }
-};
+}
+
+const errorHandler = new ErrorHandler();
 </script>
