@@ -8,8 +8,37 @@
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
+        :root {
+            --primary: #4361EE;
+            --primary-dark: #3F37C9;
+            --text-primary: #1F2937;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f9fafb;
+            --border-light: #dfe1e5;
+            --border-dark: #cdd1d5;
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
         body {
-            background: var(--bg-secondary, #f9fafb);
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            flex: 1;
+            padding-top: 80px;
+            margin-top: 0;
+            width: 100%;
+            overflow-x: hidden;
         }
         .contact-container {
             max-width: 900px;
@@ -165,26 +194,10 @@
     </style>
 </head>
 <body>
-    <header class="header">
-        <div class="header__container">
-            <a href="/" class="header__logo">
-                <img src="assets/logo-icon.png" alt="Everytool" class="header__logo-img">
-            </a>
-            <nav class="header__nav">
-                <button class="header__mobile-menu" aria-label="Toggle menu" aria-expanded="false">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-                <ul class="header__nav-list">
-                    <li><a href="/" class="header__nav-link">Home</a></li>
-                    <li><a href="/categories" class="header__nav-link">Categories</a></li>
-                    <li><a href="/contact" class="header__nav-link">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-    <main>
+    <!-- Header Section -->
+    <div id="header-placeholder"></div>
+
+    <main class="main-content">
         <div class="contact-container">
             <section class="contact-form-section">
                 <h1 class="contact-title">Get in Touch</h1>
@@ -305,99 +318,90 @@
         </div>
     </section>
 
-    <footer class="footer">
-        <div class="footer__container">
-            <div class="footer__content">
-                <div class="footer__brand">
-                    <a href="/" class="footer__logo">Everytool</a>
-                    <p class="footer__tagline">Your all-in-one solution for everyday tools</p>
-                </div>
-                <nav class="footer__nav">
-                    <ul class="footer__nav-list">
-                        <li><a href="/about" class="footer__nav-link">About</a></li>
-                        <li><a href="/contact" class="footer__nav-link">Contact</a></li>
-                        <li><a href="/privacy" class="footer__nav-link">Privacy Policy</a></li>
-                        <li><a href="/terms" class="footer__nav-link">Terms of Service</a></li>
-                    </ul>
-                </nav>
-                <div class="footer__social">
-                    <a href="#" class="footer__social-link" aria-label="Follow us on Twitter">
-                        <i class="fab fa-twitter"></i>
-                    </a>
-                    <a href="#" class="footer__social-link" aria-label="Follow us on LinkedIn">
-                        <i class="fab fa-linkedin"></i>
-                    </a>
-                    <a href="#" class="footer__social-link" aria-label="Follow us on GitHub">
-                        <i class="fab fa-github"></i>
-                    </a>
-                </div>
-            </div>
-            <div class="footer__bottom">
-                <p class="footer__copyright">
-                    © <span class="current-year">2024</span> Everytool.tech. All rights reserved.
-                </p>
-            </div>
-        </div>
-    </footer>
+    <!-- Footer Section -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
     <script>
-    // Micro-animation for form elements
-    document.addEventListener('DOMContentLoaded', () => {
-        const form = document.querySelector('.contact-form');
-        if (form) {
-            Array.from(form.elements).forEach((el, i) => {
-                if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.tagName === 'BUTTON') {
-                    el.style.opacity = 0;
-                    el.style.transform = 'translateY(30px)';
-                    setTimeout(() => {
-                        el.style.transition = 'opacity 0.5s cubic-bezier(0.4,0,0.2,1), transform 0.5s cubic-bezier(0.4,0,0.2,1)';
-                        el.style.opacity = 1;
-                        el.style.transform = 'translateY(0)';
-                    }, 200 + i * 90);
+        // Function to load HTML content
+        async function loadHTML(url, elementId) {
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
                 }
-            });
+                const html = await response.text();
+                document.getElementById(elementId).innerHTML = html;
+            } catch (error) {
+                console.error(`Error loading ${url}:`, error);
+            }
         }
-    });
-    // Client-side validation
-    document.getElementById('contactForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        let valid = true;
-        const name = document.getElementById('contact-name');
-        const email = document.getElementById('contact-email');
-        const message = document.getElementById('contact-message');
-        const errorName = document.getElementById('error-name');
-        const errorEmail = document.getElementById('error-email');
-        const errorMessage = document.getElementById('error-message');
-        // Reset errors
-        [errorName, errorEmail, errorMessage].forEach(e => { e.textContent = ''; e.classList.remove('visible'); });
-        // Name validation
-        if (!name.value.trim()) {
-            errorName.textContent = 'Please enter your name.';
-            errorName.classList.add('visible');
-            valid = false;
-        }
-        // Email validation
-        if (!email.value.trim()) {
-            errorEmail.textContent = 'Please enter your email.';
-            errorEmail.classList.add('visible');
-            valid = false;
-        } else if (!/^\S+@\S+\.\S+$/.test(email.value.trim())) {
-            errorEmail.textContent = 'Please enter a valid email address.';
-            errorEmail.classList.add('visible');
-            valid = false;
-        }
-        // Message validation
-        if (!message.value.trim()) {
-            errorMessage.textContent = 'Please enter your message.';
-            errorMessage.classList.add('visible');
-            valid = false;
-        }
-        if (valid) {
-            // Simulate successful submission
-            this.reset();
-            alert('Thank you for contacting us! We will get back to you soon.');
-        }
-    });
+
+        // Load header and footer
+        document.addEventListener('DOMContentLoaded', () => {
+            loadHTML('header.html', 'header-placeholder');
+            loadHTML('footer.html', 'footer-placeholder');
+        });
+
+        // Micro-animation for form elements
+        document.addEventListener('DOMContentLoaded', () => {
+            const form = document.querySelector('.contact-form');
+            if (form) {
+                Array.from(form.elements).forEach((el, i) => {
+                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.tagName === 'BUTTON') {
+                        el.style.opacity = 0;
+                        el.style.transform = 'translateY(30px)';
+                        setTimeout(() => {
+                            el.style.transition = 'opacity 0.5s cubic-bezier(0.4,0,0.2,1), transform 0.5s cubic-bezier(0.4,0,0.2,1)';
+                            el.style.opacity = 1;
+                            el.style.transform = 'translateY(0)';
+                        }, 200 + i * 90);
+                    }
+                });
+            }
+        });
+        // Client-side validation
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            let valid = true;
+            const name = document.getElementById('contact-name');
+            const email = document.getElementById('contact-email');
+            const message = document.getElementById('contact-message');
+            const errorName = document.getElementById('error-name');
+            const errorEmail = document.getElementById('error-email');
+            const errorMessage = document.getElementById('error-message');
+            // Reset errors
+            [errorName, errorEmail, errorMessage].forEach(e => { e.textContent = ''; e.classList.remove('visible'); });
+            // Name validation
+            if (!name.value.trim()) {
+                errorName.textContent = 'Please enter your name.';
+                errorName.classList.add('visible');
+                valid = false;
+            }
+            // Email validation
+            if (!email.value.trim()) {
+                errorEmail.textContent = 'Please enter your email.';
+                errorEmail.classList.add('visible');
+                valid = false;
+            } else if (!/^\S+@\S+\.\S+$/.test(email.value.trim())) {
+                errorEmail.textContent = 'Please enter a valid email address.';
+                errorEmail.classList.add('visible');
+                valid = false;
+            }
+            // Message validation
+            if (!message.value.trim()) {
+                errorMessage.textContent = 'Please enter your message.';
+                errorMessage.classList.add('visible');
+                valid = false;
+            }
+            if (valid) {
+                // Simulate successful submission
+                this.reset();
+                alert('Thank you for contacting us! We will get back to you soon.');
+            }
+        });
     </script>
+    <script src="view.js" defer></script>
     <script src="script.js" defer></script>
     <script src="faq.js" defer></script>
 </body>

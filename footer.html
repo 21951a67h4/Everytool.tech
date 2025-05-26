@@ -15,24 +15,13 @@
 
     .everytool-site-footer {
         padding: 4rem 0;
-        background: linear-gradient(135deg, #1a1f36 0%, #2a2f46 100%);
+        background: linear-gradient(90deg, #1a237e -10%, #0d47a1 100%);
         color: #fff;
         font-family: sans-serif;
         line-height: 1.6;
         position: relative;
         overflow: hidden;
         min-height: 300px; /* Ensure footer has enough height for particles */
-    }
-
-    /* Particles.js container */
-    #particles-js {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 0;
-        pointer-events: none;
     }
 
     /* Ensure content stays above the particles */
@@ -219,7 +208,6 @@
 
 <!-- HTML for the Footer -->
 <footer class="everytool-site-footer" id="everytool-standalone-footer">
-    <div id="particles-js"></div>
     <div class="footer__container">
         <div class="footer__content">
             <div class="footer__col footer__brand-col">
@@ -242,12 +230,12 @@
             <div class="footer__col footer__categories-col">
                 <div class="footer__col-title">Categories</div>
                 <ul class="footer__categories-list">
-                    <li><a href="#" class="footer__categories-link">Calculators</a></li>
-                    <li><a href="#" class="footer__categories-link">Converters</a></li>
-                    <li><a href="#" class="footer__categories-link">Generators</a></li>
-                    <li><a href="#" class="footer__categories-link">Developer Tools</a></li>
-                    <li><a href="#" class="footer__categories-link">SEO Tools</a></li>
-                    <li><a href="#" class="footer__categories-link">Text & File Tools</a></li>
+                    <li><a href="/categorie-page/calculators.html" class="footer__categories-link">Calculators</a></li>
+                    <li><a href="/categorie-page/converters.html" class="footer__categories-link">Converters</a></li>
+                    <li><a href="/categorie-page/generators.html" class="footer__categories-link">Generators</a></li>
+                    <li><a href="/categorie-page/developer-tools.html" class="footer__categories-link">Developer Tools</a></li>
+                    <li><a href="/categorie-page/seo-tools.html" class="footer__categories-link">SEO Tools</a></li>
+                    <li><a href="/categorie-page/text-file-tools.html" class="footer__categories-link">Text & File Tools</a></li>
                 </ul>
             </div>
         </div>
@@ -271,89 +259,3 @@
         </div>
     </div>
 </footer>
-
-<!-- Particles.js library -->
-<script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
-
-<script>
-    document.addEventListener('DOMContentLoaded', () => {
-        particlesJS('particles-js', {
-            particles: {
-                number: {
-                    value: 50,
-                    density: {
-                        enable: true,
-                        value_area: 800
-                    }
-                },
-                color: {
-                    value: '#ffd700'  // Gold color to match the footer theme
-                },
-                shape: {
-                    type: 'circle'
-                },
-                opacity: {
-                    value: 0.3,
-                    random: false,
-                    anim: {
-                        enable: false
-                    }
-                },
-                size: {
-                    value: 2,
-                    random: true,
-                    anim: {
-                        enable: false
-                    }
-                },
-                line_linked: {
-                    enable: true,
-                    distance: 150,
-                    color: '#ffd700',  // Gold color to match the footer theme
-                    opacity: 0.2,
-                    width: 1
-                },
-                move: {
-                    enable: true,
-                    speed: 1,
-                    direction: 'none',
-                    random: false,
-                    straight: false,
-                    out_mode: 'out',
-                    bounce: false,
-                    attract: {
-                        enable: false,
-                        rotateX: 600,
-                        rotateY: 1200
-                    }
-                }
-            },
-            interactivity: {
-                detect_on: 'canvas',
-                events: {
-                    onhover: {
-                        enable: true,
-                        mode: 'grab'
-                    },
-                    onclick: {
-                        enable: true,
-                        mode: 'push'
-                    },
-                    resize: true
-                },
-                modes: {
-                    grab: {
-                        distance: 140,
-                        line_linked: {
-                            opacity: 0.5
-                        }
-                    },
-                    push: {
-                        particles_nb: 3
-                    }
-                }
-            },
-            retina_detect: true
-        });
-    });
-</script>

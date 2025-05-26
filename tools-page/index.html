@@ -17,30 +17,44 @@
     
     <!-- Custom Styles -->
     <link rel="stylesheet" href="styles.css">
+
+    <style>
+        :root {
+            --primary: #4361EE;
+            --primary-dark: #3F37C9;
+            --text-primary: #1F2937;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f9fafb;
+            --border-light: #dfe1e5;
+            --border-dark: #cdd1d5;
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            flex: 1;
+            padding-top: 80px;
+        }
+    </style>
 </head>
 <body>
-    <header class="header glassy-header">
-        <div class="header__container">
-            <a href="/" class="header__logo modern-logo">
-                <img src="../assets/logo-icon.png" alt="Everytool" class="header__logo-img">
-            </a>
-            <nav class="header__nav">
-                <button class="header__mobile-menu" aria-label="Toggle menu" aria-expanded="false">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-                <ul class="header__nav-list">
-                    <li><a href="/" class="header__nav-link">Home</a></li>
-                    <li><a href="/tools-page" class="header__nav-link">Tools</a></li>
-                    <li><a href="/about" class="header__nav-link">About</a></li>
-                    <li><a href="/contact" class="header__nav-link">Contact</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
+    <!-- Header Section -->
+    <div id="header-placeholder"></div>
 
-    <main>
+    <main class="main-content">
         <section class="tools-header-section">
             <div class="tools-header-content">
                 <h1 class="tools-header-title">Powerful Tools for Everyone</h1>
@@ -276,60 +290,14 @@
                 </div>
             </div>
         </section>
-
-        <footer class="footer">
-            <div class="footer__container">
-                <div class="footer__content">
-                    <div class="footer__col footer__brand-col">
-                        <a href="/" class="footer__logo"><img src="../assets/favicon.png" alt="EveryTool" style="width:40px;height:40px;border-radius:8px;vertical-align:middle;"></a>
-                        <p class="footer__tagline">Your all-in-one solution for everyday tools</p>
-                    </div>
-                    <div class="footer__col footer__nav-col">
-                        <div class="footer__col-title">Navigation</div>
-                        <ul class="footer__nav-list">
-                            <li><a href="/" class="footer__nav-link">Home</a></li>
-                            <li><a href="/tools-page" class="footer__nav-link">Tools</a></li>
-                            <li><a href="/about" class="footer__nav-link">About</a></li>
-                            <li><a href="/contact" class="footer__nav-link">Contact</a></li>
-                            <li><a href="/privacy-policy" class="footer__nav-link">Privacy Policy</a></li>
-                            <li><a href="/terms" class="footer__nav-link">Terms of Service</a></li>
-                        </ul>
-                    </div>
-                    <div class="footer__col footer__categories-col">
-                        <div class="footer__col-title">Categories</div>
-                        <ul class="footer__categories-list">
-                            <li><a href="#" class="footer__categories-link">Calculators</a></li>
-                            <li><a href="#" class="footer__categories-link">Converters</a></li>
-                            <li><a href="#" class="footer__categories-link">Generators</a></li>
-                            <li><a href="#" class="footer__categories-link">Developer Tools</a></li>
-                            <li><a href="#" class="footer__categories-link">SEO Tools</a></li>
-                            <li><a href="#" class="footer__categories-link">Text & File Tools</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="footer__social-row">
-                    <div class="footer__social">
-                        <a href="#" class="footer__social-link" aria-label="Follow us on Twitter">
-                            <i class="fab fa-twitter"></i>
-                        </a>
-                        <a href="#" class="footer__social-link" aria-label="Follow us on LinkedIn">
-                            <i class="fab fa-linkedin"></i>
-                        </a>
-                        <a href="#" class="footer__social-link" aria-label="Follow us on GitHub">
-                            <i class="fab fa-github"></i>
-                        </a>
-                    </div>
-                </div>
-                <div class="footer__bottom">
-                    <p class="footer__copyright">
-                        © <span class="current-year">2024</span> Everytool.tech. All rights reserved.
-                    </p>
-                </div>
-            </div>
-        </footer>
-
-        <script src="script.js" defer></script>
-        <script src="../@faq.js" defer></script>
     </main>
+
+    <!-- Footer Section -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="../view.js" defer></script>
+    <script src="../script.js" defer></script>
+    <script src="../faq.js" defer></script>
 </body>
 </html> 

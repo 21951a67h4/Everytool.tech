@@ -34,66 +34,6 @@
             color: var(--text-primary);
             background: var(--bg-primary);
         }
-
-        /* Header Styles */
-        .header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-bottom: 1px solid var(--border-light);
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            z-index: 1000;
-            padding: 1rem 0;
-        }
-
-        .header__container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .header__logo {
-            text-decoration: none;
-        }
-
-        .header__logo-img {
-            height: 40px;
-            width: auto;
-        }
-
-        .header__nav-list {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .header__nav-link {
-            color: var(--text-primary);
-            text-decoration: none;
-            font-weight: 500;
-            transition: var(--transition);
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-        }
-
-        .header__nav-link:hover {
-            color: var(--primary);
-            background: rgba(67, 97, 238, 0.1);
-        }
-
-        .header__mobile-menu {
-            display: none;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 0.5rem;
-        }
-
         /* Main Content Styles */
         .terms-page {
             margin-top: 80px;
@@ -330,30 +270,111 @@
                 justify-content: center;
             }
         }
+
+        /* FAQ Section Styles */
+        .faq-section {
+            padding: 4rem 0;
+            background: var(--bg-secondary);
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .faq-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .faq-title {
+            color: var(--primary);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .faq-subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .faq-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .faq-item {
+            background: var(--bg-primary);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: var(--transition);
+        }
+
+        .faq-item:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--bg-primary);
+        }
+
+        .faq-question h3 {
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        .faq-question i {
+            color: var(--primary);
+            transition: var(--transition);
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: var(--transition);
+        }
+
+        .faq-answer p {
+            padding-bottom: 1.5rem;
+            color: var(--text-secondary);
+        }
+
+        .faq-item.active .faq-question i {
+            transform: rotate(180deg);
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+
+        @media (max-width: 768px) {
+            .faq-section {
+                padding: 2rem 0;
+            }
+
+            .faq-title {
+                font-size: 1.75rem;
+            }
+
+            .faq-question h3 {
+                font-size: 1rem;
+            }
+        }
     </style>
 </head>
 <body>
     <!-- Header Section -->
-    <header class="header">
-        <div class="header__container">
-            <a href="/" class="header__logo">
-                <img src="/assets/logo-icon.png" alt="EveryTool.tech Logo" class="header__logo-img">
-            </a>
-            <nav class="header__nav">
-                <ul class="header__nav-list">
-                    <li><a href="/" class="header__nav-link">Home</a></li>
-                    <li><a href="/tools" class="header__nav-link">Tools</a></li>
-                    <li><a href="/about" class="header__nav-link">About</a></li>
-                    <li><a href="/contact" class="header__nav-link">Contact</a></li>
-                </ul>
-            </nav>
-            <button class="header__mobile-menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-        </div>
-    </header>
+    <div id="header-placeholder"></div>
 
     <!-- Main Content -->
     <main class="terms-page">
@@ -509,32 +530,32 @@
     </section>
 
     <!-- Footer Section -->
-    <footer class="footer">
-        <div class="footer__container">
-            <div class="footer__content">
-                <div class="footer__brand">
-                    <h3>EveryTool.tech</h3>
-                    <p class="footer__tagline">Your one-stop solution for online tools</p>
-                </div>
-                <nav class="footer__nav">
-                    <ul class="footer__nav-list">
-                        <li><a href="/about" class="footer__nav-link">About Us</a></li>
-                        <li><a href="/contact" class="footer__nav-link">Contact</a></li>
-                        <li><a href="/privacy-policy" class="footer__nav-link">Privacy Policy</a></li>
-                        <li><a href="/terms" class="footer__nav-link">Terms of Service</a></li>
-                    </ul>
-                </nav>
-                <div class="footer__social">
-                    <a href="#" class="footer__social-link"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="footer__social-link"><i class="fab fa-github"></i></a>
-                    <a href="#" class="footer__social-link"><i class="fab fa-linkedin"></i></a>
-                </div>
-            </div>
-        </div>
-    </footer>
+    <div id="footer-placeholder"></div>
 
     <!-- Scripts -->
+    <script src="view.js" defer></script>
     <script src="script.js" defer></script>
     <script src="faq.js" defer></script>
+    <script>
+        // Function to load HTML content
+        async function loadHTML(url, elementId) {
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                const html = await response.text();
+                document.getElementById(elementId).innerHTML = html;
+            } catch (error) {
+                console.error(`Error loading ${url}:`, error);
+            }
+        }
+
+        // Load header and footer
+        document.addEventListener('DOMContentLoaded', () => {
+            loadHTML('header.html', 'header-placeholder');
+            loadHTML('footer.html', 'footer-placeholder');
+        });
+    </script>
 </body>
 </html> 

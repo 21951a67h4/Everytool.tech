@@ -8,18 +8,15 @@ document.addEventListener('DOMContentLoaded', function() {
         const question = item.querySelector('.faq-question');
         
         question.addEventListener('click', () => {
-            // Toggle active class on the clicked item
-            const isActive = item.classList.contains('active');
-            
-            // Close all FAQ items
-            faqItems.forEach(faqItem => {
-                faqItem.classList.remove('active');
+            // Close all other FAQ items
+            faqItems.forEach(otherItem => {
+                if (otherItem !== item) {
+                    otherItem.classList.remove('active');
+                }
             });
-
-            // If the clicked item wasn't active, make it active
-            if (!isActive) {
-                item.classList.add('active');
-            }
+            
+            // Toggle current FAQ item
+            item.classList.toggle('active');
         });
 
         // Add keyboard navigation

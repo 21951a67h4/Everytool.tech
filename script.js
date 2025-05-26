@@ -65,51 +65,51 @@ document.addEventListener('DOMContentLoaded', () => {
     // Always run trust section animation
     animateNumbers();
 
+    // Mobile menu functionality
     const mobileMenuButton = document.querySelector('.header__mobile-menu');
     const navList = document.querySelector('.header__nav-list');
-    let isMenuOpen = false;
+    
+    if (mobileMenuButton && navList) {
+        let isMenuOpen = false;
 
-    function toggleMenu(shouldOpen) {
-        isMenuOpen = typeof shouldOpen === 'boolean' ? shouldOpen : !isMenuOpen;
-        navList.classList.toggle('active', isMenuOpen);
-        mobileMenuButton.setAttribute('aria-expanded', isMenuOpen.toString());
-        
-        // Toggle menu icon animation
-        mobileMenuButton.classList.toggle('open', isMenuOpen);
-        
-        // Prevent body scroll when menu is open
-        document.body.style.overflow = isMenuOpen ? 'hidden' : '';
-    }
-
-    mobileMenuButton.addEventListener('click', (e) => {
-        e.stopPropagation();
-        toggleMenu();
-    });
-
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-        if (isMenuOpen && !e.target.closest('.header__nav')) {
-            toggleMenu(false);
+        function toggleMenu(shouldOpen) {
+            isMenuOpen = typeof shouldOpen === 'boolean' ? shouldOpen : !isMenuOpen;
+            navList.classList.toggle('active', isMenuOpen);
+            mobileMenuButton.setAttribute('aria-expanded', isMenuOpen.toString());
+            mobileMenuButton.classList.toggle('open', isMenuOpen);
+            document.body.style.overflow = isMenuOpen ? 'hidden' : '';
         }
-    });
 
-    // Close menu when pressing Escape key
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && isMenuOpen) {
-            toggleMenu(false);
-        }
-    });
+        mobileMenuButton.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleMenu();
+        });
 
-    // Close menu on resize if moving to desktop view
-    let resizeTimer;
-    window.addEventListener('resize', () => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(function() {
-            if (window.innerWidth > 768 && isMenuOpen) {
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            if (isMenuOpen && !e.target.closest('.header__nav')) {
                 toggleMenu(false);
             }
-        }, 250);
-    });
+        });
+
+        // Close menu when pressing Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && isMenuOpen) {
+                toggleMenu(false);
+            }
+        });
+
+        // Close menu on resize if moving to desktop view
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(function() {
+                if (window.innerWidth > 768 && isMenuOpen) {
+                    toggleMenu(false);
+                }
+            }, 250);
+        });
+    }
 
     // Intersection Observer for animations
     const observerOptions = {
@@ -122,87 +122,36 @@ document.addEventListener('DOMContentLoaded', () => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-                observer.unobserve(entry.target); // Stop observing once visible
+                observer.unobserve(entry.target);
             }
         });
     }, observerOptions);
 
-    // Observe category cards
+    // Observe elements if they exist
     const categoryCards = document.querySelectorAll('.category-card');
-    categoryCards.forEach(card => {
-        observer.observe(card);
-    });
-
-    // Observe popular tool cards
-    const popularToolCards = document.querySelectorAll('.popular-tool-card');
-    popularToolCards.forEach(card => {
-        observer.observe(card);
-    });
-
-    // Observe testimonial cards
-    const testimonialCards = document.querySelectorAll('.testimonial-card');
-    testimonialCards.forEach(card => {
-        observer.observe(card);
-    });
-
-    // Debounce function
-    function debounce(func, wait) {
-        let timeout;
-        return function executedFunction(...args) {
-            const later = function() {
-                clearTimeout(timeout);
-                func.apply(this, args);
-            };
-            clearTimeout(timeout);
-            timeout = setTimeout(later, wait);
-        };
+    if (categoryCards.length > 0) {
+        categoryCards.forEach(card => observer.observe(card));
     }
 
-    // Error handling utility
-    const ErrorHandler = {
-        errors: new Map(),
-        
-        addError(type, message) {
-            this.errors.set(type, message);
-            this.showError(type);
-        },
-        
-        clearError(type) {
-            this.errors.delete(type);
-            this.hideError(type);
-        },
-        
-        showError(type) {
-            const errorElement = document.querySelector(`.hero__search-error[data-error="${type}"]`);
-            if (errorElement) {
-                errorElement.textContent = this.errors.get(type);
-                errorElement.hidden = false;
-            }
-        },
-        
-        hideError(type) {
-            const errorElement = document.querySelector(`.hero__search-error[data-error="${type}"]`);
-            if (errorElement) {
-                errorElement.hidden = true;
-                errorElement.textContent = '';
-            }
-        },
-        
-        hasErrors() {
-            return this.errors.size > 0;
-        }
-    };
+    const popularToolCards = document.querySelectorAll('.popular-tool-card');
+    if (popularToolCards.length > 0) {
+        popularToolCards.forEach(card => observer.observe(card));
+    }
 
-    // Search functionality (with null checks)
+    const testimonialCards = document.querySelectorAll('.testimonial-card');
+    if (testimonialCards.length > 0) {
+        testimonialCards.forEach(card => observer.observe(card));
+    }
+
+    // Search functionality
     const searchForm = document.querySelector('.hero__search');
-    let searchInput, searchButton, clearButton, searchResults, searchResultsContent, searchError;
     if (searchForm) {
-        searchInput = searchForm.querySelector('.hero__search-input');
-        searchButton = searchForm.querySelector('.hero__search-button');
-        clearButton = searchForm.querySelector('.hero__search-clear');
-        searchResults = searchForm.querySelector('.hero__search-results');
-        searchResultsContent = searchForm.querySelector('.hero__search-results-content');
-        searchError = searchForm.querySelector('.hero__search-error');
+        const searchInput = searchForm.querySelector('input[type="text"]');
+        const searchButton = searchForm.querySelector('button[type="submit"]');
+        const clearButton = searchForm.querySelector('.clear-button');
+        const searchResults = searchForm.querySelector('.search-results');
+        const searchResultsContent = searchForm.querySelector('.search-results-content');
+        const searchError = searchForm.querySelector('.search-error');
         const popularTags = document.querySelectorAll('.hero__popular-tag');
 
         let searchTimeout;

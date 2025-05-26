@@ -1,10 +1,10 @@
-<!-- This is the Calculators Tools Page -->
+<!-- This is the Converters Tools Page -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculators | Everytool</title>
+    <title>Converters | Everytool</title>
     <link rel="icon" type="image/svg+xml" href="../assets/SVG/favicon.svg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -227,7 +227,7 @@
             will-change: transform;
         }
 
-        .calculator-grid {
+        .converter-grid {
             position: absolute;
             width: 100%;
             height: 100%;
@@ -239,7 +239,7 @@
             pointer-events: none;
         }
 
-        .math-equations {
+        .conversion-equations {
             position: absolute;
             width: 100%;
             height: 100%;
@@ -904,91 +904,91 @@
     <main class="main-content">
         <section class="hero-section">
             <div class="math-animation-container">
-                <div class="calculator-grid"></div>
+                <div class="converter-grid"></div>
                 <div class="floating-symbols">
-                    <span class="floating-symbol" style="left: 10%; animation-delay: 0s;">+</span>
-                    <span class="floating-symbol" style="left: 20%; animation-delay: 2s;">×</span>
-                    <span class="floating-symbol" style="left: 30%; animation-delay: 4s;">÷</span>
+                    <span class="floating-symbol" style="left: 10%; animation-delay: 0s;">→</span>
+                    <span class="floating-symbol" style="left: 20%; animation-delay: 2s;">⇄</span>
+                    <span class="floating-symbol" style="left: 30%; animation-delay: 4s;">↔</span>
                     <span class="floating-symbol" style="left: 40%; animation-delay: 6s;">=</span>
-                    <span class="floating-symbol" style="left: 50%; animation-delay: 8s;">π</span>
-                    <span class="floating-symbol" style="left: 60%; animation-delay: 10s;">√</span>
-                    <span class="floating-symbol" style="left: 70%; animation-delay: 12s;">∞</span>
-                    <span class="floating-symbol" style="left: 80%; animation-delay: 14s;">∑</span>
+                    <span class="floating-symbol" style="left: 50%; animation-delay: 8s;">°</span>
+                    <span class="floating-symbol" style="left: 60%; animation-delay: 10s;">$</span>
+                    <span class="floating-symbol" style="left: 70%; animation-delay: 12s;">€</span>
+                    <span class="floating-symbol" style="left: 80%; animation-delay: 14s;">£</span>
                 </div>
-                <div class="math-equations">
-                    <span class="equation" style="top: 20%; animation-delay: 0s;">E = mc²</span>
-                    <span class="equation" style="top: 40%; animation-delay: 5s;">F = ma</span>
-                    <span class="equation" style="top: 60%; animation-delay: 10s;">a² + b² = c²</span>
-                    <span class="equation" style="top: 80%; animation-delay: 15s;">y = mx + b</span>
+                <div class="conversion-equations">
+                    <span class="equation" style="top: 20%; animation-delay: 0s;">1 km = 0.621371 mi</span>
+                    <span class="equation" style="top: 40%; animation-delay: 5s;">1 kg = 2.20462 lb</span>
+                    <span class="equation" style="top: 60%; animation-delay: 10s;">1 L = 0.264172 gal</span>
+                    <span class="equation" style="top: 80%; animation-delay: 15s;">1 m = 3.28084 ft</span>
                 </div>
             </div>
             <div class="hero-content">
                 <div class="hero__text-content hero__text-content-modern animate-fade-up">
                     <span class="hero__badge improved-badge">
                         <span class="hero__badge-icon">⚡</span>
-                        <span class="hero__badge-text">Powerful calculator tools for professionals</span>
+                        <span class="hero__badge-text">Powerful conversion tools for everyday use</span>
                     </span>
-                    <h1 class="hero-title">Calculators Tools</h1>
-                    <p class="hero-subtitle">Explore our powerful Calculators tools built for speed, simplicity, and usability.</p>
+                    <h1 class="hero-title">Converters Tools</h1>
+                    <p class="hero-subtitle">Convert between different units, currencies, and measurements with our easy-to-use conversion tools.</p>
                 </div>
             </div>
         </section>
 
         <div class="search-filter">
             <div class="search-container">
-                <input type="text" class="search-input" placeholder="Search calculator tools..." aria-label="Search tools">
+                <input type="text" class="search-input" placeholder="Search converter tools..." aria-label="Search tools">
             </div>
         </div>
 
         <div class="tools-grid">
-            <!-- BMI Calculator -->
+            <!-- PDF to Word Converter -->
             <article class="tool-card">
                 <div class="tool-icon">
-                    <i class="fas fa-weight"></i>
+                    <i class="fas fa-file-word"></i>
                 </div>
-                <h2 class="tool-name">BMI Calculator</h2>
-                <p class="tool-description">Helps users determine their Body Mass Index based on height and weight.</p>
-                <a href="/tools/bmi-calculator" class="tool-button">Use Tool</a>
+                <h2 class="tool-name">PDF to Word Converter</h2>
+                <p class="tool-description">Converts PDF documents into editable Word files.</p>
+                <a href="/tools/pdf-to-word-converter" class="tool-button">Use Tool</a>
             </article>
 
-            <!-- Loan EMI Calculator -->
+            <!-- Image Format Converter -->
             <article class="tool-card">
                 <div class="tool-icon">
-                    <i class="fas fa-money-bill-wave"></i>
+                    <i class="fas fa-image"></i>
                 </div>
-                <h2 class="tool-name">Loan EMI Calculator</h2>
-                <p class="tool-description">Calculates monthly loan payments, total interest, and repayment schedules.</p>
-                <a href="/tools/loan-emi-calculator" class="tool-button">Use Tool</a>
+                <h2 class="tool-name">Image Format Converter</h2>
+                <p class="tool-description">Transforms images between formats like JPG, PNG, and WebP.</p>
+                <a href="/tools/image-format-converter" class="tool-button">Use Tool</a>
             </article>
 
-            <!-- Age Calculator -->
+            <!-- Currency Converter -->
             <article class="tool-card">
                 <div class="tool-icon">
-                    <i class="fas fa-birthday-cake"></i>
+                    <i class="fas fa-dollar-sign"></i>
                 </div>
-                <h2 class="tool-name">Age Calculator</h2>
-                <p class="tool-description">Determines a person's age in years, months, and days from their birthdate.</p>
-                <a href="/tools/age-calculator" class="tool-button">Use Tool</a>
+                <h2 class="tool-name">Currency Converter</h2>
+                <p class="tool-description">Provides real-time currency exchange rates and conversions.</p>
+                <a href="/tools/currency-converter" class="tool-button">Use Tool</a>
             </article>
 
-            <!-- Percentage Calculator -->
+            <!-- Unit Converter -->
             <article class="tool-card">
                 <div class="tool-icon">
-                    <i class="fas fa-percent"></i>
+                    <i class="fas fa-exchange-alt"></i>
                 </div>
-                <h2 class="tool-name">Percentage Calculator</h2>
-                <p class="tool-description">Assists in finding percentages, percentage increases/decreases, and related computations.</p>
-                <a href="/tools/percentage-calculator" class="tool-button">Use Tool</a>
+                <h2 class="tool-name">Unit Converter</h2>
+                <p class="tool-description">Converts between various units of measurement (length, weight, temperature, etc.).</p>
+                <a href="/tools/unit-converter" class="tool-button">Use Tool</a>
             </article>
 
-            <!-- Calorie Calculator -->
+            <!-- Video to MP3 Converter -->
             <article class="tool-card">
                 <div class="tool-icon">
-                    <i class="fas fa-fire"></i>
+                    <i class="fas fa-music"></i>
                 </div>
-                <h2 class="tool-name">Calorie Calculator</h2>
-                <p class="tool-description">Estimates daily calorie needs based on activity level, age, weight, and goals.</p>
-                <a href="/tools/calorie-calculator" class="tool-button">Use Tool</a>
+                <h2 class="tool-name">Video to MP3 Converter</h2>
+                <p class="tool-description">Extracts audio from video files and saves it as MP3.</p>
+                <a href="/tools/video-to-mp3-converter" class="tool-button">Use Tool</a>
             </article>
         </div>
 
@@ -996,36 +996,36 @@
             <div class="faq-container">
                 <div class="faq-header">
                     <h2 class="faq-title">Frequently Asked Questions</h2>
-                    <p class="faq-subtitle">Find answers to common questions about our calculator tools</p>
+                    <p class="faq-subtitle">Find answers to common questions about our converter tools</p>
                 </div>
                 <div class="faq-list">
                     <div class="faq-item">
                         <div class="faq-question">
-                            <h3>How accurate are the calculator tools?</h3>
+                            <h3>How accurate are the conversion tools?</h3>
                             <i class="fas fa-chevron-down"></i>
                         </div>
                         <div class="faq-answer">
-                            <p>Our calculator tools are designed to provide accurate results based on standard mathematical formulas and industry standards. However, for critical calculations, we recommend verifying results with professional tools or experts.</p>
+                            <p>Our conversion tools use standardized conversion rates and formulas to ensure accurate results. For currency conversions, we use real-time exchange rates from reliable financial sources.</p>
                         </div>
                     </div>
 
                     <div class="faq-item">
                         <div class="faq-question">
-                            <h3>Can I use these calculators on mobile devices?</h3>
+                            <h3>Can I use these converters on mobile devices?</h3>
                             <i class="fas fa-chevron-down"></i>
                         </div>
                         <div class="faq-answer">
-                            <p>Yes, all our calculator tools are fully responsive and work perfectly on mobile devices, tablets, and desktop computers. The interface automatically adjusts to provide the best user experience on any screen size.</p>
+                            <p>Yes, all our converter tools are fully responsive and work perfectly on mobile devices, tablets, and desktop computers. The interface automatically adjusts to provide the best user experience on any screen size.</p>
                         </div>
                     </div>
 
                     <div class="faq-item">
                         <div class="faq-question">
-                            <h3>Do I need to create an account to use the calculators?</h3>
+                            <h3>Do I need to create an account to use the converters?</h3>
                             <i class="fas fa-chevron-down"></i>
                         </div>
                         <div class="faq-answer">
-                            <p>No, all our calculator tools are completely free to use without requiring an account. Simply visit the tool you need and start calculating immediately.</p>
+                            <p>No, all our converter tools are completely free to use without requiring an account. Simply visit the tool you need and start converting immediately.</p>
                         </div>
                     </div>
                 </div>
