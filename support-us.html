@@ -2,297 +2,307 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Support Us - EveryTool.Tech</title>
-  
-  <!-- Favicon -->
-  <link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
-  <link rel="manifest" href="/manifest.json">
-  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Support Us – EveryTool.tech</title>
+  <link rel="stylesheet" href="styles.css">
   <style>
     :root {
-      --primary: #4361EE;
-      --primary-dark: #3A0CA3;
-      --text-primary: #1F2937;
-      --text-secondary: #4B5563;
-      --bg-primary: #FFFFFF;
-      --bg-secondary: #F3F4F6;
-      --border-light: #E5E7EB;
-      --success: #10B981;
-      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      /* Color Variables */
+      --primary-color: #4361EE;
+      --primary-hover: #1d4ed8;
+      --secondary-color: #64748b;
+      --background-color: #ffffff;
+      --text-color: #1e293b;
+      --text-light: #64748b;
+      --border-color: #e2e8f0;
+      --success-color: #22c55e;
+      --error-color: #ef4444;
+      --modal-background: rgba(15, 23, 42, 0.7);
+      
+      /* Spacing Variables */
+      --spacing-xs: 0.5rem;
+      --spacing-sm: 1rem;
+      --spacing-md: 1.5rem;
+      --spacing-lg: 2rem;
+      --spacing-xl: 2.5rem;
+      
+      /* Border Radius */
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      
+      /* Shadows */
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
       --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-      --transition: all 0.3s ease;
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      
+      /* Transitions */
+      --transition-fast: 0.2s ease;
+      --transition-normal: 0.3s ease;
     }
 
-    .support-container {
-      max-width: 1000px;
-      margin: 80px auto;
-      padding: 2rem;
-    }
-
-    .support-header {
-      text-align: center;
-      margin-bottom: 3rem;
-    }
-
-    .support-header h1 {
-      font-size: 2.5rem;
-      color: var(--text-primary);
-      margin-bottom: 1rem;
-    }
-
-    .support-header p {
-      font-size: 1.1rem;
-      line-height: 1.7;
-      color: var(--text-secondary);
-      max-width: 700px;
-      margin: 0 auto;
-    }
-
-    .support-methods {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 2rem;
-      margin-bottom: 3rem;
-    }
-
-    .method-card {
-      background: var(--bg-primary);
-      border-radius: 12px;
-      padding: 2rem;
-      box-shadow: var(--shadow-md);
-      transition: var(--transition);
-      position: relative;
-      overflow: hidden;
-    }
-
-    .method-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
-    }
-
-    .method-card h2 {
-      font-size: 1.5rem;
-      color: var(--text-primary);
-      margin-bottom: 1.5rem;
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: var(--background-color);
+      margin: 0;
+      padding: 0;
+      color: var(--text-color);
+      min-height: 100vh;
       display: flex;
-      align-items: center;
-      gap: 0.5rem;
+      flex-direction: column;
     }
 
-    .method-card img {
-      width: 100%;
-      max-width: 200px;
-      height: auto;
-      margin: 1rem auto;
-      display: block;
-      border-radius: 8px;
-    }
-
-    .upi-section {
+    main {
+      flex: 1;
+      padding: var(--spacing-lg);
       text-align: center;
     }
 
-    .upi-id {
-      background: var(--bg-secondary);
-      padding: 1rem;
-      border-radius: 8px;
-      font-family: monospace;
-      font-size: 1.1rem;
-      margin: 1rem 0;
-      position: relative;
-      cursor: pointer;
+    h1 {
+      color: var(--primary-color);
+      font-size: 2.5rem;
+      margin-bottom: var(--spacing-xs);
     }
 
-    .copy-button {
-      position: absolute;
-      right: 0.5rem;
-      top: 50%;
-      transform: translateY(-50%);
-      background: var(--primary);
+    p.description {
+      font-size: 1.1rem;
+      max-width: 650px;
+      margin: 0 auto var(--spacing-md);
+      color: var(--text-light);
+    }
+
+    .highlight {
+      color: var(--primary-color);
+      font-weight: bold;
+    }
+
+    .btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: var(--spacing-sm);
+      align-items: center;
+      margin-top: var(--spacing-xl);
+    }
+
+    button {
+      padding: 0.8rem 1.6rem;
+      font-size: 1rem;
+      background-color: var(--primary-color);
       color: white;
       border: none;
-      padding: 0.5rem;
-      border-radius: 4px;
+      border-radius: var(--radius-md);
       cursor: pointer;
-      opacity: 0;
-      transition: var(--transition);
+      transition: var(--transition-normal);
+      width: 100%;
+      max-width: 300px;
+      box-shadow: var(--shadow-sm);
     }
 
-    .upi-id:hover .copy-button {
-      opacity: 1;
-    }
-
-    .paypal-button {
-      display: inline-block;
-      background: var(--primary);
-      color: white;
-      padding: 1rem 2rem;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: 500;
-      transition: var(--transition);
-      margin-top: 1rem;
-    }
-
-    .paypal-button:hover {
-      background: var(--primary-dark);
+    button:hover {
+      background-color: var(--primary-hover);
       transform: translateY(-2px);
-    }
-
-    .support-info {
-      background: var(--bg-secondary);
-      padding: 2rem;
-      border-radius: 12px;
-      margin-top: 3rem;
-    }
-
-    .support-info h3 {
-      color: var(--text-primary);
-      margin-bottom: 1rem;
-    }
-
-    .support-info ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    .support-info li {
-      margin-bottom: 0.5rem;
-      padding-left: 1.5rem;
-      position: relative;
-    }
-
-    .support-info li:before {
-      content: "•";
-      color: var(--primary);
-      position: absolute;
-      left: 0;
-    }
-
-    .copy-success {
-      position: fixed;
-      bottom: 2rem;
-      right: 2rem;
-      background: var(--success);
-      color: white;
-      padding: 1rem 2rem;
-      border-radius: 8px;
       box-shadow: var(--shadow-md);
-      transform: translateY(100%);
-      opacity: 0;
-      transition: var(--transition);
     }
 
-    .copy-success.show {
-      transform: translateY(0);
-      opacity: 1;
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 99;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: var(--modal-background);
+      backdrop-filter: blur(5px);
+    }
+
+    .modal-content {
+      background-color: white;
+      margin: 10% auto;
+      padding: var(--spacing-lg);
+      border-radius: var(--radius-lg);
+      width: 90%;
+      max-width: 400px;
+      position: relative;
+      box-shadow: var(--shadow-lg);
+      text-align: center;
+      animation: modalSlideIn 0.3s ease-out;
+    }
+
+    @keyframes modalSlideIn {
+      from {
+        transform: translateY(-20px);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .close {
+      position: absolute;
+      top: var(--spacing-sm);
+      right: var(--spacing-md);
+      font-size: 1.5rem;
+      font-weight: bold;
+      color: var(--text-light);
+      cursor: pointer;
+      transition: var(--transition-fast);
+    }
+
+    .close:hover {
+      color: var(--text-color);
+    }
+
+    .qr-image {
+      width: 200px;
+      height: auto;
+      margin-top: var(--spacing-sm);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-md);
+    }
+
+    .popup-text {
+      font-size: 1.1rem;
+      margin-top: var(--spacing-sm);
+      background: var(--background-color);
+      padding: 0.8rem 1.2rem;
+      border-radius: var(--radius-md);
+      display: inline-block;
+      word-break: break-all;
+      border: 1px solid var(--border-color);
+    }
+
+    .section {
+      max-width: 700px;
+      margin: auto;
+      padding: var(--spacing-lg) var(--spacing-sm);
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.8rem 1.6rem;
+      background-color: var(--primary-color);
+      color: white;
+      text-decoration: none;
+      border-radius: var(--radius-md);
+      transition: var(--transition-normal);
+      margin-top: var(--spacing-sm);
+    }
+
+    .btn:hover {
+      background-color: var(--primary-hover);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
     }
 
     @media (max-width: 768px) {
-      .support-container {
-        margin: 40px auto;
-        padding: 1rem;
-      }
-
-      .support-header h1 {
+      h1 {
         font-size: 2rem;
       }
-
-      .method-card {
-        padding: 1.5rem;
+      
+      .section {
+        padding: var(--spacing-sm);
+      }
+      
+      button {
+        padding: 0.7rem 1.4rem;
       }
     }
   </style>
 </head>
 <body>
-  <!-- Header Placeholder -->
-  <div id="header-placeholder"></div>
+  <header id="main-header"></header>
 
-  <div class="support-container">
-    <div class="support-header">
-      <h1>Support EveryTool.Tech</h1>
-      <p>
-        EveryTool.Tech is a free and personal side project. If our tools have helped you, consider supporting us to help with server costs, development, and future improvements. Your support means the world to us! 💖
+  <main>
+    <div class="section">
+      <h1>Support Our Mission 💚</h1>
+      <p class="description">
+        EveryTool.tech is a free, ad-light platform designed to provide helpful tools for everyone —
+        from students to developers. Maintaining servers, building tools, and keeping everything
+        running smoothly takes time and resources.
       </p>
-    </div>
+      <p class="description">
+        If you find our tools useful, consider supporting us. Even a small contribution helps us
+        continue building <span class="highlight">free & valuable tools</span> for you.
+      </p>
 
-    <div class="support-methods">
-      <!-- UPI Section -->
-      <div class="method-card">
-        <h2>🇮🇳 Support via UPI</h2>
-        <div class="upi-section">
-          <img src="/assets/upi-qr.png" alt="UPI QR Code" />
-          <div class="upi-id">
-            varshith@upi
-            <button class="copy-button" onclick="copyUpiId()">Copy</button>
-          </div>
-          <p>Scan the QR code or copy the UPI ID above</p>
-        </div>
-      </div>
-
-      <!-- PayPal Section -->
-      <div class="method-card">
-        <h2>🌍 Support via PayPal</h2>
-        <div class="upi-section">
-          <img src="/assets/paypal-logo.png" alt="PayPal" />
-          <a href="https://www.paypal.me/yourusername" target="_blank" class="paypal-button">
-            Support via PayPal
-          </a>
-          <p>For international supporters</p>
-        </div>
+      <div class="btn-group">
+        <button onclick="showPopup('upi')">Show UPI ID</button>
+        <button onclick="showPopup('qr')">Show QR Code</button>
+        <button onclick="showPopup('bmc')">Buy Me a Coffee</button>
+        <button onclick="showPopup('paypal')">Donate via PayPal</button>
       </div>
     </div>
 
-    <div class="support-info">
-      <h3>Why Support Us?</h3>
-      <ul>
-        <li>Help us maintain and improve our existing tools</li>
-        <li>Enable us to develop new features and tools</li>
-        <li>Support server costs and infrastructure</li>
-        <li>Help us keep our services free and accessible</li>
-      </ul>
+    <!-- Modal -->
+    <div id="popupModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closePopup()">&times;</span>
+        <div id="popupBody"></div>
+      </div>
     </div>
+  </main>
 
-    <div class="copy-success" id="copySuccess">
-      UPI ID copied to clipboard!
-    </div>
-  </div>
+  <footer id="main-footer"></footer>
 
-  <!-- Footer Placeholder -->
-  <div id="footer-placeholder"></div>
-
+  <script src="view.js"></script>
   <script>
-    // Load header and footer
-    function loadHTML(url, elementId) {
-      fetch(url)
-        .then(response => response.text())
-        .then(data => {
-          document.getElementById(elementId).innerHTML = data;
-        })
-        .catch(error => console.error('Error loading component:', error));
+    // Fetch and insert header
+    fetch('header.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('main-header').innerHTML = data;
+      })
+      .catch(error => console.error('Error loading header:', error));
+
+    // Fetch and insert footer
+    fetch('footer.html')
+      .then(response => response.text())
+      .then(data => {
+        document.getElementById('main-footer').innerHTML = data;
+      })
+      .catch(error => console.error('Error loading footer:', error));
+
+    function showPopup(type) {
+      const popup = document.getElementById('popupModal');
+      const body = document.getElementById('popupBody');
+
+      let content = '';
+      if (type === 'upi') {
+        content = `<h2>UPI ID</h2><div class="popup-text">everytool@upi</div>`;
+      } else if (type === 'qr') {
+        content = `<h2>Scan to Support</h2><img src="assets/your-upi-qr.png" class="qr-image" alt="UPI QR Code">`;
+      } else if (type === 'bmc') {
+        content = `<h2>Buy Me a Coffee ☕</h2><a href="https://buymeacoffee.com/yourlink" target="_blank" class="btn">Click here to support</a>`;
+      } else if (type === 'paypal') {
+        content = `<h2>PayPal</h2><a href="https://paypal.me/yourlink" target="_blank" class="btn">paypal.me/yourlink</a>`;
+      }
+
+      body.innerHTML = content;
+      popup.style.display = 'block';
     }
 
+    function closePopup() {
+      document.getElementById('popupModal').style.display = 'none';
+    }
+
+    window.onclick = function(event) {
+      const modal = document.getElementById('popupModal');
+      if (event.target === modal) {
+        closePopup();
+      }
+    }
+
+    // Initialize view manager
     document.addEventListener('DOMContentLoaded', () => {
-      loadHTML('header.html', 'header-placeholder');
-      loadHTML('footer.html', 'footer-placeholder');
-    });
-
-    // Existing copyUpiId function
-    function copyUpiId() {
-      const upiId = 'varshith@upi';
-      navigator.clipboard.writeText(upiId).then(() => {
-        const successMessage = document.getElementById('copySuccess');
-        successMessage.classList.add('show');
-        setTimeout(() => {
-          successMessage.classList.remove('show');
-        }, 2000);
+      const viewManager = new DeviceViewManager();
+      viewManager.subscribe((deviceInfo) => {
+        // Handle device changes if needed
+        console.log('Device info updated:', deviceInfo);
       });
-    }
+    });
   </script>
-  <!-- View.js Script -->
-  <script src="/view.js"></script>
 </body>
 </html>
