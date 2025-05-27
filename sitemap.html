@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Complete sitemap of EveryTool.tech - Find all tools, calculators, converters, and utilities in one place">
+    <title>Sitemap - EveryTool.tech</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="assets/favicon.png">
+    <link rel="apple-touch-icon" href="assets/logo-icon.png">
+    <link rel="manifest" href="site.webmanifest">
+    
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --text-color: #1f2937;
+            --bg-color: #ffffff;
+            --border-color: #b6c2d1;
+            --section-bg: #f9fafb;
+            --section-border: #2563eb;
+            --section-heading-bg: #e8f0fe;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--bg-color);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .main-content {
+            flex: 1;
+            padding: 2.5rem 1.5rem 0 1.5rem;
+            max-width: 1400px;
+            margin: 0 auto;
+            width: 100%;
+        }
+
+        .sitemap-title {
+            font-size: 2.7rem;
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            text-align: center;
+        }
+
+        .description {
+            color: #374151;
+            font-size: 1.15rem;
+            max-width: 700px;
+            margin: 0 auto 2.5rem auto;
+            text-align: center;
+        }
+
+        .section {
+            margin-bottom: 2.5rem;
+            padding: 2rem 1.5rem;
+            background: var(--section-bg);
+            border-radius: 10px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.07);
+            border: 2px solid var(--section-border);
+        }
+
+        .section-heading {
+            color: var(--primary-color);
+            background: var(--section-heading-bg);
+            font-size: 1.6rem;
+            font-weight: 600;
+            margin-bottom: 1.2rem;
+            padding: 0.5rem 1rem;
+            border-radius: 6px;
+            border-bottom: 3px solid var(--primary-color);
+            letter-spacing: 0.5px;
+        }
+
+        .link-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 0.5rem 2.5rem;
+        }
+
+        .link-list li {
+            margin-bottom: 0.2rem;
+        }
+
+        .link-list a {
+            color: var(--text-color);
+            text-decoration: none;
+            display: block;
+            padding: 0.5rem 0.75rem;
+            border-radius: 4px;
+            font-weight: 500;
+            transition: background 0.2s, color 0.2s;
+        }
+
+        .link-list a:hover, .link-list a:focus {
+            background-color: #e5e7eb;
+            color: var(--primary-color);
+            outline: none;
+        }
+
+        .timestamp {
+            text-align: center;
+            color: #374151;
+            margin: 3.5rem 0 2.5rem 0;
+            font-size: 1rem;
+        }
+
+        /* Header and Footer Container Styles */
+        #header-container, #footer-container {
+            width: 100%;
+        }
+
+        @media (max-width: 900px) {
+            .main-content {
+                max-width: 98vw;
+                padding: 1.2rem 0.5rem 0 0.5rem;
+            }
+            .section {
+                padding: 1.2rem 0.5rem;
+            }
+            .section-heading {
+                font-size: 1.2rem;
+                padding: 0.5rem 0.5rem;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .main-content {
+                padding: 0.5rem 0.1rem 0 0.1rem;
+            }
+            .sitemap-title {
+                font-size: 1.5rem;
+            }
+            .section {
+                padding: 0.7rem 0.2rem;
+            }
+            .section-heading {
+                font-size: 1rem;
+                padding: 0.4rem 0.2rem;
+            }
+            .link-list {
+                grid-template-columns: 1fr;
+                gap: 0.2rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Container -->
+    <div id="header-container"></div>
+
+    <div class="main-content">
+        <div class="sitemap-title">Sitemap</div>
+        <div class="description">A complete overview of all pages and tools available on EveryTool.tech</div>
+        <main>
+            <section class="section">
+                <div class="section-heading">Main Pages</div>
+                <ul class="link-list">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="support-us.html">Support Us</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <div class="section-heading">Tool Categories</div>
+                <ul class="link-list">
+                    <li><a href="categorie-page/calculators.html">Calculators</a></li>
+                    <li><a href="categorie-page/converters.html">Converters</a></li>
+                    <li><a href="categorie-page/developer-tools.html">Developer Tools</a></li>
+                    <li><a href="categorie-page/generators.html">Generators</a></li>
+                    <li><a href="categorie-page/seo-tools.html">SEO Tools</a></li>
+                    <li><a href="categorie-page/text-file-tools.html">Text/File Tools</a></li>
+                </ul>
+            </section>
+
+            <section class="section">
+                <div class="section-heading">Individual Tools</div>
+                <ul class="link-list">
+                    <!-- Calculators -->
+                    <li><a href="tools/calculators/">Calculator Tools</a></li>
+                    
+                    <!-- Converters -->
+                    <li><a href="tools/converters/">Converter Tools</a></li>
+                    
+                    <!-- Developer Tools -->
+                    <li><a href="tools/developer-tools/">Developer Tools</a></li>
+                    
+                    <!-- Generators -->
+                    <li><a href="tools/generators-tools/">Generator Tools</a></li>
+                    
+                    <!-- SEO Tools -->
+                    <li><a href="tools/SEO-tools/">SEO Tools</a></li>
+                    
+                    <!-- Text/File Tools -->
+                    <li><a href="tools/text-file-tools/">Text/File Tools</a></li>
+                </ul>
+            </section>
+        </main>
+
+        <footer class="timestamp">
+            <p>Last updated on: <time id="last-updated"></time></p>
+        </footer>
+    </div>
+
+    <!-- Footer Container -->
+    <div id="footer-container"></div>
+
+    <!-- Scripts -->
+    <script src="view.js"></script>
+    <script>
+        // Set the last updated timestamp
+        document.getElementById('last-updated').textContent = new Date().toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        });
+
+        // Fetch and insert header
+        fetch('header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-container').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading header:', error));
+
+        // Fetch and insert footer
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-container').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading footer:', error));
+    </script>
+</body>
+</html> 
