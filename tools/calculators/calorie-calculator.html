@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calorie Calculator - Free Online Tool | EveryTool.tech</title>
+    <meta name="description" content="Calculate your daily calorie needs, BMR, and TDEE with our free Calorie Calculator. Get personalized nutrition recommendations for your health goals. Try it now!">
+    <meta name="keywords" content="calorie calculator, BMR calculator, TDEE calculator, daily calorie needs, weight loss calculator, nutrition calculator">
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="Calorie Calculator - Free Online Tool | EveryTool.tech">
+    <meta property="og:description" content="Calculate your daily calorie needs, BMR, and TDEE with our free Calorie Calculator. Get personalized nutrition recommendations for your health goals.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://everytool.tech/tools/calculators/calorie-calculator">
+    <meta property="og:image" content="https://everytool.tech/assets/calorie-calculator-preview.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../../assets/favicon.png">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Add in <head> if not present -->
+    <link rel="stylesheet" href="/faq.css">
+    
+    <style>
+        /* Core Variables */
+        :root {
+            --primary: #4361EE;
+            --primary-dark: #2945c8;
+            --primary-darker: #1f37a8;
+            --primary-light: #6b83f1;
+            --primary-lighter: #94a5f4;
+            --secondary: #7209B7;
+            --secondary-dark: #560BAD;
+            --accent: #F72585;
+            --accent-dark: #B5179E;
+            --text-primary: #1F2937;
+            --text-secondary: #4B5563;
+            --text-light: #9CA3AF;
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #F9FAFB;
+            --bg-accent: #F3F4F6;
+            --bg-dark: #111827;
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --radius-sm: 0.375rem;
+            --radius-md: 0.75rem;
+            --radius-lg: 1.5rem;
+            --transition-all: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+        }
+
+        /* Header Placeholder */
+        #header-placeholder {
+            height: 64px;
+        }
+
+        /* Tool Hero Section */
+        .tool-hero {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, rgba(67, 97, 238, 0.1) 0%, rgba(41, 69, 200, 0.1) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tool-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><rect width="1" height="1" fill="%234361EE" opacity="0.1"/></svg>');
+            opacity: 0.5;
+            animation: patternMove 20s linear infinite;
+        }
+
+        .tool-hero__container {
+            max-width: 1280px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .tool-hero__content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .tool-hero__left {
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .tool-hero__title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            line-height: 1.2;
+        }
+
+        .tool-hero__description {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .tool-hero__features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .tool-feature {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .tool-feature i {
+            color: var(--primary);
+            font-size: 1.25rem;
+        }
+
+        .tool-hero__cta {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .tool-button {
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition-all);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tool-button--primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .tool-button--primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .tool-button--secondary {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .tool-button--secondary:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .tool-hero__right {
+            position: relative;
+            animation: slideIn 1s ease-out;
+        }
+
+        .tool-preview {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tool-preview::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+
+        /* Tool Display Section */
+        .tool-display {
+            padding: 4rem 2rem;
+            background: var(--bg-primary);
+            position: relative;
+        }
+
+        .tool-display__container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .tool-display__wrapper {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tool-display__wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+
+        .tool-display__header {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .tool-display__title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .tool-display__description {
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .tool-display__content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .tool-display__input-section {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+        }
+
+        .tool-display__output-section {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            min-height: 200px;
+        }
+
+        .tool-display__controls {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tool-display__button {
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition-all);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--primary);
+            color: white;
+        }
+
+        .tool-display__button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .tool-display__button--secondary {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .tool-display__button--secondary:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .tool-display__input-group {
+            margin-bottom: 1rem;
+        }
+
+        .tool-display__label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .tool-display__input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--bg-accent);
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            transition: var(--transition-all);
+        }
+
+        .tool-display__input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-lighter);
+        }
+
+        .tool-display__result {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: white;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--bg-accent);
+        }
+
+        .calorie-summary {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: var(--radius-md);
+            background: var(--bg-accent);
+        }
+
+        .calorie-summary__item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--bg-secondary);
+        }
+
+        .calorie-summary__item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .calorie-summary__label {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .calorie-summary__value {
+            color: var(--text-secondary);
+        }
+
+        /* Blog Section */
+        .tool-blog {
+            padding: 4rem 2rem;
+            background: var(--bg-secondary);
+        }
+
+        .tool-blog__container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .tool-blog__header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .tool-blog__title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .tool-blog__subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .blog-content {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            box-shadow: var(--shadow-md);
+            margin-top: 2rem;
+        }
+
+        .blog-section {
+            margin-bottom: 3rem;
+        }
+
+        .blog-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .blog-section__title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .blog-section__title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+
+        .blog-section__content {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .blog-section__content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .blog-section__content ul {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+
+        .blog-section__content li {
+            margin-bottom: 0.75rem;
+        }
+
+        .blog-section__content strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .blog-section__content a {
+            color: var(--primary);
+            text-decoration: none;
+            border-bottom: 2px solid var(--primary-light);
+            transition: var(--transition-all);
+        }
+
+        .blog-section__content a:hover {
+            color: var(--primary-dark);
+            border-bottom-color: var(--primary-dark);
+        }
+
+        /* Footer Placeholder */
+        #footer-placeholder {
+            min-height: 400px;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes patternMove {
+            from {
+                background-position: 0 0;
+            }
+            to {
+                background-position: 100px 100px;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .tool-hero__content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .tool-hero__right {
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .tool-hero {
+                padding: 3rem 1rem;
+            }
+
+            .tool-hero__title {
+                font-size: 2.5rem;
+            }
+
+            .tool-hero__features {
+                grid-template-columns: 1fr;
+            }
+
+            .tool-blog {
+                padding: 3rem 1rem;
+            }
+
+            .blog-content {
+                padding: 2rem;
+            }
+
+            .blog-section__title {
+                font-size: 1.75rem;
+            }
+
+            .blog-section__content {
+                font-size: 1rem;
+            }
+
+            .tool-display {
+                padding: 2rem 1rem;
+            }
+
+            .tool-display__wrapper {
+                padding: 1.5rem;
+            }
+
+            .tool-display__title {
+                font-size: 1.5rem;
+            }
+
+            .tool-display__controls {
+                flex-direction: column;
+            }
+
+            .tool-display__button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <!-- Tool Hero Section -->
+    <section class="tool-hero">
+        <div class="tool-hero__container">
+            <div class="tool-hero__content">
+                <div class="tool-hero__left">
+                    <h1 class="tool-hero__title">Calculate Your Daily Calorie Needs</h1>
+                    <p class="tool-hero__description">
+                        Get personalized calorie recommendations based on your age, weight, height, and activity level. 
+                        Make informed decisions about your nutrition and health goals.
+                    </p>
+                    <div class="tool-hero__features">
+                        <div class="tool-feature">
+                            <i class="fas fa-bolt"></i>
+                            <span>Instant Results</span>
+                        </div>
+                        <div class="tool-feature">
+                            <i class="fas fa-user"></i>
+                            <span>Personalized</span>
+                        </div>
+                        <div class="tool-feature">
+                            <i class="fas fa-chart-line"></i>
+                            <span>Detailed Analysis</span>
+                        </div>
+                        <div class="tool-feature">
+                            <i class="fas fa-lock"></i>
+                            <span>100% Private</span>
+                        </div>
+                    </div>
+                    <div class="tool-hero__cta">
+                        <a href="#tool-display" class="tool-button tool-button--primary">
+                            <i class="fas fa-calculator"></i>
+                            Calculate Now
+                        </a>
+                        <a href="#learn-more" class="tool-button tool-button--secondary">
+                            <i class="fas fa-book"></i>
+                            Learn More
+                        </a>
+                    </div>
+                </div>
+                <div class="tool-hero__right">
+                    <div class="tool-preview">
+                        <img src="../../assets/calorie-calculator-preview.png" alt="Calorie Calculator Preview - Professional Health Tool" style="width: 100%;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tool Display Section -->
+    <section id="tool-display" class="tool-display">
+        <div class="tool-display__container">
+            <div class="tool-display__wrapper">
+                <div class="tool-display__header">
+                    <h2 class="tool-display__title">Calculate Your Calories</h2>
+                    <p class="tool-display__description">
+                        Enter your details to get personalized calorie recommendations for your health goals. 
+                        Perfect for weight loss, maintenance, or muscle gain.
+                    </p>
+                </div>
+                <div class="tool-display__content">
+                    <div class="tool-display__input-section">
+                        <div class="tool-display__input-group">
+                            <label class="tool-display__label">Gender</label>
+                            <select class="tool-display__input" id="gender">
+                                <option value="male">Male</option>
+                                <option value="female">Female</option>
+                            </select>
+                        </div>
+                        <div class="tool-display__input-group">
+                            <label class="tool-display__label">Age (years)</label>
+                            <input type="number" class="tool-display__input" id="age" placeholder="Enter your age" min="15" max="100">
+                        </div>
+                        <div class="tool-display__input-group">
+                            <label class="tool-display__label">Weight (kg)</label>
+                            <input type="number" class="tool-display__input" id="weight" placeholder="Enter your weight" min="30" max="300">
+                        </div>
+                        <div class="tool-display__input-group">
+                            <label class="tool-display__label">Height (cm)</label>
+                            <input type="number" class="tool-display__input" id="height" placeholder="Enter your height" min="100" max="250">
+                        </div>
+                        <div class="tool-display__input-group">
+                            <label class="tool-display__label">Activity Level</label>
+                            <select class="tool-display__input" id="activity-level">
+                                <option value="sedentary">Sedentary (little or no exercise)</option>
+                                <option value="light">Lightly active (light exercise 1-3 days/week)</option>
+                                <option value="moderate">Moderately active (moderate exercise 3-5 days/week)</option>
+                                <option value="very">Very active (hard exercise 6-7 days/week)</option>
+                                <option value="extra">Extra active (very hard exercise & physical job)</option>
+                            </select>
+                        </div>
+                        <div class="tool-display__input-group">
+                            <label class="tool-display__label">Goal</label>
+                            <select class="tool-display__input" id="goal">
+                                <option value="maintain">Maintain Weight</option>
+                                <option value="lose">Lose Weight</option>
+                                <option value="gain">Gain Weight</option>
+                            </select>
+                        </div>
+                        <div class="tool-display__controls">
+                            <button class="tool-display__button" id="calculate-calories">
+                                <i class="fas fa-calculator"></i>
+                                Calculate
+                            </button>
+                            <button class="tool-display__button tool-display__button--secondary" id="reset-calories">
+                                <i class="fas fa-redo"></i>
+                                Reset
+                            </button>
+                        </div>
+                    </div>
+                    <div class="tool-display__output-section">
+                        <h3 class="tool-display__label">Your Results</h3>
+                        <div class="tool-display__result" id="calorie-result">
+                            Your calorie calculation results will appear here...
+                        </div>
+                        <div class="calorie-summary" id="calorie-summary" style="display: none;">
+                            <div class="calorie-summary__item">
+                                <span class="calorie-summary__label">BMR (Basal Metabolic Rate):</span>
+                                <span class="calorie-summary__value" id="bmr-value"></span>
+                            </div>
+                            <div class="calorie-summary__item">
+                                <span class="calorie-summary__label">TDEE (Total Daily Energy Expenditure):</span>
+                                <span class="calorie-summary__value" id="tdee-value"></span>
+                            </div>
+                            <div class="calorie-summary__item">
+                                <span class="calorie-summary__label">Recommended Daily Calories:</span>
+                                <span class="calorie-summary__value" id="recommended-calories"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="learn-more" class="tool-blog">
+        <div class="tool-blog__container">
+            <div class="tool-blog__header">
+                <h2 class="tool-blog__title">Understanding Calorie Needs and Nutrition</h2>
+                <p class="tool-blog__subtitle">
+                    A comprehensive guide to understanding your calorie needs, metabolism, and nutrition for optimal health
+                </p>
+            </div>
+            <div class="blog-content">
+                <div class="blog-section">
+                    <h3 class="blog-section__title">Understanding Your Metabolism</h3>
+                    <div class="blog-section__content">
+                        <p>
+                            Your metabolism is the complex process by which your body converts food into energy. 
+                            Understanding your metabolic rate is crucial for managing your weight and overall health. 
+                            The two key components of metabolism are:
+                        </p>
+                        <ul>
+                            <li><strong>Basal Metabolic Rate (BMR):</strong> The calories your body burns at rest to maintain basic functions</li>
+                            <li><strong>Total Daily Energy Expenditure (TDEE):</strong> The total calories you burn each day, including activity</li>
+                        </ul>
+                        <p>
+                            These calculations help you understand your body's energy needs and make informed decisions about your diet.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="blog-section">
+                    <h3 class="blog-section__title">Factors Affecting Calorie Needs</h3>
+                    <div class="blog-section__content">
+                        <p>
+                            Several factors influence your daily calorie requirements:
+                        </p>
+                        <ul>
+                            <li>
+                                <strong>Age:</strong>
+                                <br>Metabolic rate typically decreases with age
+                            </li>
+                            <li>
+                                <strong>Gender:</strong>
+                                <br>Men generally have higher calorie needs than women
+                            </li>
+                            <li>
+                                <strong>Body Composition:</strong>
+                                <br>Muscle mass increases calorie needs
+                            </li>
+                            <li>
+                                <strong>Activity Level:</strong>
+                                <br>Physical activity significantly impacts calorie requirements
+                            </li>
+                            <li>
+                                <strong>Health Status:</strong>
+                                <br>Certain medical conditions can affect metabolism
+                            </li>
+                        </ul>
+                        <p>
+                            Understanding these factors helps in creating a personalized nutrition plan.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="blog-section">
+                    <h3 class="blog-section__title">Nutrition and Health Goals</h3>
+                    <div class="blog-section__content">
+                        <p>
+                            Different health goals require different calorie approaches:
+                        </p>
+                        <ul>
+                            <li><strong>Weight Loss:</strong> Create a moderate calorie deficit (500-1000 calories below TDEE)</li>
+                            <li><strong>Weight Maintenance:</strong> Match calorie intake to TDEE</li>
+                            <li><strong>Muscle Gain:</strong> Create a moderate calorie surplus (300-500 calories above TDEE)</li>
+                            <li><strong>Performance:</strong> Adjust calories based on training intensity and goals</li>
+                        </ul>
+                        <p>
+                            Remember that sustainable changes are more effective than extreme calorie restrictions.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="blog-section">
+                    <h3 class="blog-section__title">Tips for Healthy Nutrition</h3>
+                    <div class="blog-section__content">
+                        <p>
+                            Here are some strategies for maintaining a healthy diet:
+                        </p>
+                        <ul>
+                            <li>Focus on nutrient-dense foods</li>
+                            <li>Stay hydrated throughout the day</li>
+                            <li>Include a balance of macronutrients</li>
+                            <li>Plan meals ahead of time</li>
+                            <li>Listen to your body's hunger and fullness cues</li>
+                            <li>Make sustainable lifestyle changes</li>
+                        </ul>
+                        <p>
+                            These practices help support your health goals while maintaining a balanced approach to nutrition.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Move FAQ section above the footer -->
+    <section class="faq-section">
+        <div class="faq-container">
+            <div class="faq-header">
+                <h2 class="faq-title">Calorie Calculator FAQ</h2>
+                <p class="faq-subtitle">Frequently asked questions about the Calorie Calculator</p>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question"><h3>What is a calorie calculator?</h3><i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer"><p>A calorie calculator estimates your daily caloric needs based on your age, gender, weight, height, and activity level.</p></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question"><h3>What is BMR?</h3><i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer"><p>BMR stands for Basal Metabolic Rate, which is the number of calories your body needs at rest to maintain vital functions.</p></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question"><h3>What is TDEE?</h3><i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer"><p>TDEE stands for Total Daily Energy Expenditure, which is the total number of calories you burn in a day, including all activities.</p></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question"><h3>Can this calculator help with weight loss?</h3><i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer"><p>Yes, by knowing your daily caloric needs, you can plan your diet for weight loss, maintenance, or gain.</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Add before </body> -->
+    <script src="/faq.js"></script>
+
+    <script>
+        // Fetch and insert header
+        fetch('../../header.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('header-placeholder').innerHTML = html;
+            })
+            .catch(error => console.error('Error loading header:', error));
+
+        // Fetch and insert footer
+        fetch('../../footer.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('footer-placeholder').innerHTML = html;
+            })
+            .catch(error => console.error('Error loading footer:', error));
+
+        // Calorie Calculator Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const genderSelect = document.getElementById('gender');
+            const ageInput = document.getElementById('age');
+            const weightInput = document.getElementById('weight');
+            const heightInput = document.getElementById('height');
+            const activitySelect = document.getElementById('activity-level');
+            const goalSelect = document.getElementById('goal');
+            const calculateButton = document.getElementById('calculate-calories');
+            const resetButton = document.getElementById('reset-calories');
+            const resultDiv = document.getElementById('calorie-result');
+            const summaryDiv = document.getElementById('calorie-summary');
+            const bmrValueSpan = document.getElementById('bmr-value');
+            const tdeeValueSpan = document.getElementById('tdee-value');
+            const recommendedCaloriesSpan = document.getElementById('recommended-calories');
+
+            // Activity level multipliers
+            const activityMultipliers = {
+                sedentary: 1.2,
+                light: 1.375,
+                moderate: 1.55,
+                very: 1.725,
+                extra: 1.9
+            };
+
+            // Goal adjustments
+            const goalAdjustments = {
+                maintain: 0,
+                lose: -500,
+                gain: 500
+            };
+
+            function calculateCalories() {
+                const gender = genderSelect.value;
+                const age = parseFloat(ageInput.value);
+                const weight = parseFloat(weightInput.value);
+                const height = parseFloat(heightInput.value);
+                const activityLevel = activitySelect.value;
+                const goal = goalSelect.value;
+
+                if (isNaN(age) || isNaN(weight) || isNaN(height)) {
+                    resultDiv.textContent = 'Please enter valid numbers for all fields.';
+                    summaryDiv.style.display = 'none';
+                    return;
+                }
+
+                // Calculate BMR using Mifflin-St Jeor Equation
+                let bmr;
+                if (gender === 'male') {
+                    bmr = 10 * weight + 6.25 * height - 5 * age + 5;
+                } else {
+                    bmr = 10 * weight + 6.25 * height - 5 * age - 161;
+                }
+
+                // Calculate TDEE
+                const tdee = bmr * activityMultipliers[activityLevel];
+
+                // Calculate recommended calories based on goal
+                const recommendedCalories = Math.round(tdee + goalAdjustments[goal]);
+
+                // Format numbers
+                const formatNumber = (num) => {
+                    return Math.round(num).toLocaleString();
+                };
+
+                bmrValueSpan.textContent = `${formatNumber(bmr)} calories/day`;
+                tdeeValueSpan.textContent = `${formatNumber(tdee)} calories/day`;
+                recommendedCaloriesSpan.textContent = `${formatNumber(recommendedCalories)} calories/day`;
+
+                resultDiv.textContent = 'Your calorie calculation is complete!';
+                summaryDiv.style.display = 'block';
+            }
+
+            function resetCalculator() {
+                genderSelect.value = 'male';
+                ageInput.value = '';
+                weightInput.value = '';
+                heightInput.value = '';
+                activitySelect.value = 'sedentary';
+                goalSelect.value = 'maintain';
+                resultDiv.textContent = 'Your calorie calculation results will appear here...';
+                summaryDiv.style.display = 'none';
+            }
+
+            calculateButton.addEventListener('click', calculateCalories);
+            resetButton.addEventListener('click', resetCalculator);
+
+            // Allow Enter key to trigger calculation
+            [ageInput, weightInput, heightInput].forEach(input => {
+                input.addEventListener('keypress', function(e) {
+                    if (e.key === 'Enter') {
+                        calculateCalories();
+                    }
+                });
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements with animation classes
+        document.querySelectorAll('.tool-hero__left, .tool-hero__right, .blog-section').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html> 

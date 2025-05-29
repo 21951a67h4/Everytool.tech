@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval';">
+    
+    <title>Tools - Everytool</title>
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../assets/favicon.png">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Custom Styles -->
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        :root {
+            --primary: #4361EE;
+            --primary-dark: #3F37C9;
+            --text-primary: #1F2937;
+            --bg-primary: #ffffff;
+            --bg-secondary: #f9fafb;
+            --border-light: #dfe1e5;
+            --border-dark: #cdd1d5;
+            --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Main Content Styles */
+        .main-content {
+            flex: 1;
+            padding-top: 80px;
+        }
+    </style>
+    
+    <!-- JavaScript Files -->
+    <script src="../faq.js" defer></script>
+    <script src="../view.js" defer></script>
+</head>
+<body>
+    <!-- Header Section -->
+    <div id="header-placeholder"></div>
+
+    <main class="main-content">
+        <section class="tools-header-section">
+            <div class="tools-header-content">
+                <h1 class="tools-header-title">Powerful Tools for Everyone</h1>
+                <p class="tools-header-subtitle">Access our collection of free, easy-to-use tools designed to make your work more efficient</p>
+                <div class="tools-header-stats">
+                    <div class="tools-stat-item">
+                        <div class="tools-stat-number">50+</div>
+                        <div class="tools-stat-label">Free Tools</div>
+                    </div>
+                    <div class="tools-stat-item">
+                        <div class="tools-stat-number">100k+</div>
+                        <div class="tools-stat-label">Monthly Users</div>
+                    </div>
+                    <div class="tools-stat-item">
+                        <div class="tools-stat-number">24/7</div>
+                        <div class="tools-stat-label">Available</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="tools-page">
+            <div class="tools-container">
+                <div class="tools-header">
+                    <h1 class="tools-title">Our Tools</h1>
+                    <p class="tools-subtitle">Find the perfect tool for your needs</p>
+                </div>
+
+                <div class="search-section">
+                    <div class="search-container">
+                        <i class="fas fa-search search-icon"></i>
+                        <input type="text" class="search-input" placeholder="Search tools by name or description...">
+                        <button class="clear-search" style="display: none;">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="filter-section">
+                    <div class="filter-buttons">
+                        <button class="filter-button active" data-category="all">All Tools</button>
+                        <button class="filter-button" data-category="calculators">Calculators</button>
+                        <button class="filter-button" data-category="converters">Converters</button>
+                        <button class="filter-button" data-category="generators">Generators</button>
+                        <button class="filter-button" data-category="developer">Developer Tools</button>
+                        <button class="filter-button" data-category="seo">SEO Tools</button>
+                        <button class="filter-button" data-category="text">Text Tools</button>
+                    </div>
+                </div>
+
+                <div class="tools-grid">
+                    <!-- Calculators -->
+                    <article class="tool-card" data-category="calculators">
+                        <div class="tool-category">Calculators</div>
+                        <div class="tool-icon">
+                            <i class="fas fa-calculator"></i>
+                        </div>
+                        <h2 class="tool-name">BMI Calculator</h2>
+                        <p class="tool-description">Helps users determine their Body Mass Index based on height and weight.</p>
+                        <a href="/tools/calculators/bmi-calculator.html" class="tool-button">Use Tool</a>
+                    </article>
+
+                    <article class="tool-card" data-category="calculators">
+                        <div class="tool-category">Calculators</div>
+                        <div class="tool-icon">
+                            <i class="fas fa-money-bill-wave"></i>
+                        </div>
+                        <h2 class="tool-name">Loan EMI Calculator</h2>
+                        <p class="tool-description">Calculates monthly loan payments, total interest, and repayment schedules.</p>
+                        <a href="/tools/calculators/loan-emi-calculator.html" class="tool-button">Use Tool</a>
+                    </article>
+
+                    <article class="tool-card" data-category="calculators">
+                        <div class="tool-category">Calculators</div>
+                        <div class="tool-icon">
+                            <i class="fas fa-birthday-cake"></i>
+                        </div>
+                        <h2 class="tool-name">Age Calculator</h2>
+                        <p class="tool-description">Determines a person's age in years, months, and days from their birthdate.</p>
+                        <a href="/tools/calculators/age-calculator.html" class="tool-button">Use Tool</a>
+                    </article>
+
+                    <article class="tool-card" data-category="calculators">
+                        <div class="tool-category">Calculators</div>
+                        <div class="tool-icon">
+                            <i class="fas fa-percentage"></i>
+                        </div>
+                        <h2 class="tool-name">Percentage Calculator</h2>
+                        <p class="tool-description">Assists in finding percentages, percentage increases/decreases, and related computations.</p>
+                        <a href="/tools/calculators/percentage-calculator.html" class="tool-button">Use Tool</a>
+                    </article>
+
+                    <article class="tool-card" data-category="calculators">
+                        <div class="tool-category">Calculators</div>
+                        <div class="tool-icon">
+                            <i class="fas fa-fire"></i>
+                        </div>
+                        <h2 class="tool-name">Calorie Calculator</h2>
+                        <p class="tool-description">Estimates daily calorie needs based on activity level, age, weight, and goals.</p>
+                        <a href="/tools/calculators/calorie-calculator.html" class="tool-button">Use Tool</a>
+                    </article>
+
+                    <!-- Converters -->
+                    <article class="tool-card" data-category="converters">
+                        <div class="tool-category">Converters</div>
+                        <div class="tool-icon">
+                            <i class="fas fa-file-pdf"></i>
+                        </div>
+                        <h2 class="tool-name">PDF to Word Converter</h2>
+                        <p class="tool-description">Converts PDF documents into editable Word files.</p>
+                        <a href="/tools/pdf-to-word" class="tool-button">Use Tool</a>
+                    </article>
+
+                    <article class="tool-card" data-category="converters">
+                        <div class="tool-category">Converters</div>
+                        <div class="tool-icon">
+                            <i class="fas fa-image"></i>
+                        </div>
+                        <h2 class="tool-name">Image Format Converter</h2>
+                        <p class="tool-description">Transforms images between formats like JPG, PNG, and WebP.</p>
+                        <a href="/tools/image-converter" class="tool-button">Use Tool</a>
+                    </article>
+
+                    <article class="tool-card" data-category="converters">
+                        <div class="tool-category">Converters</div>
+                        <div class="tool-icon">
+                            <i class="fas fa-exchange-alt"></i>
+                        </div>
+                        <h2 class="tool-name">Currency Converter</h2>
+                        <p class="tool-description">Provides real-time currency exchange rates and conversions.</p>
+                        <a href="/tools/currency-converter" class="tool-button">Use Tool</a>
+                    </article>
+
+                    <article class="tool-card" data-category="converters">
+                        <div class="tool-category">Converters</div>
+                        <div class="tool-icon">
+                            <i class="fas fa-ruler"></i>
+                        </div>
+                        <h2 class="tool-name">Unit Converter</h2>
+                        <p class="tool-description">Converts between various units of measurement (length, weight, temperature, etc.).</p>
+                        <a href="/tools/unit-converter" class="tool-button">Use Tool</a>
+                    </article>
+
+                    <article class="tool-card" data-category="converters">
+                        <div class="tool-category">Converters</div>
+                        <div class="tool-icon">
+                            <i class="fas fa-music"></i>
+                        </div>
+                        <h2 class="tool-name">Video to MP3 Converter</h2>
+                        <p class="tool-description">Extracts audio from video files and saves it as MP3.</p>
+                        <a href="/tools/video-to-mp3" class="tool-button">Use Tool</a>
+                    </article>
+
+                    <!-- Generators -->
+                    <article class="tool-card" data-category="generators">
+                        <div class="tool-category">Generators</div>
+                        <div class="tool-icon">
+                            <i class="fas fa-key"></i>
+                        </div>
+                        <h2 class="tool-name">Password Generator</h2>
+                        <p class="tool-description">Creates strong, random passwords with customizable criteria.</p>
+                        <a href="/tools/password-generator" class="tool-button">Use Tool</a>
+                    </article>
+
+                    <article class="tool-card" data-category="generators">
+                        <div class="tool-category">Generators</div>
+                        <div class="tool-icon">
+                            <i class="fas fa-qrcode"></i>
+                        </div>
+                        <h2 class="tool-name">QR Code Generator</h2>
+                        <p class="tool-description">Generates QR codes for URLs, text, or contact information.</p>
+                        <a href="/tools/qr-generator" class="tool-button">Use Tool</a>
+                    </article>
+
+                    <article class="tool-card" data-category="generators">
+                        <div class="tool-category">Generators</div>
+                        <div class="tool-icon">
+                            <i class="fas fa-paragraph"></i>
+                        </div>
+                        <h2 class="tool-name">Lorem Ipsum Generator</h2>
+                        <p class="tool-description">Produces placeholder text for design and development purposes.</p>
+                        <a href="/tools/lorem-ipsum" class="tool-button">Use Tool</a>
+                    </article>
+
+                    <article class="tool-card" data-category="generators">
+                        <div class="tool-category">Generators</div>
+                        <div class="tool-icon">
+                            <i class="fas fa-fingerprint"></i>
+                        </div>
+                        <h2 class="tool-name">UUID Generator</h2>
+                        <p class="tool-description">Generates universally unique identifiers for various applications.</p>
+                        <a href="/tools/uuid-generator" class="tool-button">Use Tool</a>
+                    </article>
+
+                    <article class="tool-card" data-category="generators">
+                        <div class="tool-category">Generators</div>
+                        <div class="tool-icon">
+                            <i class="fas fa-palette"></i>
+                        </div>
+                        <h2 class="tool-name">Color Palette Generator</h2>
+                        <p class="tool-description">Creates harmonious color schemes for design projects.</p>
+                        <a href="/tools/color-palette" class="tool-button">Use Tool</a>
+                    </article>
+
+                    <!-- Developer Tools -->
+                    <article class="tool-card" data-category="developer">
+                        <div class="tool-category">Developer Tools</div>
+                        <div class="tool-icon">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h2 class="tool-name">JSON Formatter & Validator</h2>
+                        <p class="tool-description">Formats and validates JSON data for readability and correctness.</p>
+                        <a href="/tools/json-formatter" class="tool-button">Use Tool</a>
+                    </article>
+
+                    <article class="tool-card" data-category="developer">
+                        <div class="tool-category">Developer Tools</div>
+                        <div class="tool-icon">
+                            <i class="fas fa-terminal"></i>
+                        </div>
+                        <h2 class="tool-name">Regex Tester</h2>
+                        <p class="tool-description">Allows testing and debugging of regular expressions.</p>
+                        <a href="/tools/regex-tester" class="tool-button">Use Tool</a>
+                    </article>
+
+                    <article class="tool-card" data-category="developer">
+                        <div class="tool-category">Developer Tools</div>
+                        <div class="tool-icon">
+                            <i class="fas fa-file-code"></i>
+                        </div>
+                        <h2 class="tool-name">Base64 Encoder/Decoder</h2>
+                        <p class="tool-description">Encodes or decodes data to and from Base64 format.</p>
+                        <a href="/tools/base64" class="tool-button">Use Tool</a>
+                    </article>
+
+                    <article class="tool-card" data-category="developer">
+                        <div class="tool-category">Developer Tools</div>
+                        <div class="tool-icon">
+                            <i class="fas fa-compress-alt"></i>
+                        </div>
+                        <h2 class="tool-name">HTML/CSS Minifier</h2>
+                        <p class="tool-description">Reduces file size by removing unnecessary characters from code.</p>
+                        <a href="/tools/minifier" class="tool-button">Use Tool</a>
+                    </article>
+
+                    <article class="tool-card" data-category="developer">
+                        <div class="tool-category">Developer Tools</div>
+                        <div class="tool-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h2 class="tool-name">JWT Decoder</h2>
+                        <p class="tool-description">Decodes JSON Web Tokens to view payload and header information.</p>
+                        <a href="/tools/jwt-decoder" class="tool-button">Use Tool</a>
+                    </article>
+
+                    <!-- SEO Tools -->
+                    <article class="tool-card" data-category="seo">
+                        <div class="tool-category">SEO Tools</div>
+                        <div class="tool-icon">
+                            <i class="fas fa-tags"></i>
+                        </div>
+                        <h2 class="tool-name">Meta Tag Analyzer</h2>
+                        <p class="tool-description">Analyzes meta tags for SEO optimization.</p>
+                        <a href="/tools/meta-analyzer" class="tool-button">Use Tool</a>
+                    </article>
+
+                    <article class="tool-card" data-category="seo">
+                        <div class="tool-category">SEO Tools</div>
+                        <div class="tool-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h2 class="tool-name">Keyword Density Checker</h2>
+                        <p class="tool-description">Calculates the frequency of keywords in content.</p>
+                        <a href="/tools/keyword-density" class="tool-button">Use Tool</a>
+                    </article>
+
+                    <article class="tool-card" data-category="seo">
+                        <div class="tool-category">SEO Tools</div>
+                        <div class="tool-icon">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <h2 class="tool-name">Robots.txt Generator</h2>
+                        <p class="tool-description">Creates robots.txt files to control web crawler access.</p>
+                        <a href="/tools/robots-generator" class="tool-button">Use Tool</a>
+                    </article>
+
+                    <article class="tool-card" data-category="seo">
+                        <div class="tool-category">SEO Tools</div>
+                        <div class="tool-icon">
+                            <i class="fas fa-sitemap"></i>
+                        </div>
+                        <h2 class="tool-name">XML Sitemap Generator</h2>
+                        <p class="tool-description">Generates sitemaps to improve site indexing by search engines.</p>
+                        <a href="/tools/sitemap-generator" class="tool-button">Use Tool</a>
+                    </article>
+
+                    <article class="tool-card" data-category="seo">
+                        <div class="tool-category">SEO Tools</div>
+                        <div class="tool-icon">
+                            <i class="fas fa-link"></i>
+                        </div>
+                        <h2 class="tool-name">Broken Link Checker</h2>
+                        <p class="tool-description">Identifies broken or dead links on a website.</p>
+                        <a href="/tools/broken-link-checker" class="tool-button">Use Tool</a>
+                    </article>
+
+                    <!-- Text & File Tools -->
+                    <article class="tool-card" data-category="text">
+                        <div class="tool-category">Text Tools</div>
+                        <div class="tool-icon">
+                            <i class="fas fa-text-width"></i>
+                        </div>
+                        <h2 class="tool-name">Word & Character Counter</h2>
+                        <p class="tool-description">Counts words, characters, sentences, and paragraphs in text.</p>
+                        <a href="/tools/word-counter" class="tool-button">Use Tool</a>
+                    </article>
+
+                    <article class="tool-card" data-category="text">
+                        <div class="tool-category">Text Tools</div>
+                        <div class="tool-icon">
+                            <i class="fas fa-font"></i>
+                        </div>
+                        <h2 class="tool-name">Text Case Converter</h2>
+                        <p class="tool-description">Converts text between uppercase, lowercase, title case, etc.</p>
+                        <a href="/tools/text-case" class="tool-button">Use Tool</a>
+                    </article>
+
+                    <article class="tool-card" data-category="text">
+                        <div class="tool-category">Text Tools</div>
+                        <div class="tool-icon">
+                            <i class="fas fa-copy"></i>
+                        </div>
+                        <h2 class="tool-name">Duplicate Line Remover</h2>
+                        <p class="tool-description">Eliminates duplicate lines from text input.</p>
+                        <a href="/tools/duplicate-remover" class="tool-button">Use Tool</a>
+                    </article>
+
+                    <article class="tool-card" data-category="text">
+                        <div class="tool-category">Text Tools</div>
+                        <div class="tool-icon">
+                            <i class="fas fa-file-csv"></i>
+                        </div>
+                        <h2 class="tool-name">CSV to JSON Converter</h2>
+                        <p class="tool-description">Transforms CSV data into JSON format.</p>
+                        <a href="/tools/csv-to-json" class="tool-button">Use Tool</a>
+                    </article>
+
+                    <article class="tool-card" data-category="text">
+                        <div class="tool-category">Text Tools</div>
+                        <div class="tool-icon">
+                            <i class="fas fa-code-branch"></i>
+                        </div>
+                        <h2 class="tool-name">Text Diff Checker</h2>
+                        <p class="tool-description">Compares two text inputs and highlights differences.</p>
+                        <a href="/tools/text-diff" class="tool-button">Use Tool</a>
+                    </article>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="tools-faq">
+            <div class="container">
+                <div class="tools-faq-header">
+                    <h2 class="tools-faq-title">Frequently Asked Questions</h2>
+                    <p class="tools-faq-subtitle">Find answers to common questions about our tools and services</p>
+                </div>
+                <div class="tools-faq-list">
+                    <div class="tools-faq-item">
+                        <div class="tools-faq-question">
+                            <h3>How do I search for tools?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="tools-faq-answer">
+                            <p>You can use the search bar at the top of the page to find specific tools by name or functionality. You can also use the category filters to browse tools by type.</p>
+                        </div>
+                    </div>
+                    <div class="tools-faq-item">
+                        <div class="tools-faq-question">
+                            <h3>Are all tools free to use?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="tools-faq-answer">
+                            <p>Yes, all our tools are completely free to use. We believe in providing accessible tools for everyone.</p>
+                        </div>
+                    </div>
+                    <div class="tools-faq-item">
+                        <div class="tools-faq-question">
+                            <h3>How do I use a specific tool?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="tools-faq-answer">
+                            <p>Simply click on the "Use Tool" button of any tool you want to use. You'll be taken to a dedicated page with clear instructions and the tool's interface.</p>
+                        </div>
+                    </div>
+                    <div class="tools-faq-item">
+                        <div class="tools-faq-question">
+                            <h3>Can I suggest new tools?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="tools-faq-answer">
+                            <p>Absolutely! We welcome tool suggestions. You can submit your ideas through our contact form or email us directly.</p>
+                        </div>
+                    </div>
+                    <div class="tools-faq-item">
+                        <div class="tools-faq-question">
+                            <h3>Is my data safe when using these tools?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="tools-faq-answer">
+                            <p>Yes, we take data security seriously. Most of our tools process data directly in your browser, and we don't store any of your information on our servers.</p>
+                        </div>
+                    </div>
+                    <div class="tools-faq-item">
+                        <div class="tools-faq-question">
+                            <h3>Do I need to create an account?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="tools-faq-answer">
+                            <p>No, you don't need to create an account to use our tools. They are all available for immediate use without any registration required.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer Section -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Scripts -->
+    <script src="../view.js" defer></script>
+    <script src="../script.js" defer></script>
+    <script src="../faq.js" defer></script>
+    <script src="script.js" defer></script>
+</body>
+</html> 

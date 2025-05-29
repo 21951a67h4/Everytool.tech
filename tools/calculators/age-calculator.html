@@ -1,0 +1,920 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Age Calculator - Free Online Tool | EveryTool.tech</title>
+    <meta name="description" content="Calculate your exact age in years, months, and days with our free Age Calculator. Get precise age calculations and important life milestones. Try it now!">
+    <meta name="keywords" content="age calculator, birthday calculator, age in years months days, life milestones calculator, age difference calculator">
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="Age Calculator - Free Online Tool | EveryTool.tech">
+    <meta property="og:description" content="Calculate your exact age in years, months, and days with our free Age Calculator. Get precise age calculations and important life milestones.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://everytool.tech/tools/calculators/age-calculator">
+    <meta property="og:image" content="https://everytool.tech/assets/age-calculator-preview.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../../assets/favicon.png">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Add in <head> if not present -->
+    <link rel="stylesheet" href="/faq.css">
+    
+    <style>
+        /* Core Variables */
+        :root {
+            --primary: #4361EE;
+            --primary-dark: #2945c8;
+            --primary-darker: #1f37a8;
+            --primary-light: #6b83f1;
+            --primary-lighter: #94a5f4;
+            --secondary: #7209B7;
+            --secondary-dark: #560BAD;
+            --accent: #F72585;
+            --accent-dark: #B5179E;
+            --text-primary: #1F2937;
+            --text-secondary: #4B5563;
+            --text-light: #9CA3AF;
+            --bg-primary: #FFFFFF;
+            --bg-secondary: #F9FAFB;
+            --bg-accent: #F3F4F6;
+            --bg-dark: #111827;
+            --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            --radius-sm: 0.375rem;
+            --radius-md: 0.75rem;
+            --radius-lg: 1.5rem;
+            --transition-all: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-primary);
+            background: var(--bg-primary);
+        }
+
+        /* Header Placeholder */
+        #header-placeholder {
+            height: 64px;
+        }
+
+        /* Tool Hero Section */
+        .tool-hero {
+            padding: 4rem 2rem;
+            background: linear-gradient(135deg, rgba(67, 97, 238, 0.1) 0%, rgba(41, 69, 200, 0.1) 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tool-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><rect width="1" height="1" fill="%234361EE" opacity="0.1"/></svg>');
+            opacity: 0.5;
+            animation: patternMove 20s linear infinite;
+        }
+
+        .tool-hero__container {
+            max-width: 1280px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .tool-hero__content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .tool-hero__left {
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .tool-hero__title {
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            line-height: 1.2;
+        }
+
+        .tool-hero__description {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .tool-hero__features {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .tool-feature {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .tool-feature i {
+            color: var(--primary);
+            font-size: 1.25rem;
+        }
+
+        .tool-hero__cta {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .tool-button {
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition-all);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .tool-button--primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .tool-button--primary:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .tool-button--secondary {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .tool-button--secondary:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .tool-hero__right {
+            position: relative;
+            animation: slideIn 1s ease-out;
+        }
+
+        /* Tool Display Section */
+        .tool-display {
+            padding: 4rem 2rem;
+            background: var(--bg-primary);
+            position: relative;
+        }
+
+        .tool-display__container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .tool-display__wrapper {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 2rem;
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tool-display__wrapper::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+        }
+
+        .tool-display__header {
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .tool-display__title {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .tool-display__description {
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .tool-display__content {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        .tool-display__input-section {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+        }
+
+        .tool-display__output-section {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-md);
+            padding: 1.5rem;
+            min-height: 200px;
+        }
+
+        .tool-display__controls {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .tool-display__button {
+            padding: 0.75rem 1.5rem;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            border: none;
+            cursor: pointer;
+            transition: var(--transition-all);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--primary);
+            color: white;
+        }
+
+        .tool-display__button:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .tool-display__button--secondary {
+            background: white;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .tool-display__button--secondary:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        .tool-display__input-group {
+            margin-bottom: 1rem;
+        }
+
+        .tool-display__label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .tool-display__input {
+            width: 100%;
+            padding: 0.75rem;
+            border: 2px solid var(--bg-accent);
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            transition: var(--transition-all);
+        }
+
+        .tool-display__input:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px var(--primary-lighter);
+        }
+
+        .tool-display__result {
+            margin-top: 1rem;
+            padding: 1rem;
+            background: white;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--bg-accent);
+        }
+
+        .age-summary {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: var(--radius-md);
+            background: var(--bg-accent);
+        }
+
+        .age-summary__item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 1px solid var(--bg-secondary);
+        }
+
+        .age-summary__item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .age-summary__label {
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .age-summary__value {
+            color: var(--text-secondary);
+        }
+
+        /* Blog Section */
+        .tool-blog {
+            padding: 4rem 2rem;
+            background: var(--bg-secondary);
+        }
+
+        .tool-blog__container {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .tool-blog__header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .tool-blog__title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .tool-blog__subtitle {
+            font-size: 1.25rem;
+            color: var(--text-secondary);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .blog-content {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 3rem;
+            box-shadow: var(--shadow-md);
+            margin-top: 2rem;
+        }
+
+        .blog-section {
+            margin-bottom: 3rem;
+        }
+
+        .blog-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .blog-section__title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+
+        .blog-section__title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--accent));
+            border-radius: 2px;
+        }
+
+        .blog-section__content {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .blog-section__content p {
+            margin-bottom: 1.5rem;
+        }
+
+        .blog-section__content ul {
+            margin-bottom: 1.5rem;
+            padding-left: 1.5rem;
+        }
+
+        .blog-section__content li {
+            margin-bottom: 0.75rem;
+        }
+
+        .blog-section__content strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        .blog-section__content a {
+            color: var(--primary);
+            text-decoration: none;
+            border-bottom: 2px solid var(--primary-light);
+            transition: var(--transition-all);
+        }
+
+        .blog-section__content a:hover {
+            color: var(--primary-dark);
+            border-bottom-color: var(--primary-dark);
+        }
+
+        /* Footer Placeholder */
+        #footer-placeholder {
+            min-height: 400px;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes patternMove {
+            from {
+                background-position: 0 0;
+            }
+            to {
+                background-position: 100px 100px;
+            }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .tool-hero__content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .tool-hero__right {
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .tool-hero {
+                padding: 3rem 1rem;
+            }
+
+            .tool-hero__title {
+                font-size: 2.5rem;
+            }
+
+            .tool-hero__features {
+                grid-template-columns: 1fr;
+            }
+
+            .tool-blog {
+                padding: 3rem 1rem;
+            }
+
+            .blog-content {
+                padding: 2rem;
+            }
+
+            .blog-section__title {
+                font-size: 1.75rem;
+            }
+
+            .blog-section__content {
+                font-size: 1rem;
+            }
+
+            .tool-display {
+                padding: 2rem 1rem;
+            }
+
+            .tool-display__wrapper {
+                padding: 1.5rem;
+            }
+
+            .tool-display__title {
+                font-size: 1.5rem;
+            }
+
+            .tool-display__controls {
+                flex-direction: column;
+            }
+
+            .tool-display__button {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <!-- Tool Hero Section -->
+    <section class="tool-hero">
+        <div class="tool-hero__container">
+            <div class="tool-hero__content">
+                <div class="tool-hero__left">
+                    <h1 class="tool-hero__title">Calculate Your Exact Age</h1>
+                    <p class="tool-hero__description">
+                        Get your precise age in years, months, and days with our free Age Calculator. 
+                        Discover important life milestones and make the most of your time.
+                    </p>
+                    <div class="tool-hero__features">
+                        <div class="tool-feature">
+                            <i class="fas fa-bolt"></i>
+                            <span>Instant Results</span>
+                        </div>
+                        <div class="tool-feature">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>Precise Calculation</span>
+                        </div>
+                        <div class="tool-feature">
+                            <i class="fas fa-birthday-cake"></i>
+                            <span>Life Milestones</span>
+                        </div>
+                        <div class="tool-feature">
+                            <i class="fas fa-lock"></i>
+                            <span>100% Private</span>
+                        </div>
+                    </div>
+                    <div class="tool-hero__cta">
+                        <a href="#tool-display" class="tool-button tool-button--primary">
+                            <i class="fas fa-calculator"></i>
+                            Calculate Now
+                        </a>
+                        <a href="#learn-more" class="tool-button tool-button--secondary">
+                            <i class="fas fa-book"></i>
+                            Learn More
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tool Display Section -->
+    <section id="tool-display" class="tool-display">
+        <div class="tool-display__container">
+            <div class="tool-display__wrapper">
+                <div class="tool-display__header">
+                    <h2 class="tool-display__title">Calculate Your Age</h2>
+                    <p class="tool-display__description">
+                        Enter your birth date to calculate your exact age in years, months, and days. 
+                        Discover important life milestones and make the most of your time.
+                    </p>
+                </div>
+                <div class="tool-display__content">
+                    <div class="tool-display__input-section">
+                        <div class="tool-display__input-group">
+                            <label class="tool-display__label">Birth Date</label>
+                            <input type="date" class="tool-display__input" id="birth-date">
+                        </div>
+                        <div class="tool-display__controls">
+                            <button class="tool-display__button" id="calculate-age">
+                                <i class="fas fa-calculator"></i>
+                                Calculate Age
+                            </button>
+                            <button class="tool-display__button tool-display__button--secondary" id="reset-age">
+                                <i class="fas fa-redo"></i>
+                                Reset
+                            </button>
+                        </div>
+                    </div>
+                    <div class="tool-display__output-section">
+                        <h3 class="tool-display__label">Your Results</h3>
+                        <div class="tool-display__result" id="age-result">
+                            Your age calculation results will appear here...
+                        </div>
+                        <div class="age-summary" id="age-summary" style="display: none;">
+                            <div class="age-summary__item">
+                                <span class="age-summary__label">Years:</span>
+                                <span class="age-summary__value" id="years"></span>
+                            </div>
+                            <div class="age-summary__item">
+                                <span class="age-summary__label">Months:</span>
+                                <span class="age-summary__value" id="months"></span>
+                            </div>
+                            <div class="age-summary__item">
+                                <span class="age-summary__label">Days:</span>
+                                <span class="age-summary__value" id="days"></span>
+                            </div>
+                            <div class="age-summary__item">
+                                <span class="age-summary__label">Next Birthday:</span>
+                                <span class="age-summary__value" id="next-birthday"></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="learn-more" class="tool-blog">
+        <div class="tool-blog__container">
+            <div class="tool-blog__header">
+                <h2 class="tool-blog__title">Understanding Age Calculation and Life Milestones</h2>
+                <p class="tool-blog__subtitle">
+                    A comprehensive guide to understanding age calculation, life milestones, and making the most of your time
+                </p>
+            </div>
+            <div class="blog-content">
+                <div class="blog-section">
+                    <h3 class="blog-section__title">The Science of Age Calculation</h3>
+                    <div class="blog-section__content">
+                        <p>
+                            Age calculation is more than just counting years. It involves precise calculations of time intervals, 
+                            taking into account months, days, and even hours. Understanding how age is calculated helps us better 
+                            appreciate the passage of time and plan for important life events.
+                        </p>
+                        <p>
+                            The calculation of age involves several factors:
+                        </p>
+                        <ul>
+                            <li><strong>Calendar Years:</strong> The number of complete years since birth</li>
+                            <li><strong>Months:</strong> The number of complete months in the current year</li>
+                            <li><strong>Days:</strong> The number of days since the last birthday</li>
+                            <li><strong>Leap Years:</strong> Special consideration for February 29th</li>
+                        </ul>
+                        <p>
+                            Understanding these components helps us make more accurate age calculations and better plan for future events.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="blog-section">
+                    <h3 class="blog-section__title">Important Life Milestones</h3>
+                    <div class="blog-section__content">
+                        <p>
+                            Throughout our lives, we encounter various milestones that mark significant transitions and achievements. 
+                            These milestones help us track our progress and set new goals for the future.
+                        </p>
+                        <ul>
+                            <li>
+                                <strong>Early Life Milestones:</strong>
+                                <br>First steps, first words, starting school, and other childhood achievements
+                            </li>
+                            <li>
+                                <strong>Educational Milestones:</strong>
+                                <br>Graduation from different levels of education, academic achievements
+                            </li>
+                            <li>
+                                <strong>Career Milestones:</strong>
+                                <br>First job, promotions, career changes, and professional achievements
+                            </li>
+                            <li>
+                                <strong>Personal Milestones:</strong>
+                                <br>Relationships, family, personal growth, and life experiences
+                            </li>
+                        </ul>
+                        <p>
+                            Tracking these milestones helps us appreciate our journey and plan for future achievements.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="blog-section">
+                    <h3 class="blog-section__title">Making the Most of Your Time</h3>
+                    <div class="blog-section__content">
+                        <p>
+                            Understanding your age and life stage can help you make better decisions and maximize your potential. 
+                            Here are some strategies for making the most of your time:
+                        </p>
+                        <ul>
+                            <li>Set clear goals for different life stages</li>
+                            <li>Create a balanced approach to work and personal life</li>
+                            <li>Invest in continuous learning and personal development</li>
+                            <li>Build and maintain meaningful relationships</li>
+                            <li>Take care of your physical and mental health</li>
+                        </ul>
+                        <p>
+                            Remember that age is just a number, and what matters most is how you use your time and energy to create 
+                            a fulfilling life.
+                        </p>
+                    </div>
+                </div>
+
+                <div class="blog-section">
+                    <h3 class="blog-section__title">Age-Related Planning</h3>
+                    <div class="blog-section__content">
+                        <p>
+                            Different life stages require different types of planning and preparation. Here are some key areas to consider:
+                        </p>
+                        <ul>
+                            <li><strong>Financial Planning:</strong> Saving, investing, and preparing for retirement</li>
+                            <li><strong>Health Planning:</strong> Regular check-ups, preventive care, and wellness activities</li>
+                            <li><strong>Career Planning:</strong> Professional development, skill acquisition, and career transitions</li>
+                            <li><strong>Personal Planning:</strong> Relationships, family, and personal growth</li>
+                            <li><strong>Legacy Planning:</strong> Making a positive impact and leaving a meaningful legacy</li>
+                        </ul>
+                        <p>
+                            By understanding your age and life stage, you can make more informed decisions and create a better future 
+                            for yourself and your loved ones.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Move FAQ section above the footer -->
+    <section class="faq-section">
+        <div class="faq-container">
+            <div class="faq-header">
+                <h2 class="faq-title">Age Calculator FAQ</h2>
+                <p class="faq-subtitle">Frequently asked questions about the Age Calculator</p>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question"><h3>How does the age calculator work?</h3><i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer"><p>The age calculator computes your age in years, months, and days based on your date of birth and the current date.</p></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question"><h3>Can I calculate age on a specific date?</h3><i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer"><p>Yes, you can enter any date to calculate your age as of that date.</p></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question"><h3>Does the calculator account for leap years?</h3><i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer"><p>Yes, the calculator takes leap years into account for accurate results.</p></div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question"><h3>Is my data stored?</h3><i class="fas fa-chevron-down"></i></div>
+                    <div class="faq-answer"><p>No, your data is processed locally in your browser and is not stored.</p></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- Add before </body> -->
+    <script src="/faq.js"></script>
+
+    <script>
+        // Fetch and insert header
+        fetch('../../header.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('header-placeholder').innerHTML = html;
+            })
+            .catch(error => console.error('Error loading header:', error));
+
+        // Fetch and insert footer
+        fetch('../../footer.html')
+            .then(response => response.text())
+            .then(html => {
+                document.getElementById('footer-placeholder').innerHTML = html;
+            })
+            .catch(error => console.error('Error loading footer:', error));
+
+        // Age Calculator Functionality
+        document.addEventListener('DOMContentLoaded', function() {
+            const birthDateInput = document.getElementById('birth-date');
+            const calculateButton = document.getElementById('calculate-age');
+            const resetButton = document.getElementById('reset-age');
+            const resultDiv = document.getElementById('age-result');
+            const summaryDiv = document.getElementById('age-summary');
+            const yearsSpan = document.getElementById('years');
+            const monthsSpan = document.getElementById('months');
+            const daysSpan = document.getElementById('days');
+            const nextBirthdaySpan = document.getElementById('next-birthday');
+
+            function calculateAge() {
+                const birthDate = new Date(birthDateInput.value);
+                const today = new Date();
+
+                if (birthDate && birthDate < today) {
+                    // Calculate age
+                    let years = today.getFullYear() - birthDate.getFullYear();
+                    let months = today.getMonth() - birthDate.getMonth();
+                    let days = today.getDate() - birthDate.getDate();
+
+                    // Adjust for negative months or days
+                    if (days < 0) {
+                        months--;
+                        days += new Date(today.getFullYear(), today.getMonth(), 0).getDate();
+                    }
+                    if (months < 0) {
+                        years--;
+                        months += 12;
+                    }
+
+                    // Calculate next birthday
+                    const nextBirthday = new Date(today.getFullYear(), birthDate.getMonth(), birthDate.getDate());
+                    if (nextBirthday < today) {
+                        nextBirthday.setFullYear(today.getFullYear() + 1);
+                    }
+                    const daysUntilBirthday = Math.ceil((nextBirthday - today) / (1000 * 60 * 60 * 24));
+
+                    // Update results
+                    yearsSpan.textContent = years;
+                    monthsSpan.textContent = months;
+                    daysSpan.textContent = days;
+                    nextBirthdaySpan.textContent = `${daysUntilBirthday} days`;
+
+                    resultDiv.textContent = 'Your age calculation is complete!';
+                    summaryDiv.style.display = 'block';
+                } else {
+                    resultDiv.textContent = 'Please enter a valid birth date.';
+                    summaryDiv.style.display = 'none';
+                }
+            }
+
+            function resetCalculator() {
+                birthDateInput.value = '';
+                resultDiv.textContent = 'Your age calculation results will appear here...';
+                summaryDiv.style.display = 'none';
+            }
+
+            calculateButton.addEventListener('click', calculateAge);
+            resetButton.addEventListener('click', resetCalculator);
+
+            // Allow Enter key to trigger calculation
+            birthDateInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    calculateAge();
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe elements with animation classes
+        document.querySelectorAll('.tool-hero__left, .tool-hero__right, .blog-section').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html> 
