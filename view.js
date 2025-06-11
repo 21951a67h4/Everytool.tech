@@ -12,7 +12,8 @@ class DeviceViewManager {
         orientation: null,
         pixelRatio: window.devicePixelRatio || 1,
         touch: false,
-        retina: false
+        retina: false,
+        reducedMotion: false
     };
     #breakpoints = {
         mobile: 480,
@@ -22,10 +23,8 @@ class DeviceViewManager {
     };
     #debounceTimer = null;
     #errorHandler = null;
+    #performanceMetrics = new Map();
 
-    /**
-     * Private constructor for singleton pattern
-     */
     constructor() {
         if (DeviceViewManager.#instance) {
             return DeviceViewManager.#instance;
@@ -34,11 +33,9 @@ class DeviceViewManager {
         this.#initializeErrorHandler();
         this.#initializeDeviceInfo();
         this.#setupEventListeners();
+        this.#setupPerformanceMonitoring();
     }
 
-    /**
-     * Initialize error handler with advanced logging
-     */
     #initializeErrorHandler() {
         this.#errorHandler = {
             errors: new Map(),
@@ -58,66 +55,134 @@ class DeviceViewManager {
         };
     }
 
-    /**
-     * Initialize device information
-     */
     #initializeDeviceInfo() {
         try {
             this.#deviceInfo.touch = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
             this.#deviceInfo.retina = this.#deviceInfo.pixelRatio > 1;
+            this.#deviceInfo.reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
             this.#updateDeviceType();
             this.#updateOrientation();
+            this.#updateCSSVariables();
         } catch (error) {
             this.#errorHandler.logError(error, { context: 'initializeDeviceInfo' });
         }
     }
 
-    /**
-     * Set up event listeners with debouncing
-     */
     #setupEventListeners() {
-        const debouncedResize = this.#debounce(() => {
-            this.#updateDeviceType();
-            this.#notifyObservers();
-        }, 250);
+        try {
+            const debouncedResize = this.#debounce(() => {
+                this.#updateDeviceType();
+                this.#updateCSSVariables();
+                this.#notifyObservers();
+            }, 250);
 
-        const debouncedOrientation = this.#debounce(() => {
-            this.#updateOrientation();
-            this.#notifyObservers();
-        }, 250);
+            const debouncedOrientation = this.#debounce(() => {
+                this.#updateOrientation();
+                this.#updateCSSVariables();
+                this.#notifyObservers();
+            }, 250);
 
-        window.addEventListener('resize', debouncedResize);
-        window.addEventListener('orientationchange', debouncedOrientation);
-    }
+            window.addEventListener('resize', debouncedResize);
+            window.addEventListener('orientationchange', debouncedOrientation);
 
-    /**
-     * Update device type based on viewport width
-     */
-    #updateDeviceType() {
-        const width = window.innerWidth;
-        if (width <= this.#breakpoints.mobile) {
-            this.#deviceInfo.type = 'mobile';
-        } else if (width <= this.#breakpoints.tablet) {
-            this.#deviceInfo.type = 'tablet';
-        } else if (width <= this.#breakpoints.desktop) {
-            this.#deviceInfo.type = 'desktop';
-        } else {
-            this.#deviceInfo.type = 'large';
+            // Listen for reduced motion preference changes
+            window.matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change', (e) => {
+                this.#deviceInfo.reducedMotion = e.matches;
+                this.#updateCSSVariables();
+                this.#notifyObservers();
+            });
+        } catch (error) {
+            this.#errorHandler.logError(error, { context: 'setupEventListeners' });
         }
-        document.documentElement.setAttribute('data-device', this.#deviceInfo.type);
     }
 
-    /**
-     * Update device orientation
-     */
+    #setupPerformanceMonitoring() {
+        try {
+            if ('PerformanceObserver' in window) {
+                const observer = new PerformanceObserver((list) => {
+                    for (const entry of list.getEntries()) {
+                        this.#performanceMetrics.set(entry.name, {
+                            value: entry.duration,
+                            timestamp: Date.now()
+                        });
+                    }
+                });
+
+                observer.observe({ entryTypes: ['measure'] });
+            }
+        } catch (error) {
+            this.#errorHandler.logError(error, { context: 'setupPerformanceMonitoring' });
+        }
+    }
+
+    #updateDeviceType() {
+        try {
+            const width = window.innerWidth;
+            let newType;
+
+            if (width <= this.#breakpoints.mobile) {
+                newType = 'mobile';
+            } else if (width <= this.#breakpoints.tablet) {
+                newType = 'tablet';
+            } else if (width <= this.#breakpoints.desktop) {
+                newType = 'desktop';
+            } else {
+                newType = 'large';
+            }
+
+            if (newType !== this.#deviceInfo.type) {
+                this.#deviceInfo.type = newType;
+                document.documentElement.setAttribute('data-device', newType);
+                this.#logDeviceChange();
+            }
+        } catch (error) {
+            this.#errorHandler.logError(error, { context: 'updateDeviceType' });
+        }
+    }
+
     #updateOrientation() {
-        this.#deviceInfo.orientation = window.innerWidth > window.innerHeight ? 'landscape' : 'portrait';
-        document.documentElement.setAttribute('data-orientation', this.#deviceInfo.orientation);
+        try {
+            const newOrientation = window.innerWidth > window.innerHeight ? 'landscape' : 'portrait';
+            if (newOrientation !== this.#deviceInfo.orientation) {
+                this.#deviceInfo.orientation = newOrientation;
+                document.documentElement.setAttribute('data-orientation', newOrientation);
+                this.#logOrientationChange();
+            }
+        } catch (error) {
+            this.#errorHandler.logError(error, { context: 'updateOrientation' });
+        }
     }
 
-    /**
-     * Debounce function for performance optimization
-     */
+    #updateCSSVariables() {
+        try {
+            const root = document.documentElement;
+            root.style.setProperty('--is-mobile', this.isDeviceType('mobile') ? 1 : 0);
+            root.style.setProperty('--is-tablet', this.isDeviceType('tablet') ? 1 : 0);
+            root.style.setProperty('--is-desktop', this.isDeviceType('desktop') ? 1 : 0);
+            root.style.setProperty('--is-large', this.isDeviceType('large') ? 1 : 0);
+            root.style.setProperty('--is-touch', this.#deviceInfo.touch ? 1 : 0);
+            root.style.setProperty('--is-retina', this.#deviceInfo.retina ? 1 : 0);
+            root.style.setProperty('--pixel-ratio', this.#deviceInfo.pixelRatio);
+            root.style.setProperty('--reduced-motion', this.#deviceInfo.reducedMotion ? 1 : 0);
+        } catch (error) {
+            this.#errorHandler.logError(error, { context: 'updateCSSVariables' });
+        }
+    }
+
+    #logDeviceChange() {
+        if ('performance' in window) {
+            performance.mark('deviceChange');
+            performance.measure('Device Change', 'deviceChange');
+        }
+    }
+
+    #logOrientationChange() {
+        if ('performance' in window) {
+            performance.mark('orientationChange');
+            performance.measure('Orientation Change', 'orientationChange');
+        }
+    }
+
     #debounce(func, wait) {
         return (...args) => {
             clearTimeout(this.#debounceTimer);
@@ -125,9 +190,6 @@ class DeviceViewManager {
         };
     }
 
-    /**
-     * Notify all observers of changes
-     */
     #notifyObservers() {
         this.#observers.forEach(observer => {
             try {
@@ -136,7 +198,8 @@ class DeviceViewManager {
                     orientation: this.#deviceInfo.orientation,
                     isTouch: this.#deviceInfo.touch,
                     isRetina: this.#deviceInfo.retina,
-                    pixelRatio: this.#deviceInfo.pixelRatio
+                    pixelRatio: this.#deviceInfo.pixelRatio,
+                    reducedMotion: this.#deviceInfo.reducedMotion
                 });
             } catch (error) {
                 this.#errorHandler.logError(error, { context: 'notifyObservers' });
@@ -144,11 +207,7 @@ class DeviceViewManager {
         });
     }
 
-    /**
-     * Add an observer to receive device updates
-     * @param {Function} callback - Function to call when device changes
-     * @returns {Function} Unsubscribe function
-     */
+    // Public methods
     subscribe(callback) {
         if (typeof callback !== 'function') {
             throw new Error('Observer must be a function');
@@ -157,52 +216,26 @@ class DeviceViewManager {
         return () => this.#observers.delete(callback);
     }
 
-    /**
-     * Get current device information
-     * @returns {Object} Device information
-     */
     getDeviceInfo() {
         return { ...this.#deviceInfo };
     }
 
-    /**
-     * Check if current device matches specified type
-     * @param {string} type - Device type to check
-     * @returns {boolean} Whether device matches type
-     */
     isDeviceType(type) {
         return this.#deviceInfo.type === type;
     }
 
-    /**
-     * Check if device is in specified orientation
-     * @param {string} orientation - Orientation to check
-     * @returns {boolean} Whether device is in specified orientation
-     */
     isOrientation(orientation) {
         return this.#deviceInfo.orientation === orientation;
     }
 
-    /**
-     * Get current breakpoint
-     * @returns {string} Current breakpoint name
-     */
     getCurrentBreakpoint() {
         return this.#deviceInfo.type;
     }
 
-    /**
-     * Get all breakpoints
-     * @returns {Object} Breakpoints configuration
-     */
     getBreakpoints() {
         return { ...this.#breakpoints };
     }
 
-    /**
-     * Update breakpoints configuration
-     * @param {Object} newBreakpoints - New breakpoints configuration
-     */
     updateBreakpoints(newBreakpoints) {
         try {
             this.#breakpoints = { ...this.#breakpoints, ...newBreakpoints };
@@ -211,6 +244,14 @@ class DeviceViewManager {
         } catch (error) {
             this.#errorHandler.logError(error, { context: 'updateBreakpoints' });
         }
+    }
+
+    getPerformanceMetrics() {
+        return Array.from(this.#performanceMetrics.entries());
+    }
+
+    clearPerformanceMetrics() {
+        this.#performanceMetrics.clear();
     }
 }
 
@@ -229,6 +270,7 @@ style.textContent = `
         --is-touch: ${viewManager.getDeviceInfo().touch ? 1 : 0};
         --is-retina: ${viewManager.getDeviceInfo().retina ? 1 : 0};
         --pixel-ratio: ${viewManager.getDeviceInfo().pixelRatio};
+        --reduced-motion: ${viewManager.getDeviceInfo().reducedMotion ? 1 : 0};
     }
 
     /* Device-specific styles */
@@ -260,40 +302,18 @@ style.textContent = `
     [data-orientation="landscape"] {
         --orientation-multiplier: 1.2;
     }
+
+    /* Reduced motion styles */
+    @media (prefers-reduced-motion: reduce) {
+        * {
+            animation-duration: 0.01ms !important;
+            animation-iteration-count: 1 !important;
+            transition-duration: 0.01ms !important;
+            scroll-behavior: auto !important;
+        }
+    }
 `;
 document.head.appendChild(style);
-
-// Example usage with error handling
-try {
-    // Subscribe to device changes
-    const unsubscribe = viewManager.subscribe((deviceInfo) => {
-        console.log('Device changed:', deviceInfo);
-        // Update your UI or perform device-specific actions here
-    });
-
-    // Example of device-specific code
-    if (viewManager.isDeviceType('mobile')) {
-        // Mobile-specific initialization
-        console.log('Initializing mobile view');
-    }
-
-    // Example of orientation-specific code
-    if (viewManager.isOrientation('landscape')) {
-        // Landscape-specific initialization
-        console.log('Initializing landscape view');
-    }
-
-    // Example of updating breakpoints
-    viewManager.updateBreakpoints({
-        mobile: 400,
-        tablet: 800,
-        desktop: 1200,
-        large: 1600
-    });
-
-} catch (error) {
-    console.error('Error in view manager initialization:', error);
-}
 
 // Export the view manager instance
 window.viewManager = viewManager;

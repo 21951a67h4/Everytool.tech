@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About EveryTool.tech</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="faq.css">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -12,6 +12,7 @@
             --primary: #4361EE;
             --primary-dark: #3F37C9;
             --text-primary: #1F2937;
+            --text-yellow: #ffe066;
             --bg-primary: #ffffff;
             --bg-secondary: #f9fafb;
             --border-light: #dfe1e5;
@@ -32,7 +33,6 @@
             flex-direction: column;
         }
 
-        /* Main Content Styles */
         .main-content {
             flex: 1;
             padding-top: 80px;
@@ -40,159 +40,386 @@
             width: 100%;
             overflow-x: hidden;
         }
+
         .about-hero {
-            background: linear-gradient(135deg, rgba(255,255,255,0.95), rgba(240,242,245,0.9));
-            padding: 4rem 2rem 3rem 2rem;
+            background: linear-gradient(135deg, rgba(67,97,238,0.05), rgba(63,55,201,0.1));
+            padding: 6rem 2rem 4rem;
             text-align: center;
-            margin-bottom: 2.5rem;
-            width: 100%;
-            box-sizing: border-box;
-        }
-        .about-hero-title {
-            font-size: 2.5rem;
-            font-weight: 800;
-            color: var(--primary, #4361EE);
-            margin-bottom: 1rem;
-            opacity: 0;
-            animation: fadeInUp 0.7s 0.1s forwards;
-        }
-        .about-hero-subtitle {
-            color: #4B5563;
-            font-size: 1.25rem;
-            margin-bottom: 0;
-            opacity: 0;
-            animation: fadeInUp 0.7s 0.3s forwards;
-        }
-        .about-section {
-            max-width: 800px;
-            margin: 0 auto 3.5rem auto;
-            background: var(--glass-bg, rgba(255,255,255,0.7));
-            border-radius: 1.5rem;
-            box-shadow: 0 4px 24px rgba(67,97,238,0.08);
-            padding: 2.5rem 2rem;
-            opacity: 1;
-            transform: translateY(0);
-            transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1), transform 0.7s cubic-bezier(0.4,0,0.2,1);
-            width: calc(100% - 4rem);
-            box-sizing: border-box;
-        }
-        .about-section.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-        .about-section-title {
-            color: var(--primary, #4361EE);
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 1.2rem;
-        }
-        .about-section-content {
-            color: #333;
-            font-size: 1.08rem;
-            line-height: 1.7;
-            margin-bottom: 0.5rem;
-        }
-        .about-mission-list {
-            margin: 1.5rem 0 0 0;
-            padding-left: 1.2rem;
-        }
-        .about-mission-list li {
-            color: var(--primary-dark, #3F37C9);
-            font-weight: 600;
-            margin-bottom: 0.7rem;
-            font-size: 1.08rem;
             position: relative;
-            opacity: 0;
-            left: -20px;
-            animation: slideInLeft 0.7s forwards;
+            overflow: hidden;
         }
-        .about-mission-list li:nth-child(1) { animation-delay: 0.2s; }
-        .about-mission-list li:nth-child(2) { animation-delay: 0.4s; }
-        .about-mission-list li:nth-child(3) { animation-delay: 0.6s; }
-        .about-section-behind {
-            background: rgba(67,97,238,0.07);
-            border-radius: 1rem;
-            padding: 1.5rem 1.2rem;
-            margin-top: 1.5rem;
-            color: #333;
-            font-size: 1.05rem;
-            box-shadow: 0 2px 8px rgba(67,97,238,0.06);
+
+        .about-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('assets/pattern.svg') repeat;
+            opacity: 0.1;
+            z-index: 0;
         }
-        .about-who-section {
+
+        .about-hero-content {
+            position: relative;
+            z-index: 1;
             max-width: 800px;
-            margin: 0 auto 3.5rem auto;
-            background: var(--glass-bg, rgba(255,255,255,0.7));
-            border-radius: 1.5rem;
-            box-shadow: 0 4px 24px rgba(67,97,238,0.08);
-            padding: 2.5rem 2rem;
+            margin: 0 auto;
+        }
+
+        .about-hero-badge {
+            display: inline-flex;
+            align-items: center;
+            background: rgba(67,97,238,0.1);
+            color: var(--primary);
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-hero-badge i {
+            margin-right: 0.5rem;
+        }
+
+        .about-hero-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            font-weight: 800;
+            color: var(--text-primary);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .about-hero-title .gradient-text {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .about-hero-subtitle {
+            font-size: clamp(1.1rem, 2vw, 1.25rem);
+            color: var(--text-primary);
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            line-height: 1.6;
+        }
+
+        .about-section {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .about-card {
+            background: var(--bg-primary);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: var(--shadow-md);
+            transition: var(--transition);
+            border: 1px solid var(--border-light);
+        }
+
+        .about-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .about-card-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(67,97,238,0.1);
+            border-radius: 1rem;
             display: flex;
             align-items: center;
-            gap: 2.5rem;
-            opacity: 1;
-            transform: translateY(0);
-            transition: opacity 0.7s cubic-bezier(0.4,0,0.2,1), transform 0.7s cubic-bezier(0.4,0,0.2,1);
-            width: calc(100% - 4rem);
-            box-sizing: border-box;
+            justify-content: center;
+            margin-bottom: 1.5rem;
         }
-        .about-who-section.visible {
-            opacity: 1;
-            transform: translateY(0);
+
+        .about-card-icon i {
+            font-size: 1.5rem;
+            color: var(--primary);
         }
-        .about-profile-img {
-            width: 120px;
-            height: 120px;
+
+        .about-card-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .about-card-content {
+            color: var(--text-primary);
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        .about-profile {
+            background: var(--bg-primary);
+            border-radius: 1.5rem;
+            padding: 3rem;
+            margin: 4rem auto;
+            max-width: 800px;
+            box-shadow: var(--shadow-md);
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            border: 1px solid var(--border-light);
+        }
+
+        .about-profile-image {
+            width: 200px;
+            height: 200px;
             border-radius: 50%;
             object-fit: cover;
-            object-position: 50% 35%;
-            box-shadow: 0 2px 12px rgba(67,97,238,0.13);
-            border: 3px solid var(--primary, #4361EE);
-            background: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
+
         .about-profile-content {
             flex: 1;
         }
+
         .about-profile-name {
-            font-size: 1.3rem;
+            font-size: 2rem;
             font-weight: 700;
-            color: var(--primary-dark, #3F37C9);
-            margin-bottom: 0.3rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
         }
+
         .about-profile-role {
-            color: #4B5563;
-            font-size: 1.05rem;
-            margin-bottom: 0.7rem;
+            color: var(--primary);
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
         }
-        .about-profile-story {
-            color: #333;
-            font-size: 1.08rem;
-            line-height: 1.7;
+
+        .about-profile-bio {
+            color: var(--text-primary);
+            opacity: 0.8;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
         }
-        @media (max-width: 600px) {
-            .about-hero-title { font-size: 1.5rem; }
-            .about-section { padding: 1.2rem 0.7rem; }
+
+        .about-profile-bio:hover {
+            color: var(--primary);
+            text-decoration: none;
+            transition: var(--transition);
         }
-        @media (max-width: 700px) {
-            .about-who-section {
+
+        .about-profile-social {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .about-profile-social a {
+            color: var(--text-primary);
+            opacity: 0.6;
+            transition: var(--transition);
+        }
+
+        .about-profile-social a:hover {
+            opacity: 1;
+            color: var(--primary);
+        }
+
+        @media (max-width: 768px) {
+            .about-profile {
                 flex-direction: column;
-                align-items: flex-start;
-                gap: 1.5rem;
-                padding: 1.5rem 0.7rem;
+                text-align: center;
+                padding: 2rem;
             }
-            .about-profile-img {
-                width: 120px;
-                height: 120px;
-                border-radius: 50%;
-                object-fit: cover;
-                object-position: 50% 60%; /* Default: center */
-   }
+
+            .about-profile-image {
+                width: 150px;
+                height: 150px;
             }
-        @keyframes fadeInUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+
+            .about-profile-social {
+                justify-content: center;
+            }
         }
-        @keyframes slideInLeft {
-            from { opacity: 0; left: -20px; }
-            to { opacity: 1; left: 0; }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fade-up {
+            animation: fadeInUp 0.6s ease-out forwards;
+        }
+
+        /* New Section Styles */
+        .about-features {
+            background: linear-gradient(135deg, rgba(67,97,238,0.02), rgba(63,55,201,0.05));
+            padding: 6rem 0;
+            margin: 4rem 0;
+        }
+
+        .about-features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .about-feature-card {
+            background: var(--bg-primary);
+            border-radius: 1rem;
+            padding: 2rem;
+            text-align: center;
+            transition: var(--transition);
+            border: 1px solid var(--border-light);
+        }
+
+        .about-feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .about-feature-icon {
+            width: 80px;
+            height: 80px;
+            background: rgba(67,97,238,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.5rem;
+        }
+
+        .about-feature-icon i {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        .about-feature-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 1rem;
+        }
+
+        .about-feature-description {
+            color: var(--text-primary);
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        .about-cta {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            padding: 6rem 2rem;
+            text-align: center;
+            color: white;
+            margin: 4rem 0;
+            border-radius: 1rem;
+        }
+
+        .about-cta-content {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .about-cta-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+        }
+
+        .about-cta-description {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .about-cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .about-cta-button {
+            padding: 1rem 2rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .about-cta-button--primary {
+            background: white;
+            color: var(--primary);
+        }
+
+        .about-cta-button--secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+            border-radius: 50px;
+        }
+
+        .about-cta-button--primary:hover {
+            background:var(--text-yellow);
+            color: var(--primary);
+            border-radius: 50px;
+            box-shadow: var(--shadow-md);
+        }
+
+        .about-cta-button--secondary:hover {
+            background: white;
+            color: var(--primary);
+            box-shadow: var(--shadow-md);
+            border-radius: 0.5rem;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .section-title .gradient-text {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--text-primary);
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto 3rem;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 768px) {
+            .about-cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .about-cta-button {
+                width: 100%;
+                max-width: 300px;
+                text-align: center;
+            }
         }
     </style>
 </head>
@@ -202,120 +429,173 @@
 
     <main class="main-content">
         <section class="about-hero">
-            <h1 class="about-hero-title">About EveryTool.tech</h1>
-            <p class="about-hero-subtitle">Simple, free tools built for everyone.</p>
+            <div class="about-hero-content">
+                <div class="about-hero-badge animate-fade-up">
+                    <i class="fas fa-rocket"></i>
+                    <span>Building the Future of Online Tools</span>
+                </div>
+                <h1 class="about-hero-title animate-fade-up">
+                    About <span class="gradient-text">EveryTool.tech</span>
+                </h1>
+                <p class="about-hero-subtitle animate-fade-up">
+                    We're on a mission to make powerful tools accessible to everyone. 
+                    Simple, fast, and free - that's our promise.
+                </p>
+            </div>
         </section>
-        <section class="about-who-section" id="about-who">
-            <img src="assets/profile-placeholder.jpg" alt="Your Name" class="about-profile-img">
+
+        <div class="about-profile animate-fade-up">
+            <img src="assets/profile-placeholder.jpg" alt="Gubba Varshith" class="about-profile-image">
             <div class="about-profile-content">
-                <div class="about-profile-name">Gubba Varshith</div>
+                <h2 class="about-profile-name">Gubba Varshith</h2>
                 <div class="about-profile-role">Founder & Builder</div>
-                <div class="about-profile-story">
-                    Hi! I'm varshith, the creator of EveryTool.tech. I'm passionate about building simple, useful tools that help people get things done faster. <br><br>
-                    My background is in web development and product design, and I love turning ideas into real, user-friendly products. This site is my way of sharing that passion with the world.<br><br>
-                    (You can update this story with your real bio and achievements!)
+                <p class="about-profile-bio">
+                    Hi! I'm Varshith, the creator of EveryTool.tech. I'm passionate about building simple, 
+                    useful tools that help people get things done faster. My background is in web development 
+                    and product design, and I love turning ideas into real, user-friendly products.
+                </p>
+                <div class="about-profile-social">
+                    <a href="https://www.instagram.com/gubba_varshith/" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="https://www.linkedin.com/in/gubba-varshith-0000000000/" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="https://github.com/gubba-varshith" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                </div>
+            </div>
+        </div>
+
+        <section class="about-section">
+            <div class="about-grid">
+                <div class="about-card animate-fade-up">
+                    <div class="about-card-icon">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3 class="about-card-title">Our Mission</h3>
+                    <p class="about-card-content">
+                        To provide high-quality, free tools that help people work more efficiently. 
+                        We believe in making technology accessible to everyone, regardless of their technical expertise.
+                    </p>
+                </div>
+
+                <div class="about-card animate-fade-up">
+                    <div class="about-card-icon">
+                        <i class="fas fa-heart"></i>
+                    </div>
+                    <h3 class="about-card-title">Our Values</h3>
+                    <p class="about-card-content">
+                        Simplicity, accessibility, and user experience are at the core of everything we do. 
+                        We're committed to creating tools that are both powerful and easy to use.
+                    </p>
+                </div>
+
+                <div class="about-card animate-fade-up">
+                    <div class="about-card-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <h3 class="about-card-title">Our Community</h3>
+                    <p class="about-card-content">
+                        We're building a community of users who share our vision. 
+                        Your feedback and suggestions help us improve and grow.
+                    </p>
                 </div>
             </div>
         </section>
-        <section class="about-section" id="about-story">
-            <h2 class="about-section-title">Our Story</h2>
-            <div class="about-section-content">
-                EveryTool.tech was started with a simple idea: <b>make daily tools accessible, fast, and frustration-free</b>.<br>
-                <br>
-                Tired of cluttered, ad-heavy, and slow online utilities, we set out to build a platform where <b>anyone</b> can get things done—without distractions.<br>
-                <br>
-                Our focus is on a clean UI, zero ads, and lightning-fast performance. We believe everyone deserves tools that just work.
+
+        <!-- New Features Section -->
+        <section class="about-features">
+            <div class="about-section">
+                <h2 class="section-title">Why Choose <span class="gradient-text">EveryTool.tech</span></h2>
+                <p class="section-subtitle">We're committed to providing the best tools and experience for our users</p>
+                
+                <div class="about-features-grid">
+                    <div class="about-feature-card animate-fade-up">
+                        <div class="about-feature-icon">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3 class="about-feature-title">Lightning Fast</h3>
+                        <p class="about-feature-description">
+                            Our tools are optimized for speed and performance, ensuring you get results instantly.
+                        </p>
+                    </div>
+
+                    <div class="about-feature-card animate-fade-up">
+                        <div class="about-feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3 class="about-feature-title">Privacy First</h3>
+                        <p class="about-feature-description">
+                            Your data stays on your device. We don't store or process your files on our servers.
+                        </p>
+                    </div>
+
+                    <div class="about-feature-card animate-fade-up">
+                        <div class="about-feature-icon">
+                            <i class="fas fa-magic"></i>
+                        </div>
+                        <h3 class="about-feature-title">Easy to Use</h3>
+                        <p class="about-feature-description">
+                            Clean, intuitive interfaces that make complex tasks simple and straightforward.
+                        </p>
+                    </div>
+
+                    <div class="about-feature-card animate-fade-up">
+                        <div class="about-feature-icon">
+                            <i class="fas fa-sync"></i>
+                        </div>
+                        <h3 class="about-feature-title">Always Updated</h3>
+                        <p class="about-feature-description">
+                            Regular updates and new features to keep our tools at the cutting edge.
+                        </p>
+                    </div>
+                </div>
             </div>
         </section>
-        <section class="about-section" id="about-mission">
-            <h2 class="about-section-title">Our Mission</h2>
-            <ul class="about-mission-list">
-                <li>Empower users with daily-use tools</li>
-                <li>100% free and privacy-friendly</li>
-                <li>Continuously expanding with new tools</li>
-            </ul>
-        </section>
-        <section class="about-section" id="about-behind">
-            <h2 class="about-section-title">Behind the Scenes</h2>
-            <div class="about-section-behind">
-                EveryTool.tech is built using a mix of <b>AI-assisted development</b> and real user feedback. We're always improving—so your suggestions help shape the future of our platform!
+
+        <!-- New CTA Section -->
+        <section class="about-cta">
+            <div class="about-cta-content">
+                <h2 class="about-cta-title">Ready to Get Started?</h2>
+                <p class="about-cta-description">
+                    Join thousands of users who trust EveryTool.tech for their daily tasks.
+                    Start using our tools today and experience the difference.
+                </p>
+                <div class="about-cta-buttons">
+                    <a href="/tools-page" class="about-cta-button about-cta-button--primary">
+                        Explore Tools
+                    </a>
+                    <a href="/contact" class="about-cta-button about-cta-button--secondary">
+                        Contact Us
+                    </a>
+                </div>
             </div>
         </section>
     </main>
 
-    <!-- FAQ Section -->
-    <section class="faq-section">
-        <div class="container">
-            <div class="faq-header">
-                <h2 class="faq-title">Frequently Asked Questions</h2>
-                <p class="faq-subtitle">Learn more about EveryTool.tech and our mission.</p>
-            </div>
-            <div class="faq-list">
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h3>What is EveryTool.tech?</h3>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>EveryTool.tech is a comprehensive platform offering a wide range of free online tools designed to help you with various tasks. From text manipulation to file conversion, we provide easy-to-use tools that make your work more efficient. Check out our <a href="/tools-page">Tools page</a> to explore all available tools.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h3>What is our mission?</h3>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Our mission is to provide high-quality, free tools that help people work more efficiently. We believe in making technology accessible to everyone, regardless of their technical expertise. Visit our <a href="/tools-page">Tools page</a> to see how we're achieving this mission.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h3>Who is behind EveryTool.tech?</h3>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>EveryTool.tech is built and maintained by a normal engineering student who is passionate about creating useful tools for the community. I have a good experience in web development and user experience design. Learn more about me on <a href="/creator">creator page</a>.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h3>How can I contribute?</h3>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>There are several ways you can contribute:</p>
-                        <ul>
-                            <li>Report bugs or suggest improvements through our <a href="/contact">Contact page</a></li>
-                            <li>Share our tools with others</li>
-                            <li>Provide feedback on existing tools</li>
-                            <li>Suggest new tools or features</li>
-                        </ul>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h3>How can I get in touch with the team?</h3>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>You can reach us through our <a href="/contact">Contact page</a>. We're always happy to hear from our users and respond to all inquiries as quickly as possible.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <!-- Footer Section -->
     <div id="footer-placeholder"></div>
 
-    <!-- Scripts -->
-    <script src="view.js" defer></script>
-    <script src="script.js" defer></script>
-    <script src="faq.js" defer></script>
+    <script src="view.js"></script>
+    <script src="faq.js"></script>
+    <script>
+        // Load header and footer
+        fetch('header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading header:', error));
+
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading footer:', error));
+
+        // Initialize FAQ functionality
+        document.addEventListener('DOMContentLoaded', () => {
+            if (window.faqManager) {
+                window.faqManager.init();
+            }
+        });
+    </script>
 </body>
 </html> 

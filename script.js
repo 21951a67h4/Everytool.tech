@@ -258,41 +258,79 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         ];
 
+        // Error Handler
+        const ErrorHandler = {
+            showError: function(type, message) {
+                const errorElement = document.querySelector(`.${type}-error`);
+                if (errorElement) {
+                    errorElement.textContent = message;
+                    errorElement.style.display = 'block';
+                }
+            },
+            clearError: function(type) {
+                const errorElement = document.querySelector(`.${type}-error`);
+                if (errorElement) {
+                    errorElement.textContent = '';
+                    errorElement.style.display = 'none';
+                }
+            }
+        };
+
+        // Debounce function
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+
         // Update performSearch to redirect if found, else show error
         async function performSearch() {
-            const query = searchInput.value.trim();
-            if (!query) {
-                hideLoading();
-                ErrorHandler.addError('search', 'Please enter a search term');
+            if (isSearching) return;
+            
+            const searchTerm = searchInput.value.trim().toLowerCase();
+            if (searchTerm.length < 2) {
+                hideResults();
                 return;
             }
 
             showLoading();
-            hideError();
+            isSearching = true;
 
-            setTimeout(() => {
-                // Find the first matching tool (title or description)
-                const result = allTools.find(tool =>
-                    tool.title.toLowerCase().includes(query.toLowerCase()) ||
-                    tool.description.toLowerCase().includes(query.toLowerCase())
+            try {
+                // Filter tools based on search term
+                const results = allTools.filter(tool => 
+                    tool.title.toLowerCase().includes(searchTerm) || 
+                    tool.description.toLowerCase().includes(searchTerm)
                 );
-                if (result) {
-                    window.location.href = result.url;
+
+                if (results.length === 0) {
+                    searchResultsContent.innerHTML = `
+                        <div class="search-dropdown-item no-results">
+                            <i class="fas fa-search"></i>
+                            <div class="search-dropdown-item-content">
+                                <div class="search-dropdown-item-title">No results found</div>
+                                <div class="search-dropdown-item-description">Try different keywords or browse categories</div>
+                            </div>
+                        </div>
+                    `;
                 } else {
-                    hideLoading();
-                    ErrorHandler.addError('search', `No tool found matching your search.<br><button class='search-retry-btn' style='margin-left:8px;padding:0.3em 1em;border-radius:1em;border:none;background:#4361EE;color:#fff;cursor:pointer;'>Retry</button>`);
-                    // Add retry handler
-                    setTimeout(() => {
-                        const retryBtn = document.querySelector('.search-retry-btn');
-                        if (retryBtn) {
-                            retryBtn.onclick = () => {
-                                ErrorHandler.clearError('search');
-                                searchInput.focus();
-                            };
-                        }
-                    }, 10);
+                    displayResults(results);
                 }
-            }, 500); // Short delay for loading effect
+
+                searchResults.style.display = 'block';
+            } catch (error) {
+                ErrorHandler.showError('search', 'An error occurred while searching. Please try again.');
+                hideResults();
+            } finally {
+                hideLoading();
+                isSearching = false;
+            }
         }
 
         function displayResults(results) {
@@ -465,45 +503,4 @@ document.addEventListener('DOMContentLoaded', () => {
         // Initialize speech recognition on page load
         initSpeechRecognition();
     }
-
-    // FAQ Accordion Functionality
-    const faqItems = document.querySelectorAll('.faq-item');
-    
-    faqItems.forEach(item => {
-        const question = item.querySelector('.faq-question');
-        const answer = item.querySelector('.faq-answer');
-        const icon = question.querySelector('i');
-        
-        // Set initial state
-        answer.style.maxHeight = '0px';
-        answer.style.opacity = '0';
-        
-        question.addEventListener('click', () => {
-            // Close all other items
-            faqItems.forEach(otherItem => {
-                if (otherItem !== item) {
-                    const otherAnswer = otherItem.querySelector('.faq-answer');
-                    const otherIcon = otherItem.querySelector('.faq-question i');
-                    otherItem.classList.remove('active');
-                    otherAnswer.style.maxHeight = '0px';
-                    otherAnswer.style.opacity = '0';
-                    otherIcon.style.transform = 'rotate(0deg)';
-                }
-            });
-            
-            // Toggle current item
-            const isActive = item.classList.contains('active');
-            item.classList.toggle('active');
-            
-            if (isActive) {
-                answer.style.maxHeight = '0px';
-                answer.style.opacity = '0';
-                icon.style.transform = 'rotate(0deg)';
-            } else {
-                answer.style.maxHeight = answer.scrollHeight + 'px';
-                answer.style.opacity = '1';
-                icon.style.transform = 'rotate(180deg)';
-            }
-        });
-    });
-}); 
+});
