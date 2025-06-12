@@ -130,4 +130,38 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Initialize the filter
     filterTools();
+});
+
+// Function to load header and footer
+async function loadHeaderAndFooter() {
+    try {
+        // Load header
+        const headerResponse = await fetch('../header.html');
+        if (!headerResponse.ok) {
+            throw new Error('Failed to load header');
+        }
+        const headerHtml = await headerResponse.text();
+        const headerPlaceholder = document.getElementById('header-placeholder');
+        if (headerPlaceholder) {
+            headerPlaceholder.innerHTML = headerHtml;
+        }
+
+        // Load footer
+        const footerResponse = await fetch('../footer.html');
+        if (!footerResponse.ok) {
+            throw new Error('Failed to load footer');
+        }
+        const footerHtml = await footerResponse.text();
+        const footerPlaceholder = document.getElementById('footer-placeholder');
+        if (footerPlaceholder) {
+            footerPlaceholder.innerHTML = footerHtml;
+        }
+    } catch (error) {
+        console.error('Error loading components:', error);
+    }
+}
+
+// Load header and footer when DOM is ready
+document.addEventListener('DOMContentLoaded', () => {
+    loadHeaderAndFooter();
 }); 
