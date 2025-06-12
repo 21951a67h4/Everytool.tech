@@ -7,6 +7,7 @@
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="faq.css">
     <style>
         :root {
             --primary: #4361EE;
@@ -272,103 +273,16 @@
         }
 
         /* FAQ Section Styles */
-        .faq-section {
-            padding: 4rem 0;
-            background: var(--bg-secondary);
-        }
-
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        .faq-header {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .faq-title {
-            color: var(--primary);
-            font-size: 2rem;
-            margin-bottom: 1rem;
-        }
-
-        .faq-subtitle {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-        }
-
-        .faq-list {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-
-        .faq-item {
-            background: var(--bg-primary);
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: var(--shadow-sm);
-            transition: var(--transition);
-        }
-
-        .faq-item:hover {
-            box-shadow: var(--shadow-md);
-        }
-
-        .faq-question {
-            padding: 1.5rem;
-            cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: var(--bg-primary);
-        }
-
-        .faq-question h3 {
-            font-size: 1.1rem;
-            color: var(--text-primary);
-            margin: 0;
-        }
-
-        .faq-question i {
-            color: var(--primary);
-            transition: var(--transition);
-        }
-
+        .faq-section,
+        .container,
+        .faq-header,
+        .faq-title,
+        .faq-subtitle,
+        .faq-list,
+        .faq-item,
+        .faq-question,
         .faq-answer {
-            padding: 0 1.5rem;
-            max-height: 0;
-            overflow: hidden;
-            transition: var(--transition);
-        }
-
-        .faq-answer p {
-            padding-bottom: 1.5rem;
-            color: var(--text-secondary);
-        }
-
-        .faq-item.active .faq-question i {
-            transform: rotate(180deg);
-        }
-
-        .faq-item.active .faq-answer {
-            max-height: 500px;
-        }
-
-        @media (max-width: 768px) {
-            .faq-section {
-                padding: 2rem 0;
-            }
-
-            .faq-title {
-                font-size: 1.75rem;
-            }
-
-            .faq-question h3 {
-                font-size: 1rem;
-            }
+            /* Remove these styles as they're now in faq.css */
         }
     </style>
 </head>
@@ -469,59 +383,59 @@
     </main>
 
     <!-- FAQ Section -->
-    <section class="faq-section">
+    <section class="tools-faq">
         <div class="container">
-            <div class="faq-header">
-                <h2 class="faq-title">Frequently Asked Questions</h2>
-                <p class="faq-subtitle">Common questions about our terms of service.</p>
+            <div class="tools-faq-header">
+                <h2 class="tools-faq-title">Frequently Asked Questions</h2>
+                <p class="tools-faq-subtitle">Common questions about our terms of service.</p>
             </div>
-            <div class="faq-list">
-                <div class="faq-item">
-                    <div class="faq-question">
+            <div class="tools-faq-list">
+                <div class="tools-faq-item">
+                    <div class="tools-faq-question">
                         <h3>What are the terms of service?</h3>
                         <i class="fas fa-chevron-down"></i>
                     </div>
-                    <div class="faq-answer">
+                    <div class="tools-faq-answer">
                         <p>Our terms of service outline the rules and guidelines for using EveryTool.tech. By using our <a href="/tools-page">tools</a>, you agree to these terms. Please read our full <a href="/terms">Terms of Service</a> for complete details.</p>
                     </div>
                 </div>
 
-                <div class="faq-item">
-                    <div class="faq-question">
+                <div class="tools-faq-item">
+                    <div class="tools-faq-question">
                         <h3>How do I accept the terms?</h3>
                         <i class="fas fa-chevron-down"></i>
                     </div>
-                    <div class="faq-answer">
+                    <div class="tools-faq-answer">
                         <p>By accessing and using our <a href="/tools-page">tools</a>, you automatically accept our terms of service. No additional action is required. However, we recommend reviewing our <a href="/terms">Terms of Service</a> and <a href="/privacy-policy">Privacy Policy</a> to understand your rights and responsibilities.</p>
                     </div>
                 </div>
 
-                <div class="faq-item">
-                    <div class="faq-question">
+                <div class="tools-faq-item">
+                    <div class="tools-faq-question">
                         <h3>Can the terms change?</h3>
                         <i class="fas fa-chevron-down"></i>
                     </div>
-                    <div class="faq-answer">
+                    <div class="tools-faq-answer">
                         <p>Yes, we may update our terms from time to time. We will notify users of any significant changes through our website or email. Continued use of our <a href="/tools-page">tools</a> after such changes constitutes acceptance of the new terms.</p>
                     </div>
                 </div>
 
-                <div class="faq-item">
-                    <div class="faq-question">
+                <div class="tools-faq-item">
+                    <div class="tools-faq-question">
                         <h3>What happens if I violate the terms?</h3>
                         <i class="fas fa-chevron-down"></i>
                     </div>
-                    <div class="faq-answer">
+                    <div class="tools-faq-answer">
                         <p>Violation of our terms may result in temporary or permanent suspension of access to our <a href="/tools-page">tools</a>. For serious violations, we may take legal action. If you have questions about our terms, please <a href="/contact">contact us</a>.</p>
                     </div>
                 </div>
 
-                <div class="faq-item">
-                    <div class="faq-question">
+                <div class="tools-faq-item">
+                    <div class="tools-faq-question">
                         <h3>How can I report violations?</h3>
                         <i class="fas fa-chevron-down"></i>
                     </div>
-                    <div class="faq-answer">
+                    <div class="tools-faq-answer">
                         <p>If you notice any violations of our terms, please <a href="/contact">contact us</a> immediately. Include as much detail as possible about the violation, and we will investigate the matter promptly.</p>
                     </div>
                 </div>
@@ -533,28 +447,28 @@
     <div id="footer-placeholder"></div>
 
     <!-- Scripts -->
-    <script src="view.js" defer></script>
-    <script src="script.js" defer></script>
-    <script src="faq.js" defer></script>
+    <script src="faq.js"></script>
     <script>
-        // Function to load HTML content
-        async function loadHTML(url, elementId) {
-            try {
-                const response = await fetch(url);
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                const html = await response.text();
-                document.getElementById(elementId).innerHTML = html;
-            } catch (error) {
-                console.error(`Error loading ${url}:`, error);
-            }
-        }
-
         // Load header and footer
+        fetch('header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading header:', error));
+
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading footer:', error));
+
+        // Initialize FAQ functionality
         document.addEventListener('DOMContentLoaded', () => {
-            loadHTML('header.html', 'header-placeholder');
-            loadHTML('footer.html', 'footer-placeholder');
+            if (window.faqManager) {
+                faqManager.init();
+            }
         });
     </script>
 </body>

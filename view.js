@@ -133,6 +133,10 @@ class DeviceViewManager {
             if (newType !== this.#deviceInfo.type) {
                 this.#deviceInfo.type = newType;
                 document.documentElement.setAttribute('data-device', newType);
+                document.body.className = document.body.className
+                    .replace(/mobile-view|tablet-view|desktop-view|large-view/g, '')
+                    .trim();
+                document.body.classList.add(`${newType}-view`);
                 this.#logDeviceChange();
             }
         } catch (error) {
@@ -312,15 +316,7 @@ style.textContent = `
             scroll-behavior: auto !important;
         }
     }
-`;
-document.head.appendChild(style);
 
-// Export the view manager instance
-window.viewManager = viewManager;
-
-// Add view-specific styles
-const style = document.createElement('style');
-style.textContent = `
     /* Mobile View Styles */
     .mobile-view .header__nav-list {
         position: fixed;
@@ -357,8 +353,99 @@ style.textContent = `
     .desktop-view .header__container {
         padding: 0 2rem;
     }
+
+    /* Menu Animation Styles */
+    .header__nav-list {
+        transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    }
+
+    .header__nav-list.active {
+        transform: translateX(0);
+        opacity: 1;
+    }
+
+    .header__submenu {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-in-out;
+    }
+
+    .header__submenu.active {
+        max-height: 500px;
+    }
+
+    /* Menu Button Animation */
+    .header__mobile-menu {
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .header__mobile-menu.open {
+        transform: rotate(90deg);
+    }
+
+    /* Menu Item Hover Effects */
+    .header__nav-item {
+        position: relative;
+        transition: color 0.3s ease-in-out;
+    }
+
+    .header__nav-item::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: var(--primary);
+        transition: width 0.3s ease-in-out;
+    }
+
+    .header__nav-item:hover::after {
+        width: 100%;
+    }
+
+    /* Submenu Styles */
+    .header__submenu {
+        background: rgba(255, 255, 255, 0.98);
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Mobile Menu Styles */
+    @media (max-width: 768px) {
+        .header__nav-list {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: min(280px, 80vw);
+            height: 100vh;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            flex-direction: column;
+            padding: calc(var(--header-height) + 2rem) 2rem 2rem;
+            box-shadow: -4px 0 24px rgba(67, 97, 238, 0.12);
+            overflow-y: auto;
+        }
+
+        .header__nav-list.active {
+            right: 0;
+        }
+
+        .header__submenu {
+            position: static;
+            width: 100%;
+            box-shadow: none;
+            background: transparent;
+        }
+    }
 `;
 document.head.appendChild(style);
+
+// Export the view manager instance
+window.viewManager = viewManager;
 
 // Example usage of view manager
 document.addEventListener('DOMContentLoaded', () => {
@@ -387,6 +474,9 @@ class MenuManager {
         submenus: null
     };
     #errorHandler = null;
+    #initializationAttempts = 0;
+    #maxInitializationAttempts = 10;
+    #initializationInterval = 100;
 
     constructor() {
         if (MenuManager.#instance) {
@@ -395,7 +485,6 @@ class MenuManager {
         MenuManager.#instance = this;
         this.#initializeErrorHandler();
         this.#initializeElements();
-        this.#setupEventListeners();
     }
 
     #initializeErrorHandler() {
@@ -423,8 +512,15 @@ class MenuManager {
             this.#elements.submenus = document.querySelectorAll('.header__submenu');
 
             if (!this.#elements.menuButton || !this.#elements.menuContainer) {
-                throw new Error('Required menu elements not found');
+                if (this.#initializationAttempts < this.#maxInitializationAttempts) {
+                    this.#initializationAttempts++;
+                    setTimeout(() => this.#initializeElements(), this.#initializationInterval);
+                    return;
+                }
+                throw new Error('Required menu elements not found after multiple attempts');
             }
+
+            this.#setupEventListeners();
         } catch (error) {
             this.#errorHandler.logError(error, { context: 'initializeElements' });
         }
@@ -449,12 +545,15 @@ class MenuManager {
             this.#elements.menuItems.forEach(item => {
                 const submenu = item.querySelector('.header__submenu');
                 if (submenu) {
-                    item.addEventListener('click', (e) => {
-                        if (window.innerWidth <= 768) {
-                            e.preventDefault();
-                            this.toggleSubmenu(item, submenu);
-                        }
-                    });
+                    const link = item.querySelector('a');
+                    if (link) {
+                        link.addEventListener('click', (e) => {
+                            if (window.innerWidth <= 768) {
+                                e.preventDefault();
+                                this.toggleSubmenu(item, submenu);
+                            }
+                        });
+                    }
                 }
             });
 
@@ -474,6 +573,13 @@ class MenuManager {
                         this.closeMenu();
                     }
                 }, 250);
+            });
+
+            // Handle orientation change
+            window.addEventListener('orientationchange', () => {
+                if (this.#menuState.isOpen) {
+                    this.closeMenu();
+                }
             });
         } catch (error) {
             this.#errorHandler.logError(error, { context: 'setupEventListeners' });
@@ -509,6 +615,9 @@ class MenuManager {
             // Focus first menu item
             const firstMenuItem = this.#elements.menuContainer?.querySelector('a');
             firstMenuItem?.focus();
+
+            // Dispatch custom event
+            window.dispatchEvent(new CustomEvent('menuOpened'));
         } catch (error) {
             this.#errorHandler.logError(error, { context: 'openMenu' });
         }
@@ -527,6 +636,9 @@ class MenuManager {
             this.#elements.submenus.forEach(submenu => {
                 submenu.classList.remove('active');
             });
+
+            // Dispatch custom event
+            window.dispatchEvent(new CustomEvent('menuClosed'));
         } catch (error) {
             this.#errorHandler.logError(error, { context: 'closeMenu' });
         }
@@ -540,16 +652,31 @@ class MenuManager {
             this.#elements.submenus.forEach(otherSubmenu => {
                 if (otherSubmenu !== submenu) {
                     otherSubmenu.classList.remove('active');
+                    const parent = otherSubmenu.closest('.header__nav-item');
+                    if (parent) {
+                        parent.classList.remove('submenu-open');
+                    }
                 }
             });
 
             if (isOpen) {
                 submenu.classList.remove('active');
+                parentItem.classList.remove('submenu-open');
                 this.#menuState.currentSubmenu = null;
             } else {
                 submenu.classList.add('active');
+                parentItem.classList.add('submenu-open');
                 this.#menuState.currentSubmenu = submenu;
+
+                // Focus first submenu item
+                const firstSubmenuItem = submenu.querySelector('a');
+                firstSubmenuItem?.focus();
             }
+
+            // Dispatch custom event
+            window.dispatchEvent(new CustomEvent('submenuToggled', {
+                detail: { isOpen: !isOpen, submenu }
+            }));
         } catch (error) {
             this.#errorHandler.logError(error, { context: 'toggleSubmenu' });
         }
@@ -561,6 +688,12 @@ class MenuManager {
 
     getCurrentSubmenu() {
         return this.#menuState.currentSubmenu;
+    }
+
+    // Public method to reinitialize elements if needed
+    reinitialize() {
+        this.#initializationAttempts = 0;
+        this.#initializeElements();
     }
 }
 

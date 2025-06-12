@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About EveryTool.tech</title>
+    <title>About | EveryTool.tech</title>
     <link rel="stylesheet" href="faq.css">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -421,6 +421,97 @@
                 text-align: center;
             }
         }
+
+        .journey-section {
+            max-width: 900px;
+            margin: 4rem auto;
+            padding: 2rem;
+            background: var(--bg-secondary);
+            border-radius: 1.5rem;
+            box-shadow: var(--shadow-md);
+        }
+        .journey-title {
+            text-align: center;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 2.5rem;
+        }
+        .journey-timeline {
+            position: relative;
+            margin-left: 30px;
+            padding-left: 30px;
+            border-left: 3px solid var(--primary);
+        }
+        .journey-item {
+            position: relative;
+            margin-bottom: 3rem;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.7s cubic-bezier(.4,0,.2,1), transform 0.7s cubic-bezier(.4,0,.2,1);
+        }
+        .journey-item.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        .journey-item::before {
+            content: '';
+            position: absolute;
+            left: -41px;
+            top: 10px;
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: var(--primary);
+            box-shadow: 0 0 0 4px var(--bg-secondary);
+        }
+        .journey-content {
+            background: var(--bg-primary);
+            border-radius: 1rem;
+            padding: 1.5rem 2rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--border-light);
+            transition: var(--transition);
+        }
+        .journey-content:hover {
+            box-shadow: var(--shadow-md);
+            border-color: var(--primary);
+            transform: translateY(-2px);
+        }
+        .journey-date {
+            font-size: 1rem;
+            color: var(--primary);
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        .journey-content h3 {
+            margin: 0 0 0.5rem 0;
+            color: var(--text-primary);
+            font-size: 1.3rem;
+            font-weight: 700;
+        }
+        .journey-content p {
+            color: var(--text-primary);
+            opacity: 0.85;
+            margin: 0;
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        @media (max-width: 600px) {
+            .journey-section {
+                padding: 1rem;
+            }
+            .journey-timeline {
+                margin-left: 10px;
+                padding-left: 15px;
+            }
+            .journey-content {
+                padding: 1rem;
+            }
+            .journey-item::before {
+                left: -25px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -569,6 +660,40 @@
         </section>
     </main>
 
+    <section class="journey-section">
+        <h2 class="journey-title">Our Journey</h2>
+        <div class="journey-timeline">
+            <div class="journey-item">
+                <div class="journey-content">
+                    <div class="journey-date">2021</div>
+                    <h3>Idea & Vision</h3>
+                    <p>EveryTool.tech was conceived as a vision to provide free, accessible, and powerful tools for everyone.</p>
+                </div>
+            </div>
+            <div class="journey-item">
+                <div class="journey-content">
+                    <div class="journey-date">2022</div>
+                    <h3>Development Begins</h3>
+                    <p>Started building the platform, focusing on user experience and a growing collection of essential tools.</p>
+                </div>
+            </div>
+            <div class="journey-item">
+                <div class="journey-content">
+                    <div class="journey-date">2023</div>
+                    <h3>Public Launch</h3>
+                    <p>Launched EveryTool.tech to the public, quickly gaining thousands of users and positive feedback.</p>
+                </div>
+            </div>
+            <div class="journey-item">
+                <div class="journey-content">
+                    <div class="journey-date">2024</div>
+                    <h3>Continuous Growth</h3>
+                    <p>Expanded our toolset, improved performance, and built a vibrant community of users and contributors.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Footer Section -->
     <div id="footer-placeholder"></div>
 
@@ -596,6 +721,33 @@
                 window.faqManager.init();
             }
         });
+
+        // Scroll-triggered animation for journey items
+        window.addEventListener('DOMContentLoaded', function() {
+            const items = document.querySelectorAll('.journey-item');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.2 });
+            items.forEach(item => observer.observe(item));
+        });
+
+        // Back to Top Button
+        const backToTop = document.getElementById('backToTop');
+        const progressCircle = document.getElementById('progress');
+        const circumference = 2 * Math.PI * 20;
+
+        function updateProgress() {
+            const scrollTop = document.documentElement.scrollTop || document.body.scrollTop;
+            const scrollHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrollPercent = scrollTop / scrollHeight;
+            const offset = circumference - scrollPercent * circumference;
+            progressCircle.style.strokeDashoffset = offset;
+        }
     </script>
 </body>
 </html> 

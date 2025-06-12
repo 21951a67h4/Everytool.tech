@@ -4,7 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Get in Touch | EveryTool.tech</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="faq.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -232,86 +233,60 @@
     </main>
 
     <!-- FAQ Section -->
-    <section class="faq-section">
+    <section class="tools-faq">
         <div class="container">
-            <div class="faq-header">
-                <h2 class="faq-title">Frequently Asked Questions</h2>
-                <p class="faq-subtitle">Find quick answers to common questions about contacting us.</p>
+            <div class="tools-faq-header">
+                <h2 class="tools-faq-title">Frequently Asked Questions</h2>
+                <p class="tools-faq-subtitle">Find quick answers to common questions about contacting us.</p>
             </div>
-            <div class="faq-list">
-                <div class="faq-item">
-                    <div class="faq-question">
+            <div class="tools-faq-list">
+                <div class="tools-faq-item">
+                    <div class="tools-faq-question">
                         <h3>How quickly will I receive a response?</h3>
                         <i class="fas fa-chevron-down"></i>
                     </div>
-                    <div class="faq-answer">
+                    <div class="tools-faq-answer">
                         <p>I typically respond to all inquiries within 24-48 hours during business days. For urgent matters, please include "URGENT" in your subject line.</p>
                     </div>
                 </div>
 
-                <div class="faq-item">
-                    <div class="faq-question">
+                <div class="tools-faq-item">
+                    <div class="tools-faq-question">
                         <h3>What information should I include in my message?</h3>
                         <i class="fas fa-chevron-down"></i>
                     </div>
-                    <div class="faq-answer">
-                        <p>To help us assist you better, please include:</p>
-                        <ul>
-                            <li>Your name and contact information</li>
-                            <li>Clear description of your question or issue</li>
-                            <li>Any relevant screenshots or error messages</li>
-                            <li>Browser and device information if reporting a technical issue</li>
-                        </ul>
+                    <div class="tools-faq-answer">
+                        <p>Please include your name, email address, and a detailed description of your question or feedback. If you're reporting an issue, please include steps to reproduce the problem and any relevant screenshots.</p>
                     </div>
                 </div>
 
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h3>Can I report a bug or suggest a feature?</h3>
-                        <i class="fas fa-chevron-down"></i>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Yes! We welcome all feedback. When reporting a bug, please include:</p>
-                        <ul>
-                            <li>Steps to reproduce the issue</li>
-                            <li>Expected vs actual behavior</li>
-                            <li>Screenshots or screen recordings if possible</li>
-                            <li>Your browser and device information</li>
-                        </ul>
-                        <p>For feature suggestions, please explain how it would benefit users. You can also check our <a href="/tools-page">Tools page</a> to see what's already available.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question">
+                <div class="tools-faq-item">
+                    <div class="tools-faq-question">
                         <h3>Do you offer technical support?</h3>
                         <i class="fas fa-chevron-down"></i>
                     </div>
-                    <div class="faq-answer">
-                        <p>Yes, we provide technical support for all our tools. Our support team can help with:</p>
-                        <ul>
-                            <li>Tool usage questions</li>
-                            <li>Technical issues</li>
-                            <li>Browser compatibility problems</li>
-                            <li>General troubleshooting</li>
-                        </ul>
-                        <p>For specific tool issues, please visit the tool's page on our <a href="/tools-page">Tools page</a> for detailed documentation.</p>
+                    <div class="tools-faq-answer">
+                        <p>Yes, I provide technical support for all tools on EveryTool.tech. If you encounter any issues or have questions about using our tools, feel free to reach out through the contact form.</p>
                     </div>
                 </div>
 
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <h3>How can I stay updated about new features?</h3>
+                <div class="tools-faq-item">
+                    <div class="tools-faq-question">
+                        <h3>Can I suggest new features or tools?</h3>
                         <i class="fas fa-chevron-down"></i>
                     </div>
-                    <div class="faq-answer">
-                        <p>You can stay updated by:</p>
-                        <ul>
-                            <li>Following us on social media</li>
-                            <li>Subscribing to our newsletter</li>
-                            <li>Checking our <a href="/tools-page">Tools page</a> for new additions</li>
-                            <li>Visiting our website regularly</li>
-                        </ul>
+                    <div class="tools-faq-answer">
+                        <p>Absolutely! I welcome suggestions for new features and tools. Please use the contact form to share your ideas, and I'll review them carefully.</p>
+                    </div>
+                </div>
+
+                <div class="tools-faq-item">
+                    <div class="tools-faq-question">
+                        <h3>Is there a way to report bugs?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="tools-faq-answer">
+                        <p>Yes, you can report bugs through the contact form. Please provide as much detail as possible, including the tool you were using, what you were trying to do, and what went wrong.</p>
                     </div>
                 </div>
             </div>
@@ -322,87 +297,29 @@
     <div id="footer-placeholder"></div>
 
     <!-- Scripts -->
+    <script src="faq.js"></script>
     <script>
-        // Function to load HTML content
-        async function loadHTML(url, elementId) {
-            try {
-                const response = await fetch(url);
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                const html = await response.text();
-                document.getElementById(elementId).innerHTML = html;
-            } catch (error) {
-                console.error(`Error loading ${url}:`, error);
-            }
-        }
-
         // Load header and footer
-        document.addEventListener('DOMContentLoaded', () => {
-            loadHTML('header.html', 'header-placeholder');
-            loadHTML('footer.html', 'footer-placeholder');
-        });
+        fetch('header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('header-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading header:', error));
 
-        // Micro-animation for form elements
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('footer-placeholder').innerHTML = data;
+            })
+            .catch(error => console.error('Error loading footer:', error));
+
+        // Initialize FAQ functionality
         document.addEventListener('DOMContentLoaded', () => {
-            const form = document.querySelector('.contact-form');
-            if (form) {
-                Array.from(form.elements).forEach((el, i) => {
-                    if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA' || el.tagName === 'BUTTON') {
-                        el.style.opacity = 0;
-                        el.style.transform = 'translateY(30px)';
-                        setTimeout(() => {
-                            el.style.transition = 'opacity 0.5s cubic-bezier(0.4,0,0.2,1), transform 0.5s cubic-bezier(0.4,0,0.2,1)';
-                            el.style.opacity = 1;
-                            el.style.transform = 'translateY(0)';
-                        }, 200 + i * 90);
-                    }
-                });
-            }
-        });
-        // Client-side validation
-        document.getElementById('contactForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            let valid = true;
-            const name = document.getElementById('contact-name');
-            const email = document.getElementById('contact-email');
-            const message = document.getElementById('contact-message');
-            const errorName = document.getElementById('error-name');
-            const errorEmail = document.getElementById('error-email');
-            const errorMessage = document.getElementById('error-message');
-            // Reset errors
-            [errorName, errorEmail, errorMessage].forEach(e => { e.textContent = ''; e.classList.remove('visible'); });
-            // Name validation
-            if (!name.value.trim()) {
-                errorName.textContent = 'Please enter your name.';
-                errorName.classList.add('visible');
-                valid = false;
-            }
-            // Email validation
-            if (!email.value.trim()) {
-                errorEmail.textContent = 'Please enter your email.';
-                errorEmail.classList.add('visible');
-                valid = false;
-            } else if (!/^\S+@\S+\.\S+$/.test(email.value.trim())) {
-                errorEmail.textContent = 'Please enter a valid email address.';
-                errorEmail.classList.add('visible');
-                valid = false;
-            }
-            // Message validation
-            if (!message.value.trim()) {
-                errorMessage.textContent = 'Please enter your message.';
-                errorMessage.classList.add('visible');
-                valid = false;
-            }
-            if (valid) {
-                // Simulate successful submission
-                this.reset();
-                alert('Thank you for contacting us! We will get back to you soon.');
+            if (window.faqManager) {
+                faqManager.init();
             }
         });
     </script>
-    <script src="view.js" defer></script>
-    <script src="script.js" defer></script>
-    <script src="faq.js" defer></script>
 </body>
 </html> 
