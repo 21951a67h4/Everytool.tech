@@ -236,3 +236,4 @@ const faqManager = new FAQManager();
 
 // Export the FAQ manager instance
 window.faqManager = faqManager; 
+

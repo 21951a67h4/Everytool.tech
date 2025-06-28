@@ -7,7 +7,7 @@
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="faq.css">
+    <link rel="stylesheet" href="FAQ section/faq.css">
     <style>
         :root {
             --primary: #4361EE;
@@ -284,6 +284,18 @@
         .faq-answer {
             /* Remove these styles as they're now in faq.css */
         }
+
+        /* Header Styles */
+        #header-placeholder {
+            min-height: 130px;
+            position: relative; 
+            z-index: 2000;      
+        }
+        @media (max-width: 768px) {
+            #header-placeholder {
+                min-height: 64px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -373,7 +385,7 @@
                 <h2>Contact Us</h2>
                 <div class="terms-content">
                     <p>If you have any questions about these Terms of Use, please contact us:</p>
-                    <a href="/contact" class="contact-button">
+                    <a href="coming-soon.html" class="contact-button">
                         <i class="fas fa-envelope"></i>
                         Contact Us
                     </a>
@@ -396,7 +408,7 @@
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="tools-faq-answer">
-                        <p>Our terms of service outline the rules and guidelines for using EveryTool.tech. By using our <a href="/tools-page">tools</a>, you agree to these terms. Please read our full <a href="/terms">Terms of Service</a> for complete details.</p>
+                        <p>Our terms of service outline the rules and guidelines for using EveryTool.tech. By using our <a href="/tools-hub-page/index.html">tools</a>, you agree to these terms. Please read our full <a href="terms.html">Terms of Service</a> for complete details.</p>
                     </div>
                 </div>
 
@@ -406,7 +418,7 @@
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="tools-faq-answer">
-                        <p>By accessing and using our <a href="/tools-page">tools</a>, you automatically accept our terms of service. No additional action is required. However, we recommend reviewing our <a href="/terms">Terms of Service</a> and <a href="/privacy-policy">Privacy Policy</a> to understand your rights and responsibilities.</p>
+                        <p>By accessing and using our <a href="/tools-hub-page/index.html">tools</a>, you automatically accept our terms of service. No additional action is required. However, we recommend reviewing our <a href="terms.html">Terms of Service</a> and <a href="privacy-policy.html">Privacy Policy</a> to understand your rights and responsibilities.</p>
                     </div>
                 </div>
 
@@ -416,7 +428,7 @@
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="tools-faq-answer">
-                        <p>Yes, we may update our terms from time to time. We will notify users of any significant changes through our website or email. Continued use of our <a href="/tools-page">tools</a> after such changes constitutes acceptance of the new terms.</p>
+                        <p>Yes, we may update our terms from time to time. We will notify users of any significant changes through our website or email. Continued use of our <a href="/tools-hub-page/index.html">tools</a> after such changes constitutes acceptance of the new terms.</p>
                     </div>
                 </div>
 
@@ -426,7 +438,7 @@
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="tools-faq-answer">
-                        <p>Violation of our terms may result in temporary or permanent suspension of access to our <a href="/tools-page">tools</a>. For serious violations, we may take legal action. If you have questions about our terms, please <a href="/contact">contact us</a>.</p>
+                        <p>Violation of our terms may result in temporary or permanent suspension of access to our <a href="/tools-hub-page/index.html">tools</a>. For serious violations, we may take legal action. If you have questions about our terms, please <a href="coming-soon.html">contact us</a>.</p>
                     </div>
                 </div>
 
@@ -436,7 +448,7 @@
                         <i class="fas fa-chevron-down"></i>
                     </div>
                     <div class="tools-faq-answer">
-                        <p>If you notice any violations of our terms, please <a href="/contact">contact us</a> immediately. Include as much detail as possible about the violation, and we will investigate the matter promptly.</p>
+                        <p>If you notice any violations of our terms, please <a href="coming-soon.html">contact us</a> immediately. Include as much detail as possible about the violation, and we will investigate the matter promptly.</p>
                     </div>
                 </div>
             </div>
@@ -447,7 +459,7 @@
     <div id="footer-placeholder"></div>
 
     <!-- Scripts -->
-    <script src="faq.js"></script>
+    <script src="FAQ section/faq.js"></script>
     <script>
         // Load header and footer
         fetch('header.html')
@@ -471,5 +483,68 @@
             }
         });
     </script>
+
+<script>
+    // =====================================================================
+    // ====== START: MAGIC BLOCK TO COPY FOR EVERY NEW PAGE ======
+    // =====================================================================
+        document.addEventListener('DOMContentLoaded', () => {
+    
+    const loadScript = (src) => {
+        return new Promise((resolve, reject) => {
+            const script = document.createElement('script');
+            script.src = src;
+            script.onload = () => resolve(script);
+            script.onerror = () => reject(new Error(`Script load error for ${src}`));
+            document.body.appendChild(script);
+        });
+    };
+    
+    const loadHeader = () => {
+        const headerPlaceholder = document.getElementById('header-placeholder');
+        if (!headerPlaceholder) return;
+    
+        // *** IMPORTANT: ADJUST THIS PATH BASED ON YOUR FILE'S LOCATION ***
+        fetch('/header.html') 
+            .then(response => {
+                if (!response.ok) throw new Error('Network response for header.html was not ok.');
+                return response.text();
+            })
+            .then(html => {
+                headerPlaceholder.innerHTML = html;
+                return loadScript('https://cdn.jsdelivr.net/npm/fuse.js@6.6.2');
+            })
+            .then(() => {
+                // *** IMPORTANT: ADJUST THIS PATH BASED ON YOUR FILE'S LOCATION ***
+                return loadScript('/header-search.js');
+            })
+            .then(() => {
+                if (typeof initializeHeader === 'function') {
+                    initializeHeader(); 
+                } else {
+                    throw new Error('initializeHeader function not found.');
+                }
+            })
+            .catch(error => {
+                console.error('CRITICAL ERROR during header loading process:', error);
+            });
+    };
+    
+    const loadFooter = () => {
+        const footerPlaceholder = document.getElementById('footer-placeholder');
+        if (footerPlaceholder) {
+            // *** IMPORTANT: ADJUST THIS PATH BASED ON YOUR FILE'S LOCATION ***
+            fetch('/footer.html')
+                .then(response => response.ok ? response.text() : Promise.reject('Failed to load footer'))
+                .then(html => { footerPlaceholder.innerHTML = html; })
+                .catch(error => console.error('Error loading footer:', error));
+        }
+    };
+    
+    loadHeader();
+    loadFooter();
+    });
+    
+        </script>
 </body>
 </html> 

@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About | EveryTool.tech</title>
-    <link rel="stylesheet" href="faq.css">
+    <link rel="stylesheet" href="FAQ section/faq.css">
     <link rel="icon" type="image/png" href="assets/favicon.png">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
@@ -512,6 +512,19 @@
                 left: -25px;
             }
         }
+        </style>
+        <style>
+        /* header Styles */
+        #header-placeholder {
+            min-height: 130px;
+            position: relative; 
+            z-index: 2000;      
+        }
+        @media (max-width: 768px) {
+            #header-placeholder {
+                min-height: 64px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -536,7 +549,7 @@
         </section>
 
         <div class="about-profile animate-fade-up">
-            <img src="assets/profile-placeholder.jpg" alt="Gubba Varshith" class="about-profile-image">
+            <img src="assets/varshith.jpg" alt="Gubba Varshith" class="about-profile-image">
             <div class="about-profile-content">
                 <h2 class="about-profile-name">Gubba Varshith</h2>
                 <div class="about-profile-role">Founder & Builder</div>
@@ -649,10 +662,10 @@
                     Start using our tools today and experience the difference.
                 </p>
                 <div class="about-cta-buttons">
-                    <a href="/tools-page" class="about-cta-button about-cta-button--primary">
+                    <a href="/tools-hub-page/index.html" class="about-cta-button about-cta-button--primary">
                         Explore Tools
                     </a>
-                    <a href="/contact" class="about-cta-button about-cta-button--secondary">
+                    <a href="coming-soon.html" class="about-cta-button about-cta-button--secondary">
                         Contact Us
                     </a>
                 </div>
@@ -698,7 +711,7 @@
     <div id="footer-placeholder"></div>
 
     <script src="view.js"></script>
-    <script src="faq.js"></script>
+    <script src="FAQ section/faq.js"></script>
     <script>
         // Load header and footer
         fetch('header.html')
@@ -749,5 +762,68 @@
             progressCircle.style.strokeDashoffset = offset;
         }
     </script>
+
+<script>
+    // =====================================================================
+// ====== START: MAGIC BLOCK TO COPY FOR EVERY NEW PAGE ======
+// =====================================================================
+document.addEventListener('DOMContentLoaded', () => {
+
+const loadScript = (src) => {
+return new Promise((resolve, reject) => {
+    const script = document.createElement('script');
+    script.src = src;
+    script.onload = () => resolve(script);
+    script.onerror = () => reject(new Error(`Script load error for ${src}`));
+    document.body.appendChild(script);
+});
+};
+
+const loadHeader = () => {
+const headerPlaceholder = document.getElementById('header-placeholder');
+if (!headerPlaceholder) return;
+
+// *** IMPORTANT: ADJUST THIS PATH BASED ON YOUR FILE'S LOCATION ***
+fetch('/header.html') 
+    .then(response => {
+        if (!response.ok) throw new Error('Network response for header.html was not ok.');
+        return response.text();
+    })
+    .then(html => {
+        headerPlaceholder.innerHTML = html;
+        return loadScript('https://cdn.jsdelivr.net/npm/fuse.js@6.6.2');
+    })
+    .then(() => {
+        // *** IMPORTANT: ADJUST THIS PATH BASED ON YOUR FILE'S LOCATION ***
+        return loadScript('/header-search.js');
+    })
+    .then(() => {
+        if (typeof initializeHeader === 'function') {
+            initializeHeader(); 
+        } else {
+            throw new Error('initializeHeader function not found.');
+        }
+    })
+    .catch(error => {
+        console.error('CRITICAL ERROR during header loading process:', error);
+    });
+};
+
+const loadFooter = () => {
+const footerPlaceholder = document.getElementById('footer-placeholder');
+if (footerPlaceholder) {
+    // *** IMPORTANT: ADJUST THIS PATH BASED ON YOUR FILE'S LOCATION ***
+    fetch('/footer.html')
+        .then(response => response.ok ? response.text() : Promise.reject('Failed to load footer'))
+        .then(html => { footerPlaceholder.innerHTML = html; })
+        .catch(error => console.error('Error loading footer:', error));
+}
+};
+
+loadHeader();
+loadFooter();
+});
+
+</script>
 </body>
 </html> 

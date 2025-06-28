@@ -1,14 +1,15 @@
-<!-- This is the Text File Tools Page -->
+<!-- This is the Converters Tools Page -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Text File Tools | Everytool</title>
+    <title>Smart Tools for Smart Money | Everytool</title>
+    <meta name="description" content="Make better financial decisions with calculators and converters.">
     <link rel="icon" type="image/svg+xml" href="../assets/SVG/favicon.svg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../FAQ section/faq.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../tools-hub-page/styles.css">
     <style>
         :root {
             --primary: #4361EE;
@@ -227,7 +228,7 @@
             will-change: transform;
         }
 
-        .calculator-grid {
+        .converter-grid {
             position: absolute;
             width: 100%;
             height: 100%;
@@ -239,7 +240,7 @@
             pointer-events: none;
         }
 
-        .math-equations {
+        .conversion-equations {
             position: absolute;
             width: 100%;
             height: 100%;
@@ -897,6 +898,45 @@
                 opacity: 1;
             }
         }
+
+        /* Header Styles */
+        #header-placeholder {
+            min-height: 130px;
+            position: relative; 
+            z-index: 2000;      
+        }
+        @media (max-width: 768px) {
+            #header-placeholder {
+                min-height: 64px;
+            }
+        }
+    </style>
+
+    <!-- Add category-specific styles -->
+    <style id="category-specific-styles">
+        /* These styles will be dynamically replaced based on category */
+        :root {
+            --category-primary: #4361EE;
+            --category-secondary: #7209B7;
+            --category-accent: #F72585;
+            --category-gradient: linear-gradient(135deg, var(--category-primary) 0%, var(--category-secondary) 100%);
+        }
+
+        .hero-section {
+            background: var(--category-gradient);
+        }
+
+        .tool-icon {
+            color: var(--category-primary);
+        }
+
+        .tool-button {
+            background: var(--category-primary);
+        }
+
+        .tool-button:hover {
+            background: var(--category-secondary);
+        }
     </style>
 </head>
 <body>
@@ -904,128 +944,151 @@
     <main class="main-content">
         <section class="hero-section">
             <div class="math-animation-container">
-                <div class="calculator-grid"></div>
-                <div class="floating-symbols">
-                    <span class="floating-symbol" style="left: 10%; animation-delay: 0s;">📄</span>
-                    <span class="floating-symbol" style="left: 20%; animation-delay: 2s;">📝</span>
-                    <span class="floating-symbol" style="left: 30%; animation-delay: 4s;">📋</span>
-                    <span class="floating-symbol" style="left: 40%; animation-delay: 6s;">📑</span>
-                    <span class="floating-symbol" style="left: 50%; animation-delay: 8s;">📚</span>
-                    <span class="floating-symbol" style="left: 60%; animation-delay: 10s;">📖</span>
-                    <span class="floating-symbol" style="left: 70%; animation-delay: 12s;">📎</span>
-                    <span class="floating-symbol" style="left: 80%; animation-delay: 14s;">📌</span>
+                <div class="converter-grid"></div>
+                <div class="floating-symbols" id="category-symbols">
+                    <!-- Symbols will be dynamically inserted based on category -->
                 </div>
-                <div class="math-equations">
-                    <span class="equation" style="top: 20%; animation-delay: 0s;">Text + Format = Document</span>
-                    <span class="equation" style="top: 40%; animation-delay: 5s;">Convert + Optimize = Better Files</span>
-                    <span class="equation" style="top: 60%; animation-delay: 10s;">Edit + Transform = New Content</span>
-                    <span class="equation" style="top: 80%; animation-delay: 15s;">Analyze + Process = Results</span>
+                <div class="conversion-equations" id="category-equations">
+                    <!-- Equations will be dynamically inserted based on category -->
                 </div>
             </div>
             <div class="hero-content">
                 <div class="hero__text-content hero__text-content-modern animate-fade-up">
                     <span class="hero__badge improved-badge">
-                        <span class="hero__badge-icon">⚡</span>
-                        <span class="hero__badge-text">Powerful tools for text and file manipulation</span>
+                        <span class="hero__badge-icon">💰</span>
+                        <span class="hero__badge-text">Finance tools</span>
                     </span>
-                    <h1 class="hero-title">Text & File Tools</h1>
-                    <p class="hero-subtitle">Transform, analyze, and optimize your text files with our comprehensive suite of tools.</p>
+                    <h1 class="hero-title">Smart Tools for Smart Money</h1>
+                    <p class="hero-subtitle">Make better financial decisions with calculators and converters.</p>
                 </div>
             </div>
         </section>
 
         <div class="search-filter">
             <div class="search-container">
-                <input type="text" class="search-input" placeholder="Search text and file tools..." aria-label="Search tools">
+                <input type="text" class="search-input" placeholder="Search Smart Tools for Smart Money tools..." aria-label="Search tools">
             </div>
         </div>
 
-        <div class="tools-grid">
-            <!-- Word Counter -->
+        <div class="tools-grid" id="tools-container">
             <article class="tool-card">
                 <div class="tool-icon">
-                    <i class="fas fa-file-word"></i>
+                    <i class="fas fa-calculator"></i>
                 </div>
-                <h2 class="tool-name">Word Counter</h2>
-                <p class="tool-description">Counts the number of words, characters, and sentences in a text.</p>
-                <a href="../coming-soon(without countdown).html" class="tool-button">Use Tool</a>
+                <h2 class="tool-name">Loan Calculator</h2>
+                <p class="tool-description">Calculate monthly payments, interest rates, and loan terms for any type of loan.</p>
+                <a href="../tools/loan-calculator.html" class="tool-button">Use Tool</a>
+            </article>
+            <article class="tool-card">
+                <div class="tool-icon">
+                    <i class="fas fa-home"></i>
+                </div>
+                <h2 class="tool-name">Mortgage Calculator</h2>
+                <p class="tool-description">Calculate monthly mortgage payments, interest costs, and amortization schedules.</p>
+                <a href="../tools/Mortagage-calculator.html" class="tool-button">Use Tool</a>
             </article>
 
-            <!-- Case Converter -->
             <article class="tool-card">
                 <div class="tool-icon">
-                    <i class="fas fa-text-height"></i>
+                    <i class="fas fa-car"></i>
                 </div>
-                <h2 class="tool-name">Case Converter</h2>
-                <p class="tool-description">Converts text between different cases (uppercase, lowercase, title case, etc.).</p>
-                <a href="../coming-soon(without countdown).html" class="tool-button">Use Tool</a>
+                <h2 class="tool-name">Car Loan Calculator</h2>
+                <p class="tool-description">Estimate monthly car payments and total interest costs for auto financing.</p>
+                <a href="../tools/Car-loan-calculator.html" class="tool-button">Use Tool</a>
             </article>
 
-            <!-- Text Cleaner -->
             <article class="tool-card">
                 <div class="tool-icon">
-                    <i class="fas fa-broom"></i>
+                    <i class="fas fa-car-side"></i>
                 </div>
-                <h2 class="tool-name">Text Cleaner</h2>
-                <p class="tool-description">Removes unwanted characters, spaces, and formatting from text.</p>
-                <a href="../coming-soon(without countdown).html" class="tool-button">Use Tool</a>
+                <h2 class="tool-name">Auto Loan Calculator</h2>
+                <p class="tool-description">Plan your vehicle financing with detailed payment breakdowns and schedules.</p>
+                <a href="../coming-soon.html" class="tool-button">Use Tool</a>
             </article>
 
-            <!-- Reverse Text Generator -->
             <article class="tool-card">
                 <div class="tool-icon">
-                    <i class="fas fa-retweet"></i>
+                    <i class="fas fa-receipt"></i>
                 </div>
-                <h2 class="tool-name">Reverse Text Generator</h2>
-                <p class="tool-description">Reverses the order of characters or words in a text.</p>
-                <a href="../coming-soon(without countdown).html" class="tool-button">Use Tool</a>
+                <h2 class="tool-name">Tip Calculator</h2>
+                <p class="tool-description">Quickly calculate tips and split bills among multiple people.</p>
+                <a href="../coming-soon.html" class="tool-button">Use Tool</a>
             </article>
 
-            <!-- Duplicate Line Remover -->
             <article class="tool-card">
                 <div class="tool-icon">
-                    <i class="fas fa-stream"></i>
+                    <i class="fas fa-money-check-alt"></i>
                 </div>
-                <h2 class="tool-name">Duplicate Line Remover</h2>
-                <p class="tool-description">Removes duplicate lines from a list or text block.</p>
-                <a href="../coming-soon(without countdown).html" class="tool-button">Use Tool</a>
+                <h2 class="tool-name">Paycheck Calculator</h2>
+                <p class="tool-description">Calculate take-home pay after taxes and deductions for accurate budgeting.</p>
+                <a href="../coming-soon.html" class="tool-button">Use Tool</a>
+            </article>
+
+            <article class="tool-card">
+                <div class="tool-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h2 class="tool-name">Compound Interest Calculator</h2>
+                <p class="tool-description">See how your investments grow over time with compound interest.</p>
+                <a href="../coming-soon.html" class="tool-button">Use Tool</a>
+            </article>
+
+            <article class="tool-card">
+                <div class="tool-icon">
+                    <i class="fas fa-percentage"></i>
+                </div>
+                <h2 class="tool-name">Inflation Calculator</h2>
+                <p class="tool-description">Calculate the impact of inflation on purchasing power over time.</p>
+                <a href="../coming-soon.html" class="tool-button">Use Tool</a>
             </article>
         </div>
 
+        <!-- FAQ section -->
         <section class="faq-section">
             <div class="faq-container">
                 <div class="faq-header">
                     <h2 class="faq-title">Frequently Asked Questions</h2>
-                    <p class="faq-subtitle">Find answers to common questions about our text and file tools</p>
+                    <p class="faq-subtitle">Find answers to common questions about our Smart Tools for Smart Money tools</p>
                 </div>
-                <div class="faq-list">
+                <div class="faq-list" id="category-faqs">
+                    <!-- Default FAQs that will be shown before JavaScript loads -->
                     <div class="faq-item">
                         <div class="faq-question">
-                            <h3>What file formats are supported?</h3>
+                            <h3>What are the main features of Smart Tools for Smart Money tools?</h3>
                             <i class="fas fa-chevron-down"></i>
                         </div>
                         <div class="faq-answer">
-                            <p>Our tools support a wide range of text file formats including TXT, DOC, DOCX, PDF, RTF, and more. Each tool specifies its supported formats in its description.</p>
+                            <p>Our Smart Tools for Smart Money tools offer intuitive interfaces, fast processing, and reliable results. They are designed to be user-friendly while maintaining professional-grade functionality.</p>
                         </div>
                     </div>
 
                     <div class="faq-item">
                         <div class="faq-question">
-                            <h3>Is there a file size limit?</h3>
+                            <h3>Are these tools free to use?</h3>
                             <i class="fas fa-chevron-down"></i>
                         </div>
                         <div class="faq-answer">
-                            <p>Yes, there are file size limits to ensure optimal performance. Most tools can handle files up to 10MB, but specific limits are mentioned in each tool's description.</p>
+                            <p>Yes, all our tools are completely free to use. No registration required - just visit and start using them immediately.</p>
                         </div>
                     </div>
 
                     <div class="faq-item">
                         <div class="faq-question">
-                            <h3>Are my files secure when using these tools?</h3>
+                            <h3>Can I use these tools on mobile devices?</h3>
                             <i class="fas fa-chevron-down"></i>
                         </div>
                         <div class="faq-answer">
-                            <p>Yes, we take security seriously. All file processing is done locally in your browser, and we don't store any of your files on our servers.</p>
+                            <p>Yes, all our tools are fully responsive and work perfectly on mobile devices, tablets, and desktop computers.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Is my data safe when using these tools?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>We take data privacy seriously. Our tools process your data locally when possible, and we don't store any of your information unless explicitly stated.</p>
                         </div>
                     </div>
                 </div>
@@ -1033,61 +1096,78 @@
         </section>
     </main>
     <div id="footer-placeholder"></div>
+
+    <!-- Category Configuration Script -->
     <script>
-        // Load Header
-        fetch('../header.html')
-            .then(res => res.text())
-            .then(html => {
-                document.getElementById('header-placeholder').innerHTML = html;
-            });
-        // Load Footer
-        fetch('../footer.html')
-            .then(res => res.text())
-            .then(html => {
-                document.getElementById('footer-placeholder').innerHTML = html;
-            });
+        // Category configuration object - will be replaced for each category
+        const categoryConfig = {
+            name: "Smart Tools for Smart Money",
+            description: "Make better financial decisions with calculators and converters.",
+            icon: "💰",
+            badgeText: "Finance tools",
+            colors: {
+                primary: "#2e7d32",
+                secondary: "#a1887f",
+                accent: "#c5e1a5"
+            },
+            symbols: [{'symbol': '₹', 'position': '10%', 'delay': '0s'}, {'symbol': '💵', 'position': '30%', 'delay': '2s'}, {'symbol': '📈', 'position': '50%', 'delay': '4s'}, {'symbol': '💳', 'position': '70%', 'delay': '6s'}, {'symbol': '🏦', 'position': '85%', 'delay': '8s'}],
+            equations: [{'text': 'Interest = P × R × T', 'position': '20%', 'delay': '0s'}, {'text': 'ROI = (Gain - Cost) / Cost', 'position': '40%', 'delay': '4s'}, {'text': 'EMI = P × R × (1+R)^N / ((1+R)^N - 1)', 'position': '60%', 'delay': '8s'}],
+            tools: [],
+            faqs: [{'question': 'How do I calculate interest?', 'answer': 'Use the simple interest calculator by entering principal, rate, and time.'}, {'question': 'Are these tools suitable for personal finance?', 'answer': 'Yes, they are designed for both personal and professional use.'}]
+        };
 
-        // Search functionality
-        const searchInput = document.querySelector('.search-input');
-        const toolCards = document.querySelectorAll('.tool-card');
+        // Function to initialize the category page
+        function initializeCategoryPage(config) {
+            // Update meta information
+            document.title = `${config.name} | Everytool`;
+            document.querySelector('meta[name="description"]').content = config.description;
 
-        searchInput.addEventListener('input', () => {
-            const searchTerm = searchInput.value.toLowerCase();
-            
-            toolCards.forEach(card => {
-                const toolName = card.querySelector('.tool-name').textContent.toLowerCase();
-                const toolDescription = card.querySelector('.tool-description').textContent.toLowerCase();
-                
-                const matchesSearch = toolName.includes(searchTerm) || 
-                                    toolDescription.includes(searchTerm);
-                
-                card.style.display = matchesSearch ? 'flex' : 'none';
-            });
-        });
+            // Update hero section
+            document.querySelector('.hero-title').textContent = config.name;
+            document.querySelector('.hero-subtitle').textContent = config.description;
+            document.querySelector('.hero__badge-icon').textContent = config.icon;
+            document.querySelector('.hero__badge-text').textContent = config.badgeText;
+            document.querySelector('.search-input').placeholder = `Search ${config.name} tools...`;
 
-        // Enhanced FAQ Accordion
-        const faqItems = document.querySelectorAll('.faq-item');
-
-        faqItems.forEach(item => {
-            const question = item.querySelector('.faq-question');
-            const answer = item.querySelector('.faq-answer');
-            
-            question.addEventListener('click', () => {
-                const isActive = item.classList.contains('active');
-                
-                // Close all FAQ items
-                faqItems.forEach(faqItem => {
-                    const faqAnswer = faqItem.querySelector('.faq-answer');
-                    faqItem.classList.remove('active');
-                    faqAnswer.style.maxHeight = '0';
-                });
-                
-                // Open clicked item if it wasn't active
-                if (!isActive) {
-                    item.classList.add('active');
-                    answer.style.maxHeight = answer.scrollHeight + 'px';
+            // Update category-specific styles
+            const styleSheet = document.getElementById('category-specific-styles');
+            styleSheet.textContent = `
+                :root {
+                    --category-primary: ${config.colors.primary};
+                    --category-secondary: ${config.colors.secondary};
+                    --category-accent: ${config.colors.accent};
+                    --category-gradient: linear-gradient(135deg, var(--category-primary) 0%, var(--category-secondary) 100%);
                 }
+                /* Rest of the category-specific styles */
+            `;
+
+            // Populate tools
+            const toolsContainer = document.getElementById('tools-container');
+            const toolTemplate = document.getElementById('tool-card-template');
+            config.tools.forEach(tool => {
+                const toolCard = toolTemplate.content.cloneNode(true);
+                // Fill in tool details
+                toolCard.querySelector('.tool-icon i').className = tool.icon;
+                toolCard.querySelector('.tool-name').textContent = tool.name;
+                toolCard.querySelector('.tool-description').textContent = tool.description;
+                toolCard.querySelector('.tool-button').href = tool.url;
+                toolsContainer.appendChild(toolCard);
             });
+            // Initialize animations and other features
+            initializeAnimations();
+            initializeSearch();
+            initializeFAQs();
+        }
+
+        // Load header and footer
+        Promise.all([
+            fetch('../header.html').then(res => res.text()),
+            fetch('../footer.html').then(res => res.text())
+        ]).then(([header, footer]) => {
+            document.getElementById('header-placeholder').innerHTML = header;
+            document.getElementById('footer-placeholder').innerHTML = footer;
+            // Initialize the page after loading header and footer
+            initializeCategoryPage(categoryConfig);
         });
 
         // Intersection Observer for animations
@@ -1147,6 +1227,120 @@
                 mobileMenuButton.setAttribute('aria-expanded', 'false');
             }
         });
+
+        // Update the initializeCategoryPage function
+        function initializeCategoryPage(config) {
+            // ... existing initialization code ...
+
+            // Update FAQ section
+            if (config.faqs && config.faqs.length > 0) {
+                const faqContainer = document.getElementById('category-faqs');
+                faqContainer.innerHTML = ''; // Clear default FAQs
+                
+                config.faqs.forEach(faq => {
+                    const faqHTML = `
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>${faq.question}</h3>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>${faq.answer}</p>
+                            </div>
+                        </div>
+                    `;
+                    faqContainer.insertAdjacentHTML('beforeend', faqHTML);
+                });
+
+                // Reinitialize FAQ functionality
+                const faqItems = faqContainer.querySelectorAll('.faq-item');
+                faqItems.forEach(item => {
+                    const question = item.querySelector('.faq-question');
+                    const answer = item.querySelector('.faq-answer');
+                    const icon = item.querySelector('.fa-chevron-down');
+                    
+                    answer.style.maxHeight = '0px';
+                    answer.style.overflow = 'hidden';
+                    answer.style.transition = 'max-height 0.3s ease-out';
+                    
+                    question.addEventListener('click', () => {
+                        item.classList.toggle('active');
+                        if (item.classList.contains('active')) {
+                            answer.style.maxHeight = answer.scrollHeight + 'px';
+                            icon.style.transform = 'rotate(180deg)';
+                        } else {
+                            answer.style.maxHeight = '0px';
+                            icon.style.transform = 'rotate(0deg)';
+                        }
+                    });
+                });
+            }
+        }
     </script>
+    <script src="../FAQ section/faq.js" defer></script>
+    <script src="category(search).js"></script>
+
+    <script>
+        // =====================================================================
+        // ====== START: MAGIC BLOCK TO COPY FOR EVERY NEW PAGE ======
+        // =====================================================================
+            document.addEventListener('DOMContentLoaded', () => {
+        
+        const loadScript = (src) => {
+            return new Promise((resolve, reject) => {
+                const script = document.createElement('script');
+                script.src = src;
+                script.onload = () => resolve(script);
+                script.onerror = () => reject(new Error(`Script load error for ${src}`));
+                document.body.appendChild(script);
+            });
+        };
+        
+        const loadHeader = () => {
+            const headerPlaceholder = document.getElementById('header-placeholder');
+            if (!headerPlaceholder) return;
+        
+            // *** IMPORTANT: ADJUST THIS PATH BASED ON YOUR FILE'S LOCATION ***
+            fetch('/header.html') 
+                .then(response => {
+                    if (!response.ok) throw new Error('Network response for header.html was not ok.');
+                    return response.text();
+                })
+                .then(html => {
+                    headerPlaceholder.innerHTML = html;
+                    return loadScript('https://cdn.jsdelivr.net/npm/fuse.js@6.6.2');
+                })
+                .then(() => {
+                    // *** IMPORTANT: ADJUST THIS PATH BASED ON YOUR FILE'S LOCATION ***
+                    return loadScript('/header-search.js');
+                })
+                .then(() => {
+                    if (typeof initializeHeader === 'function') {
+                        initializeHeader(); 
+                    } else {
+                        throw new Error('initializeHeader function not found.');
+                    }
+                })
+                .catch(error => {
+                    console.error('CRITICAL ERROR during header loading process:', error);
+                });
+        };
+        
+        const loadFooter = () => {
+            const footerPlaceholder = document.getElementById('footer-placeholder');
+            if (footerPlaceholder) {
+                // *** IMPORTANT: ADJUST THIS PATH BASED ON YOUR FILE'S LOCATION ***
+                fetch('/footer.html')
+                    .then(response => response.ok ? response.text() : Promise.reject('Failed to load footer'))
+                    .then(html => { footerPlaceholder.innerHTML = html; })
+                    .catch(error => console.error('Error loading footer:', error));
+            }
+        };
+        
+        loadHeader();
+        loadFooter();
+        });
+        
+            </script>
 </body>
 </html> 

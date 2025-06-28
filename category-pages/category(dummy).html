@@ -1,14 +1,16 @@
-<!-- This is the Developer Tools Page -->
+<!-- This is the Converters Tools Page -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Developer Tools | Everytool</title>
+    <title>{{CATEGORY_NAME}} | Everytool</title>
+    <meta name="description" content="{{CATEGORY_DESCRIPTION}}">
+    <meta name="robots" content="noindex">
     <link rel="icon" type="image/svg+xml" href="../assets/SVG/favicon.svg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="../FAQ section/faq.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="tools-page/styles.css">
     <style>
         :root {
             --primary: #4361EE;
@@ -227,7 +229,7 @@
             will-change: transform;
         }
 
-        .code-grid {
+        .converter-grid {
             position: absolute;
             width: 100%;
             height: 100%;
@@ -239,14 +241,14 @@
             pointer-events: none;
         }
 
-        .code-snippets {
+        .conversion-equations {
             position: absolute;
             width: 100%;
             height: 100%;
             pointer-events: none;
         }
 
-        .code-snippet {
+        .equation {
             position: absolute;
             color: rgba(255, 255, 255, 0.2);
             font-family: 'Courier New', monospace;
@@ -898,134 +900,125 @@
             }
         }
     </style>
+
+    <!-- Add category-specific styles -->
+    <style id="category-specific-styles">
+        /* These styles will be dynamically replaced based on category */
+        :root {
+            --category-primary: #4361EE;
+            --category-secondary: #7209B7;
+            --category-accent: #F72585;
+            --category-gradient: linear-gradient(135deg, var(--category-primary) 0%, var(--category-secondary) 100%);
+        }
+
+        .hero-section {
+            background: var(--category-gradient);
+        }
+
+        .tool-icon {
+            color: var(--category-primary);
+        }
+
+        .tool-button {
+            background: var(--category-primary);
+        }
+
+        .tool-button:hover {
+            background: var(--category-secondary);
+        }
+    </style>
 </head>
 <body>
     <div id="header-placeholder"></div>
     <main class="main-content">
         <section class="hero-section">
             <div class="math-animation-container">
-                <div class="code-grid"></div>
-                <div class="floating-symbols">
-                    <span class="floating-symbol" style="left: 10%; animation-delay: 0s;">{</span>
-                    <span class="floating-symbol" style="left: 20%; animation-delay: 2s;">}</span>
-                    <span class="floating-symbol" style="left: 30%; animation-delay: 4s;">&lt;</span>
-                    <span class="floating-symbol" style="left: 40%; animation-delay: 6s;">/&gt;</span>
-                    <span class="floating-symbol" style="left: 50%; animation-delay: 8s;">;</span>
-                    <span class="floating-symbol" style="left: 60%; animation-delay: 10s;">()</span>
-                    <span class="floating-symbol" style="left: 70%; animation-delay: 12s;">[]</span>
-                    <span class="floating-symbol" style="left: 80%; animation-delay: 14s;">=></span>
+                <div class="converter-grid"></div>
+                <div class="floating-symbols" id="category-symbols">
+                    <!-- Symbols will be dynamically inserted based on category -->
                 </div>
-                <div class="code-snippets">
-                    <span class="code-snippet" style="top: 20%; animation-delay: 0s;">function() { ... }</span>
-                    <span class="code-snippet" style="top: 40%; animation-delay: 5s;">const app = new App()</span>
-                    <span class="code-snippet" style="top: 60%; animation-delay: 10s;">import { useState }</span>
-                    <span class="code-snippet" style="top: 80%; animation-delay: 15s;">npm install</span>
+                <div class="conversion-equations" id="category-equations">
+                    <!-- Equations will be dynamically inserted based on category -->
                 </div>
             </div>
             <div class="hero-content">
                 <div class="hero__text-content hero__text-content-modern animate-fade-up">
                     <span class="hero__badge improved-badge">
-                        <span class="hero__badge-icon">⚡</span>
-                        <span class="hero__badge-text">Essential tools for modern developers</span>
+                        <span class="hero__badge-icon">{{CATEGORY_ICON} }</span>
+                        <span class="hero__badge-text">{{CATEGORY_BADGE_TEXT}}</span>
                     </span>
-                    <h1 class="hero-title">Developer Tools</h1>
-                    <p class="hero-subtitle">Boost your development workflow with our collection of powerful developer tools and utilities.</p>
+                    <h1 class="hero-title">{{CATEGORY_NAME}}</h1>
+                    <p class="hero-subtitle">{{CATEGORY_DESCRIPTION}}</p>
                 </div>
             </div>
         </section>
 
         <div class="search-filter">
             <div class="search-container">
-                <input type="text" class="search-input" placeholder="Search developer tools..." aria-label="Search tools">
+                <input type="text" class="search-input" placeholder="Search {{CATEGORY_NAME}} tools..." aria-label="Search tools">
             </div>
         </div>
 
-        <div class="tools-grid">
-            <!-- JSON Formatter & Validator -->
-            <article class="tool-card">
-                <div class="tool-icon">
-                    <i class="fas fa-code"></i>
-                </div>
-                <h2 class="tool-name">JSON Formatter & Validator</h2>
-                <p class="tool-description">Formats and validates JSON data for readability and correctness.</p>
-                <a href="/tools/json-formatter-validator" class="tool-button">Use Tool</a>
-            </article>
-
-            <!-- Regex Tester -->
-            <article class="tool-card">
-                <div class="tool-icon">
-                    <i class="fas fa-asterisk"></i>
-                </div>
-                <h2 class="tool-name">Regex Tester</h2>
-                <p class="tool-description">Allows testing and debugging of regular expressions.</p>
-                <a href="/tools/regex-tester" class="tool-button">Use Tool</a>
-            </article>
-
-            <!-- Base64 Encoder/Decoder -->
-            <article class="tool-card">
-                <div class="tool-icon">
-                    <i class="fas fa-lock"></i>
-                </div>
-                <h2 class="tool-name">Base64 Encoder/Decoder</h2>
-                <p class="tool-description">Encodes or decodes data to and from Base64 format.</p>
-                <a href="/tools/base64-encoder-decoder" class="tool-button">Use Tool</a>
-            </article>
-
-            <!-- HTML/CSS Minifier -->
-            <article class="tool-card">
-                <div class="tool-icon">
-                    <i class="fas fa-compress"></i>
-                </div>
-                <h2 class="tool-name">HTML/CSS Minifier</h2>
-                <p class="tool-description">Reduces file size by removing unnecessary characters from code.</p>
-                <a href="/tools/html-css-minifier" class="tool-button">Use Tool</a>
-            </article>
-
-            <!-- JWT Decoder -->
-            <article class="tool-card">
-                <div class="tool-icon">
-                    <i class="fas fa-id-badge"></i>
-                </div>
-                <h2 class="tool-name">JWT Decoder</h2>
-                <p class="tool-description">Decodes JSON Web Tokens to view payload and header information.</p>
-                <a href="/tools/jwt-decoder" class="tool-button">Use Tool</a>
-            </article>
+        <div class="tools-grid" id="tools-container">
+            <!-- Tool cards will be dynamically inserted here -->
+            <!-- Template for tool card -->
+            <template id="tool-card-template">
+                <article class="tool-card">
+                    <div class="tool-icon">
+                        <i class="{{TOOL_ICON}}"></i>
+                    </div>
+                    <h2 class="tool-name">{{TOOL_NAME}}</h2>
+                    <p class="tool-description">{{TOOL_DESCRIPTION}}</p>
+                    <a href="{{TOOL_URL}}" class="tool-button">Use Tool</a>
+                </article>
+            </template>
         </div>
 
         <section class="faq-section">
             <div class="faq-container">
                 <div class="faq-header">
                     <h2 class="faq-title">Frequently Asked Questions</h2>
-                    <p class="faq-subtitle">Find answers to common questions about our developer tools</p>
+                    <p class="faq-subtitle">Find answers to common questions about our {{CATEGORY_NAME}} tools</p>
                 </div>
-                <div class="faq-list">
+                <div class="faq-list" id="category-faqs">
+                    <!-- Default FAQs that will be shown before JavaScript loads -->
                     <div class="faq-item">
                         <div class="faq-question">
-                            <h3>Are these tools suitable for professional development?</h3>
+                            <h3>What are the main features of {{CATEGORY_NAME}} tools?</h3>
                             <i class="fas fa-chevron-down"></i>
                         </div>
                         <div class="faq-answer">
-                            <p>Yes, our developer tools are designed to meet professional standards and are used by developers worldwide. They follow industry best practices and provide reliable results for your development needs.</p>
+                            <p>Our {{CATEGORY_NAME}} tools offer intuitive interfaces, fast processing, and reliable results. They are designed to be user-friendly while maintaining professional-grade functionality.</p>
                         </div>
                     </div>
 
                     <div class="faq-item">
                         <div class="faq-question">
-                            <h3>Can I use these tools offline?</h3>
+                            <h3>Are these tools free to use?</h3>
                             <i class="fas fa-chevron-down"></i>
                         </div>
                         <div class="faq-answer">
-                            <p>Most of our tools work in your browser and don't require an internet connection after the initial page load. However, some features like real-time validation might require an internet connection.</p>
+                            <p>Yes, all our tools are completely free to use. No registration required - just visit and start using them immediately.</p>
                         </div>
                     </div>
 
                     <div class="faq-item">
                         <div class="faq-question">
-                            <h3>Do you support all major programming languages?</h3>
+                            <h3>Can I use these tools on mobile devices?</h3>
                             <i class="fas fa-chevron-down"></i>
                         </div>
                         <div class="faq-answer">
-                            <p>Yes, our tools support a wide range of programming languages and formats, including JavaScript, Python, Java, C++, HTML, CSS, and many more. We regularly update our tools to support new languages and features.</p>
+                            <p>Yes, all our tools are fully responsive and work perfectly on mobile devices, tablets, and desktop computers.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <div class="faq-question">
+                            <h3>Is my data safe when using these tools?</h3>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>We take data privacy seriously. Our tools process your data locally when possible, and we don't store any of your information unless explicitly stated.</p>
                         </div>
                     </div>
                 </div>
@@ -1033,61 +1026,98 @@
         </section>
     </main>
     <div id="footer-placeholder"></div>
+
+    <!-- Category Configuration Script -->
     <script>
-        // Load Header
-        fetch('../header.html')
-            .then(res => res.text())
-            .then(html => {
-                document.getElementById('header-placeholder').innerHTML = html;
-            });
-        // Load Footer
-        fetch('../footer.html')
-            .then(res => res.text())
-            .then(html => {
-                document.getElementById('footer-placeholder').innerHTML = html;
-            });
+        // Category configuration object - will be replaced for each category
+        const categoryConfig = {
+            name: "{{CATEGORY_NAME}}",
+            description: "{{CATEGORY_DESCRIPTION}}",
+            icon: "{{CATEGORY_ICON}}",
+            badgeText: "{{CATEGORY_BADGE_TEXT}}",
+            colors: {
+                primary: "{{CATEGORY_PRIMARY_COLOR}}",
+                secondary: "{{CATEGORY_SECONDARY_COLOR}}",
+                accent: "{{CATEGORY_ACCENT_COLOR}}"
+            },
+            symbols: [
+                { symbol: "→", position: "10%", delay: "0s" },
+                // Add more symbols
+            ],
+            equations: [
+                { text: "Your equation", position: "20%", delay: "0s" },
+                // Add more equations
+            ],
+            tools: [
+                {
+                    name: "Tool Name",
+                    description: "Tool description",
+                    icon: "fas fa-tool",
+                    url: "/tools/tool-name"
+                },
+                // Add more tools
+            ],
+            faqs: [
+                {
+                    question: "Your question?",
+                    answer: "Your answer."
+                },
+                // Add more FAQs
+            ]
+        };
 
-        // Search functionality
-        const searchInput = document.querySelector('.search-input');
-        const toolCards = document.querySelectorAll('.tool-card');
+        // Function to initialize the category page
+        function initializeCategoryPage(config) {
+            // Update meta information
+            document.title = `${config.name} | Everytool`;
+            document.querySelector('meta[name="description"]').content = config.description;
 
-        searchInput.addEventListener('input', () => {
-            const searchTerm = searchInput.value.toLowerCase();
-            
-            toolCards.forEach(card => {
-                const toolName = card.querySelector('.tool-name').textContent.toLowerCase();
-                const toolDescription = card.querySelector('.tool-description').textContent.toLowerCase();
-                
-                const matchesSearch = toolName.includes(searchTerm) || 
-                                    toolDescription.includes(searchTerm);
-                
-                card.style.display = matchesSearch ? 'flex' : 'none';
-            });
-        });
+            // Update hero section
+            document.querySelector('.hero-title').textContent = config.name;
+            document.querySelector('.hero-subtitle').textContent = config.description;
+            document.querySelector('.hero__badge-icon').textContent = config.icon;
+            document.querySelector('.hero__badge-text').textContent = config.badgeText;
+            document.querySelector('.search-input').placeholder = `Search ${config.name} tools...`;
 
-        // Enhanced FAQ Accordion
-        const faqItems = document.querySelectorAll('.faq-item');
-
-        faqItems.forEach(item => {
-            const question = item.querySelector('.faq-question');
-            const answer = item.querySelector('.faq-answer');
-            
-            question.addEventListener('click', () => {
-                const isActive = item.classList.contains('active');
-                
-                // Close all FAQ items
-                faqItems.forEach(faqItem => {
-                    const faqAnswer = faqItem.querySelector('.faq-answer');
-                    faqItem.classList.remove('active');
-                    faqAnswer.style.maxHeight = '0';
-                });
-                
-                // Open clicked item if it wasn't active
-                if (!isActive) {
-                    item.classList.add('active');
-                    answer.style.maxHeight = answer.scrollHeight + 'px';
+            // Update category-specific styles
+            const styleSheet = document.getElementById('category-specific-styles');
+            styleSheet.textContent = `
+                :root {
+                    --category-primary: ${config.colors.primary};
+                    --category-secondary: ${config.colors.secondary};
+                    --category-accent: ${config.colors.accent};
+                    --category-gradient: linear-gradient(135deg, var(--category-primary) 0%, var(--category-secondary) 100%);
                 }
+                /* Rest of the category-specific styles */
+            `;
+
+            // Populate tools
+            const toolsContainer = document.getElementById('tools-container');
+            const toolTemplate = document.getElementById('tool-card-template');
+            config.tools.forEach(tool => {
+                const toolCard = toolTemplate.content.cloneNode(true);
+                // Fill in tool details
+                toolCard.querySelector('.tool-icon i').className = tool.icon;
+                toolCard.querySelector('.tool-name').textContent = tool.name;
+                toolCard.querySelector('.tool-description').textContent = tool.description;
+                toolCard.querySelector('.tool-button').href = tool.url;
+                toolsContainer.appendChild(toolCard);
             });
+            // Initialize animations and other features
+            initializeAnimations();
+            initializeSearch();
+            initializeFAQs();
+        }
+
+        // Load header and footer
+        Promise.all([
+            fetch('../header.html').then(res => res.text()),
+            fetch('../footer.html').then(res => res.text())
+        ]).then(([header, footer]) => {
+            document.getElementById('header-placeholder').innerHTML = header;
+            document.getElementById('footer-placeholder').innerHTML = footer;
+            // Initialize the page after loading header and footer
+            initializeCategoryPage(categoryConfig);
         });
 
         // Intersection Observer for animations
@@ -1147,6 +1177,57 @@
                 mobileMenuButton.setAttribute('aria-expanded', 'false');
             }
         });
+
+        // Update the initializeCategoryPage function
+        function initializeCategoryPage(config) {
+            // ... existing initialization code ...
+
+            // Update FAQ section
+            if (config.faqs && config.faqs.length > 0) {
+                const faqContainer = document.getElementById('category-faqs');
+                faqContainer.innerHTML = ''; // Clear default FAQs
+                
+                config.faqs.forEach(faq => {
+                    const faqHTML = `
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h3>${faq.question}</h3>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>${faq.answer}</p>
+                            </div>
+                        </div>
+                    `;
+                    faqContainer.insertAdjacentHTML('beforeend', faqHTML);
+                });
+
+                // Reinitialize FAQ functionality
+                const faqItems = faqContainer.querySelectorAll('.faq-item');
+                faqItems.forEach(item => {
+                    const question = item.querySelector('.faq-question');
+                    const answer = item.querySelector('.faq-answer');
+                    const icon = item.querySelector('.fa-chevron-down');
+                    
+                    answer.style.maxHeight = '0px';
+                    answer.style.overflow = 'hidden';
+                    answer.style.transition = 'max-height 0.3s ease-out';
+                    
+                    question.addEventListener('click', () => {
+                        item.classList.toggle('active');
+                        if (item.classList.contains('active')) {
+                            answer.style.maxHeight = answer.scrollHeight + 'px';
+                            icon.style.transform = 'rotate(180deg)';
+                        } else {
+                            answer.style.maxHeight = '0px';
+                            icon.style.transform = 'rotate(0deg)';
+                        }
+                    });
+                });
+            }
+        }
     </script>
+    <script src="../FAQ section/faq.js" defer></script>
+    <script src="category(search).js"></script>
 </body>
 </html> 

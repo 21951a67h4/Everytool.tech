@@ -1,167 +1,294 @@
-document.addEventListener('DOMContentLoaded', function() {
-    // Header scroll effect
-    const header = document.querySelector('.header');
-    let lastScroll = 0;
+/**
+ * ToolsHub Application Script
+ * 
+ * This script orchestrates the entire functionality of the ToolsHub page,
+ * including component loading, dynamic filtering, animations, and voice search.
+ */
 
-    window.addEventListener('scroll', () => {
-        const currentScroll = window.pageYOffset;
-
-        if (currentScroll > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-
-        lastScroll = currentScroll;
-    });
-
-    // Mobile menu functionality
-    const mobileMenuButton = document.querySelector('.header__mobile-menu');
-    const nav = document.querySelector('.header__nav-list');
-
-    if (mobileMenuButton && nav) {
-        mobileMenuButton.addEventListener('click', () => {
-            mobileMenuButton.classList.toggle('active');
-            nav.classList.toggle('active');
-            mobileMenuButton.setAttribute('aria-expanded', 
-                mobileMenuButton.classList.contains('active'));
-        });
-
-        // Close mobile menu when clicking outside
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.header__nav') && nav.classList.contains('active')) {
-                mobileMenuButton.classList.remove('active');
-                nav.classList.remove('active');
-                mobileMenuButton.setAttribute('aria-expanded', 'false');
-            }
-        });
-    }
-
-    // Add animation classes to elements
-    const animateElements = document.querySelectorAll('.tool-card, .tools-faq-item');
-    
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('animate-fade-up');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, {
-        threshold: 0.1
-    });
-
-    animateElements.forEach(element => {
-        observer.observe(element);
-    });
-
-    // Search and Filter functionality
-    const searchInput = document.querySelector('.search-input');
-    const clearSearchButton = document.querySelector('.clear-search');
-    const toolCards = document.querySelectorAll('.tool-card');
-    const filterButtons = document.querySelectorAll('.filter-button');
-
-    if (!searchInput || !clearSearchButton || toolCards.length === 0 || filterButtons.length === 0) {
-        console.error('Required elements not found');
-        return;
-    }
-
-    // Add data-category attributes to tool cards
-    toolCards.forEach(card => {
-        const toolName = card.querySelector('.tool-name').textContent.toLowerCase();
-        let category = 'all';
-        
-        if (toolName.includes('calculator')) category = 'calculators';
-        else if (toolName.includes('converter')) category = 'converters';
-        else if (toolName.includes('generator')) category = 'generators';
-        else if (toolName.includes('text') || toolName.includes('case') || toolName.includes('markdown')) category = 'text';
-        else if (toolName.includes('image') || toolName.includes('color')) category = 'image';
-        
-        card.setAttribute('data-category', category);
-    });
-
-    // Search input event listener
-    searchInput.addEventListener('input', () => {
-        clearSearchButton.style.display = searchInput.value ? 'block' : 'none';
-        filterTools();
-    });
-
-    // Clear search button event listener
-    clearSearchButton.addEventListener('click', () => {
-        searchInput.value = '';
-        clearSearchButton.style.display = 'none';
-        filterTools();
-        searchInput.focus();
-    });
-
-    // Filter buttons event listeners
-    filterButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            filterButtons.forEach(btn => btn.classList.remove('active'));
-            button.classList.add('active');
-            filterTools();
-        });
-    });
-
-    // Filter tools function
-    function filterTools() {
-        const searchTerm = searchInput.value.toLowerCase().trim();
-        const activeFilter = document.querySelector('.filter-button.active').getAttribute('data-category');
-
-        toolCards.forEach(card => {
-            const toolName = card.querySelector('.tool-name').textContent.toLowerCase();
-            const toolDescription = card.querySelector('.tool-description').textContent.toLowerCase();
-            const toolCategory = card.getAttribute('data-category');
-
-            const matchesSearch = searchTerm === '' || 
-                                toolName.includes(searchTerm) || 
-                                toolDescription.includes(searchTerm);
-            const matchesFilter = activeFilter === 'all' || toolCategory === activeFilter;
-
-            if (matchesSearch && matchesFilter) {
-                card.style.display = 'flex';
-                card.classList.add('animate-fade-up');
+/**
+ * Loads HTML components like header and footer into specified placeholder elements.
+ */
+class ComponentLoader {
+    async load(componentPath, placeholderId) {
+        try {
+            const response = await fetch(componentPath);
+            if (!response.ok) throw new Error(`Failed to load ${componentPath}: ${response.statusText}`);
+            const content = await response.text();
+            const placeholder = document.getElementById(placeholderId);
+            if (placeholder) {
+                placeholder.innerHTML = content;
+                console.log(`Successfully loaded ${componentPath} into #${placeholderId}`);
             } else {
-                card.style.display = 'none';
-                card.classList.remove('animate-fade-up');
+                console.error(`Placeholder element #${placeholderId} not found.`);
             }
-        });
-    }
-
-    // Initialize the filter
-    filterTools();
-});
-
-// Function to load header and footer
-async function loadHeaderAndFooter() {
-    try {
-        // Load header
-        const headerResponse = await fetch('../header.html');
-        if (!headerResponse.ok) {
-            throw new Error('Failed to load header');
+        } catch (error) {
+            console.error(`Error loading component from ${componentPath}:`, error);
+            throw error; // Re-throw to be caught by the main app
         }
-        const headerHtml = await headerResponse.text();
-        const headerPlaceholder = document.getElementById('header-placeholder');
-        if (headerPlaceholder) {
-            headerPlaceholder.innerHTML = headerHtml;
-        }
-
-        // Load footer
-        const footerResponse = await fetch('../footer.html');
-        if (!footerResponse.ok) {
-            throw new Error('Failed to load footer');
-        }
-        const footerHtml = await footerResponse.text();
-        const footerPlaceholder = document.getElementById('footer-placeholder');
-        if (footerPlaceholder) {
-            footerPlaceholder.innerHTML = footerHtml;
-        }
-    } catch (error) {
-        console.error('Error loading components:', error);
     }
 }
 
-// Load header and footer when DOM is ready
+/**
+ * Caches all necessary DOM elements for quick access.
+ */
+class DOMElementManager {
+    constructor() {
+        this.searchInput = document.getElementById('search-input');
+        this.clearSearchBtn = document.getElementById('clear-search');
+        this.voiceSearchBtn = document.getElementById('voice-search-btn');
+        this.filterButtonsContainer = document.querySelector('.filter-buttons');
+        this.filterButtons = document.querySelectorAll('.filter-button');
+        this.toolsGrid = document.getElementById('tools-grid');
+        this.toolCards = document.querySelectorAll('.tool-card');
+        this.errorOverlay = document.getElementById('error-overlay');
+        this.errorMessage = document.getElementById('error-message');
+        this.retryButton = document.getElementById('retry-button');
+
+        console.log('DOM elements cached.');
+    }
+}
+
+/**
+ * Manages all filtering logic including search, category, and voice input.
+ */
+class ToolsFilterManager {
+    constructor(domElements) {
+        this.dom = domElements;
+        this.activeCategory = 'all';
+        this.debounceTimeout = null;
+    }
+
+    init() {
+        this.dom.searchInput.addEventListener('input', () => {
+            this.dom.clearSearchBtn.classList.toggle('hidden', this.dom.searchInput.value === '');
+            this.debounceFilter();
+        });
+
+        this.dom.clearSearchBtn.addEventListener('click', () => this.clearSearch());
+
+        this.dom.filterButtonsContainer.addEventListener('click', (e) => this.handleCategoryFilter(e));
+
+        this.dom.voiceSearchBtn.addEventListener('click', () => this.startVoiceRecognition());
+        
+        this.filterFromURL();
+        console.log('ToolsFilterManager initialized.');
+    }
+
+    debounceFilter() {
+        clearTimeout(this.debounceTimeout);
+        this.debounceTimeout = setTimeout(() => {
+            this.filterTools();
+        }, 300);
+    }
+
+    filterTools() {
+        const searchTerm = this.dom.searchInput.value.toLowerCase().trim();
+        
+        this.dom.toolCards.forEach(card => {
+            const name = card.querySelector('.tool-name').textContent.toLowerCase();
+            const description = card.querySelector('.tool-description').textContent.toLowerCase();
+            const category = card.dataset.category;
+
+            const matchesSearch = name.includes(searchTerm) || description.includes(searchTerm);
+            const matchesCategory = this.activeCategory === 'all' || this.activeCategory === category;
+
+            if (matchesSearch && matchesCategory) {
+                card.classList.remove('hidden');
+            } else {
+                card.classList.add('hidden');
+            }
+        });
+        console.log(`Filtered tools for: [Category: ${this.activeCategory}, Search: "${searchTerm}"]`);
+    }
+
+    handleCategoryFilter(e) {
+        const button = e.target.closest('.filter-button');
+        if (!button) return;
+
+        this.dom.filterButtons.forEach(btn => btn.classList.remove('active'));
+        button.classList.add('active');
+        this.activeCategory = button.dataset.category;
+        this.filterTools();
+    }
+    
+    filterFromURL() {
+        const params = new URLSearchParams(window.location.search);
+        const category = params.get('category');
+        if (category) {
+            const targetButton = document.querySelector(`.filter-button[data-category="${category}"]`);
+            if (targetButton) {
+                this.dom.filterButtons.forEach(btn => btn.classList.remove('active'));
+                targetButton.classList.add('active');
+                this.activeCategory = category;
+                this.filterTools();
+                 console.log(`Pre-filtered tools from URL parameter: category=${category}`);
+            }
+        }
+    }
+
+    clearSearch() {
+        this.dom.searchInput.value = '';
+        this.dom.clearSearchBtn.classList.add('hidden');
+        this.filterTools();
+    }
+
+    startVoiceRecognition() {
+        const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+        if (!SpeechRecognition) {
+            alert('Sorry, your browser does not support voice recognition.');
+            return;
+        }
+
+        const recognition = new SpeechRecognition();
+        recognition.lang = 'en-US';
+        recognition.interimResults = false;
+        recognition.maxAlternatives = 1;
+
+        this.dom.voiceSearchBtn.classList.add('recording'); // You can add a .recording class in CSS for feedback
+        console.log('Voice recognition started...');
+
+        recognition.onresult = (event) => {
+            const speechResult = event.results[0][0].transcript;
+            this.dom.searchInput.value = speechResult;
+            this.dom.clearSearchBtn.classList.remove('hidden');
+            this.filterTools();
+            console.log(`Voice recognition result: "${speechResult}"`);
+        };
+
+        recognition.onspeechend = () => {
+            recognition.stop();
+            this.dom.voiceSearchBtn.classList.remove('recording');
+            console.log('Voice recognition ended.');
+        };
+
+        recognition.onerror = (event) => {
+            console.error('Voice recognition error:', event.error);
+            this.dom.voiceSearchBtn.classList.remove('recording');
+        };
+
+        recognition.start();
+    }
+}
+
+/**
+ * Manages scroll-based animations using IntersectionObserver.
+ */
+class AnimationManager {
+    constructor(domElements) {
+        this.dom = domElements;
+        this.observer = null;
+    }
+
+    init() {
+        if (!('IntersectionObserver' in window)) {
+            console.warn('IntersectionObserver not supported. Animations will be disabled.');
+            this.dom.toolCards.forEach(card => card.classList.add('visible'));
+            return;
+        }
+
+        const options = {
+            root: null,
+            rootMargin: '0px',
+            threshold: 0.1
+        };
+
+        this.observer = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, options);
+
+        this.dom.toolCards.forEach(card => this.observer.observe(card));
+        console.log('AnimationManager initialized with IntersectionObserver.');
+    }
+}
+
+/**
+ * Placeholder for header-specific logic like scroll behavior.
+ */
+class HeaderManager {
+    init() {
+        // Example: Add a 'scrolled' class to the header on scroll
+        // This requires the header HTML to be loaded first.
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header'); // Assuming header tag inside loaded component
+            if(header) {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            }
+        });
+        console.log('HeaderManager initialized.');
+    }
+}
+
+/**
+ * Main application class to orchestrate all modules.
+ */
+class ToolsHubApp {
+    constructor() {
+        this.componentLoader = new ComponentLoader();
+        this.dom = null;
+        this.filterManager = null;
+        this.animationManager = null;
+        this.headerManager = null;
+    }
+
+    async init() {
+        try {
+            // Load components first
+            await Promise.all([
+                this.componentLoader.load('../header.html', 'header-placeholder'),
+                this.componentLoader.load('../footer.html', 'footer-placeholder')
+            ]);
+            
+            // Initialize managers that depend on the DOM
+            this.dom = new DOMElementManager();
+            this.filterManager = new ToolsFilterManager(this.dom);
+            this.animationManager = new AnimationManager(this.dom);
+            this.headerManager = new HeaderManager();
+            
+            // Start the managers
+            this.filterManager.init();
+            this.animationManager.init();
+            this.headerManager.init();
+            
+            // Set up retry logic
+            this.dom.retryButton.addEventListener('click', () => {
+                this.dom.errorOverlay.classList.add('hidden');
+                this.init();
+            });
+
+            console.log('ToolsHub App successfully initialized.');
+        } catch (error) {
+            console.error('Application initialization failed:', error);
+            this.showError(error.message);
+        }
+    }
+
+    showError(message) {
+        if(this.dom && this.dom.errorOverlay) {
+            this.dom.errorMessage.textContent = `An error occurred: ${message}. Please check your connection or try again.`;
+            this.dom.errorOverlay.classList.remove('hidden');
+        } else {
+            // Fallback if DOM manager failed
+            const overlay = document.getElementById('error-overlay');
+            const msg = document.getElementById('error-message');
+            if(overlay) {
+                if(msg) msg.textContent = message;
+                overlay.classList.remove('hidden');
+            }
+        }
+    }
+}
+
+// --- Application Entry Point ---
 document.addEventListener('DOMContentLoaded', () => {
-    loadHeaderAndFooter();
-}); 
+    const app = new ToolsHubApp();
+    app.init();
+});

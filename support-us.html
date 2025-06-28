@@ -42,7 +42,7 @@
 
     .support-hero {
       background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-      padding: 80px 20px;
+      padding: 140px 20px 80px;
       text-align: center;
       color: white;
       position: relative;
@@ -77,7 +77,7 @@
     .support-hero p {
       font-size: 1.25rem;
       max-width: 600px;
-      margin: 0 auto;
+      margin: 1.5rem auto 0;
       opacity: 0.9;
       position: relative;
       animation: fadeUp 0.8s ease forwards 0.2s;
@@ -97,7 +97,7 @@
     .support-content {
       max-width: 800px;
       margin: -40px auto 0;
-      padding: 0 20px;
+      padding: 0 20px 60px;
       position: relative;
       z-index: 1;
     }
@@ -122,12 +122,13 @@
       color: var(--text-secondary);
       line-height: 1.6;
       margin-bottom: 1.5rem;
+      font-size: 1.05rem;
     }
 
     .support-options {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
+      gap: 30px;
       margin-top: 40px;
     }
 
@@ -169,57 +170,148 @@
         font-size: 2rem;
       }
       
+      .support-hero {
+        padding-top: 120px;
+      }
+
       .support-hero p {
         font-size: 1.1rem;
+        margin-top: 1.5rem;
       }
       
       .support-card {
         padding: 30px;
       }
     }
+
+    /* Modal Styles */
+    .modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      backdrop-filter: blur(5px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      visibility: hidden;
+    }
+
+    .modal.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .modal-content {
+      background: white;
+      padding: 40px;
+      border-radius: var(--radius-lg);
+      max-width: 400px;
+      width: 90%;
+      text-align: center;
+      position: relative;
+      transform: scale(0.95);
+      transition: transform 0.3s ease-out;
+    }
+
+    .modal.visible .modal-content {
+      transform: scale(1);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      font-size: 1.5rem;
+      color: var(--text-light);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .modal-close:hover {
+      color: var(--text-primary);
+    }
+
+    .upi-info {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: var(--bg-secondary);
+      padding: 1rem;
+      border-radius: var(--radius-md);
+      margin-top: 1.5rem;
+    }
+
+    .upi-id-text {
+      font-weight: 600;
+      font-family: monospace;
+      font-size: 1.1rem;
+      color: var(--text-primary);
+    }
+
+    .copy-btn {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: var(--text-secondary);
+      font-size: 1.2rem;
+      transition: color 0.2s;
+    }
+
+    .qr-code-img {
+      width: 200px;
+      margin: 20px auto;
+      display: block;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-md);
+    }
+
+    /* Header Styles */
+    #header-placeholder {
+        min-height: 130px;
+        position: relative; 
+        z-index: 2000;      
+    }
+    @media (max-width: 768px) {
+        #header-placeholder {
+            min-height: 64px;
+        }
+    }
   </style>
 </head>
 <body>
-  <header id="main-header"></header>
+  <div id="header-placeholder"></div>
 
   <div class="support-hero">
     <h1>Support Our Mission 💚</h1>
-    <p>Help us continue building free, valuable tools for everyone</p>
+    <p>Your contribution helps us build and maintain free, high-quality tools for everyone.</p>
   </div>
 
   <main class="support-content">
     <div class="support-card">
-      <h2>Why Support Us?</h2>
+      <h2>Why Your Support Matters</h2>
       <p>
-        EveryTool.tech is a free, ad-light platform designed to provide helpful tools for everyone —
-        from students to developers. Maintaining servers, building tools, and keeping everything
-        running smoothly takes time and resources.
+        EveryTool.tech is a passion project committed to one goal: providing simple, powerful, and free tools for everyone. To keep the lights on, develop new features, and remain ad-light and free to use, we rely on support from users like you.
       </p>
       <p>
-        If you find our tools useful, consider supporting us. Even a small contribution helps us
-        continue building <span style="color: var(--primary); font-weight: 600;">free & valuable tools</span> for you.
+        Your contribution, no matter the size, makes a huge difference and allows us to continue building and improving the platform for the entire community.
       </p>
 
       <div class="support-options">
-        <div class="support-option" onclick="showPopup('upi')">
-          <i class="fas fa-mobile-alt"></i>
-          <h3>UPI Payment</h3>
-          <p>Quick and easy payment via UPI</p>
+        <div class="support-option" onclick="showPopup('upi-id')">
+          <i class="fas fa-keyboard"></i>
+          <h3>Pay with UPI ID</h3>
+          <p>Copy our UPI ID for direct payment</p>
         </div>
         <div class="support-option" onclick="showPopup('qr')">
           <i class="fas fa-qrcode"></i>
-          <h3>QR Code</h3>
-          <p>Scan to pay instantly</p>
-        </div>
-        <div class="support-option" onclick="showPopup('bmc')">
-          <i class="fas fa-coffee"></i>
-          <h3>Buy Me a Coffee</h3>
-          <p>Support with a coffee</p>
-        </div>
-        <div class="support-option" onclick="showPopup('paypal')">
-          <i class="fab fa-paypal"></i>
-          <h3>PayPal</h3>
-          <p>International payments</p>
+          <h3>Scan QR Code</h3>
+          <p>Use your app to scan and pay instantly</p>
         </div>
       </div>
     </div>
@@ -227,76 +319,91 @@
 
   <footer id="main-footer"></footer>
 
-  <script src="scripts/header.js"></script>
-  <script src="scripts/footer.js"></script>
   <script>
+    // Function to load and insert header
+    function loadHeader() {
+        fetch('header.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('main-header').innerHTML = data;
+            });
+    }
+
+    // Function to load and insert footer
+    function loadFooter() {
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.getElementById('main-footer').innerHTML = data;
+            });
+    }
+
+    // Load header and footer when the page loads
+    document.addEventListener('DOMContentLoaded', function() {
+        loadHeader();
+        loadFooter();
+    });
+    
+    // Function to copy UPI ID from within the popup
+    function copyUpiId(button) {
+      const upiId = 'everytooltech@airtel';
+      const icon = button.querySelector('i');
+      
+      navigator.clipboard.writeText(upiId).then(() => {
+        icon.classList.remove('fa-copy');
+        icon.classList.add('fa-check');
+        button.style.color = '#2ECC71'; // Green for success
+        setTimeout(() => {
+          icon.classList.remove('fa-check');
+          icon.classList.add('fa-copy');
+          button.style.color = ''; // Revert color
+        }, 2000);
+      }).catch(err => {
+        console.error('Failed to copy: ', err);
+      });
+    }
+
+
     function showPopup(type) {
       const modal = document.createElement('div');
       modal.className = 'modal';
-      modal.style.cssText = `
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        backdrop-filter: blur(5px);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        z-index: 1000;
-      `;
+      
+      // Fade in modal
+      setTimeout(() => modal.classList.add('visible'), 10);
 
       const content = document.createElement('div');
       content.className = 'modal-content';
-      content.style.cssText = `
-        background: white;
-        padding: 40px;
-        border-radius: var(--radius-lg);
-        max-width: 400px;
-        width: 90%;
-        text-align: center;
-        position: relative;
-        animation: modalSlideIn 0.3s ease-out;
-      `;
 
       const closeBtn = document.createElement('span');
-      closeBtn.innerHTML = '&times;';
-      closeBtn.style.cssText = `
-        position: absolute;
-        top: 20px;
-        right: 20px;
-        font-size: 1.5rem;
-        color: var(--text-light);
-        cursor: pointer;
-        transition: var(--transition);
-      `;
-      closeBtn.onclick = () => modal.remove();
+      closeBtn.innerHTML = '×';
+      closeBtn.className = 'modal-close';
+      
+      const closeModal = () => {
+        modal.classList.remove('visible');
+        modal.addEventListener('transitionend', () => modal.remove(), { once: true });
+      };
+
+      closeBtn.onclick = closeModal;
 
       let contentHTML = '';
       switch(type) {
-        case 'upi':
+        case 'upi-id':
           contentHTML = `
-            <h3>UPI Payment</h3>
-            <p style="background: var(--bg-secondary); padding: 1rem; border-radius: var(--radius-md); margin-top: 1rem;">your-upi-id@bank</p>
+            <h3>Pay via UPI ID</h3>
+            <p style="color: var(--text-secondary); margin-top: 1rem;">Copy the ID below and paste it into your UPI app.</p>
+            <div class="upi-info">
+              <span class="upi-id-text">everytooltech@airtel</span>
+              <button onclick="copyUpiId(this)" title="Copy to clipboard" class="copy-btn">
+                  <i class="fas fa-copy"></i>
+              </button>
+            </div>
           `;
           break;
         case 'qr':
           contentHTML = `
-            <h3>Scan QR Code</h3>
-            <img src="assets/qr-code.png" alt="QR Code" style="width: 200px; margin: 20px auto; border-radius: var(--radius-md); box-shadow: var(--shadow-md);">
-          `;
-          break;
-        case 'bmc':
-          contentHTML = `
-            <h3>Buy Me a Coffee</h3>
-            <a href="https://www.buymeacoffee.com/your-username" target="_blank" style="display: inline-block; background: var(--primary); color: white; padding: 0.8rem 1.6rem; border-radius: var(--radius-md); text-decoration: none; margin-top: 1rem;">Visit Page</a>
-          `;
-          break;
-        case 'paypal':
-          contentHTML = `
-            <h3>PayPal Donation</h3>
-            <a href="https://www.paypal.com/donate/?hosted_button_id=YOUR_BUTTON_ID" target="_blank" style="display: inline-block; background: var(--primary); color: white; padding: 0.8rem 1.6rem; border-radius: var(--radius-md); text-decoration: none; margin-top: 1rem;">Donate via PayPal</a>
+            <h3>Scan to Pay</h3>
+            <p style="color: var(--text-secondary); margin-top: 1rem;">Open your payment app and scan the QR code below.</p>
+            <img src="/assets/SVG/UPI.svg" alt="UPI QR Code" width="200" height="200" class="qr-code-img">
           `;
           break;
       }
@@ -307,9 +414,72 @@
       document.body.appendChild(modal);
 
       modal.onclick = (e) => {
-        if (e.target === modal) modal.remove();
+        if (e.target === modal) closeModal();
       };
     }
   </script>
+
+<script>
+  // =====================================================================
+  // ====== START: MAGIC BLOCK TO COPY FOR EVERY NEW PAGE ======
+  // =====================================================================
+      document.addEventListener('DOMContentLoaded', () => {
+  
+  const loadScript = (src) => {
+      return new Promise((resolve, reject) => {
+          const script = document.createElement('script');
+          script.src = src;
+          script.onload = () => resolve(script);
+          script.onerror = () => reject(new Error(`Script load error for ${src}`));
+          document.body.appendChild(script);
+      });
+  };
+  
+  const loadHeader = () => {
+      const headerPlaceholder = document.getElementById('header-placeholder');
+      if (!headerPlaceholder) return;
+  
+      // *** IMPORTANT: ADJUST THIS PATH BASED ON YOUR FILE'S LOCATION ***
+      fetch('/header.html') 
+          .then(response => {
+              if (!response.ok) throw new Error('Network response for header.html was not ok.');
+              return response.text();
+          })
+          .then(html => {
+              headerPlaceholder.innerHTML = html;
+              return loadScript('https://cdn.jsdelivr.net/npm/fuse.js@6.6.2');
+          })
+          .then(() => {
+              // *** IMPORTANT: ADJUST THIS PATH BASED ON YOUR FILE'S LOCATION ***
+              return loadScript('/header-search.js');
+          })
+          .then(() => {
+              if (typeof initializeHeader === 'function') {
+                  initializeHeader(); 
+              } else {
+                  throw new Error('initializeHeader function not found.');
+              }
+          })
+          .catch(error => {
+              console.error('CRITICAL ERROR during header loading process:', error);
+          });
+  };
+  
+  const loadFooter = () => {
+      const footerPlaceholder = document.getElementById('footer-placeholder');
+      if (footerPlaceholder) {
+          // *** IMPORTANT: ADJUST THIS PATH BASED ON YOUR FILE'S LOCATION ***
+          fetch('/footer.html')
+              .then(response => response.ok ? response.text() : Promise.reject('Failed to load footer'))
+              .then(html => { footerPlaceholder.innerHTML = html; })
+              .catch(error => console.error('Error loading footer:', error));
+      }
+  };
+  
+  loadHeader();
+  loadFooter();
+  });
+  
+      </script>
 </body>
 </html>

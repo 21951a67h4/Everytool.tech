@@ -33,7 +33,7 @@
 
         .footer__content {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
+            grid-template-columns: repeat(4, 1fr);
             gap: 3rem;
             align-items: flex-start;
             margin-bottom: 2.5rem;
@@ -183,9 +183,11 @@
                 align-items: center;
             }
 
-            .footer__nav-list,
-            .footer__categories-list {
+            .footer__nav-list {
                 align-items: center;
+            }
+            .footer__categories-list {
+                column-width: 100%;
             }
 
             .footer__social-row {
@@ -235,6 +237,11 @@
         #progress {
             transition: stroke-dashoffset 0.2s linear;
         }
+
+        .footer__categories-list {
+            column-width: 150px;
+            column-gap: 2rem;
+        }
     </style>
 
     <div class="footer__container">
@@ -250,20 +257,28 @@
                 <ul class="footer__nav-list">
                     <li><a href="/index.html" class="footer__nav-link">Home</a></li>
                     <li><a href="/tools-hub-page/index.html" class="footer__nav-link">Tools</a></li>
-                    <li><a href="/creator.html" class="footer__nav-link">About</a></li>
-                    <li><a href="/support-us.html" class="footer__nav-link">Contact</a></li>
+                    <li><a href="/about.html" class="footer__nav-link">About</a></li>
+                    <li><a href="https://contact.everytool.tech" target="_blank" class="footer__nav-link">Contact</a></li>
+                    <li><a href="/creators.html" target="_blank" class="footer__nav-link">Creators</a></li>
                     <li><a href="/support-us.html" class="footer__nav-link">Support Us</a></li>
                 </ul>
             </div>
             <div class="footer__col">
                 <div class="footer__col-title">Categories</div>
                 <ul class="footer__categories-list">
-                    <li><a href="/categorie-page/calculators.html" class="footer__categories-link">Calculators</a></li>
-                    <li><a href="/categorie-page/converters.html" class="footer__categories-link">Converters</a></li>
-                    <li><a href="/categorie-page/generators.html" class="footer__categories-link">Generators</a></li>
-                    <li><a href="/categorie-page/developer-tools.html" class="footer__categories-link">Developer Tools</a></li>
-                    <li><a href="/categorie-page/seo-tools.html" class="footer__categories-link">SEO Tools</a></li>
-                    <li><a href="/categorie-page/text-file-tools.html" class="footer__categories-link">Text & File Tools</a></li>
+                    <li><a href="/category-pages/finance-tools.html" class="footer__categories-link">Finance Tools</a></li>
+                    <li><a href="/category-pages/health-tools.html" class="footer__categories-link">Health Tools</a></li>
+                    <li><a href="/category-pages/education-tools.html" class="footer__categories-link">Education Tools</a></li>
+                    <li><a href="/category-pages/math-tools.html" class="footer__categories-link">Math Tools</a></li>
+                    <li><a href="/category-pages/date-time-tools.html" class="footer__categories-link">Data & Time Tools</a></li>
+                </ul>
+            </div>
+            <div class="footer__col">
+                <div class="footer__col-title">Legal</div>
+                <ul class="footer__nav-list">
+                    <li><a href="/privacy-policy.html" class="footer__nav-link">Privacy Policy</a></li>
+                    <li><a href="/terms.html" class="footer__nav-link">Terms of Service</a></li>
+                    <li><a href="/cookie-policy.html" class="footer__nav-link">Cookie Policy</a></li>
                 </ul>
             </div>
         </div>
