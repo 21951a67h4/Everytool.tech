@@ -22,10 +22,26 @@
     
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    `
-    <!-- FAQ section styling -->
+    
+    <!-- Stylesheets -->
     <link rel="stylesheet" href="../FAQ section/faq.css">
     <link rel="stylesheet" href="tool.css">
+
+    <!-- START: CRITICAL STYLE FOR HEADER -->
+    <style>
+        #header-placeholder {
+            min-height: 130px;
+            position: relative; 
+            z-index: 2000;      
+        }
+        @media (max-width: 768px) {
+            #header-placeholder {
+                min-height: 64px;
+            }
+        }
+    </style>
+    <!-- END: CRITICAL STYLE FOR HEADER -->
+
 </head>
 <body>
     <!-- Header Placeholder -->
@@ -368,178 +384,217 @@
     <!-- Footer Placeholder -->
     <div id="footer-placeholder"></div>
 
+    <!-- ====== START: FINAL CORRECTED SCRIPT LOGIC ====== -->
     <script>
-        // Fetch and insert header
-        fetch('../../header.html')
-            .then(response => response.text())
-            .then(html => {
-                document.getElementById('header-placeholder').innerHTML = html;
-            })
-            .catch(error => console.error('Error loading header:', error));
+        document.addEventListener('DOMContentLoaded', () => {
 
-        // Fetch and insert footer
-        fetch('../../footer.html')
-            .then(response => response.text())
-            .then(html => {
-                document.getElementById('footer-placeholder').innerHTML = html;
-            })
-            .catch(error => console.error('Error loading footer:', error));
+            // --- Helper function to load a script and return a Promise ---
+            const loadScript = (src) => {
+                return new Promise((resolve, reject) => {
+                    const script = document.createElement('script');
+                    script.src = src;
+                    script.onload = () => resolve(script);
+                    script.onerror = () => reject(new Error(`Script load error for ${src}`));
+                    document.body.appendChild(script);
+                });
+            };
 
-        // Intersection Observer for animations
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.1
-        };
+            // --- 1. Function to Load and Initialize the Header ---
+            const loadHeader = () => {
+                const headerPlaceholder = document.getElementById('header-placeholder');
+                if (!headerPlaceholder) return;
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
+                // First, get the HTML content
+                fetch('../../header.html')
+                    .then(response => {
+                        if (!response.ok) throw new Error('Network response for header.html was not ok.');
+                        return response.text();
+                    })
+                    .then(html => {
+                        headerPlaceholder.innerHTML = html;
+
+                        console.log('Loading header scripts...');
+                        // 1. Load the Fuse.js library FIRST
+                        return loadScript('https://cdn.jsdelivr.net/npm/fuse.js@6.6.2');
+                    })
+                    .then(() => {
+                        // 2. AFTER Fuse.js is loaded, load our application script
+                        console.log('Fuse.js loaded successfully.');
+                        return loadScript('../../header-search.js');
+                    })
+                    .then(() => {
+                        // 3. AFTER our script is loaded, its functions are available to be called.
+                        console.log('header-search.js loaded successfully.');
+                        if (typeof initializeHeader === 'function') {
+                            initializeHeader(); 
+                            console.log('SUCCESS: Header has been fully loaded and initialized.');
+                        } else {
+                            throw new Error('initializeHeader function not found.');
+                        }
+                    })
+                    .catch(error => {
+                        console.error('CRITICAL ERROR during header loading process:', error);
+                    });
+            };
+            
+            // --- 2. Function to Load the Footer ---
+            const loadFooter = () => {
+                const footerPlaceholder = document.getElementById('footer-placeholder');
+                if (footerPlaceholder) {
+                    fetch('../../footer.html')
+                        .then(response => response.ok ? response.text() : Promise.reject('Failed to load footer'))
+                        .then(html => { footerPlaceholder.innerHTML = html; })
+                        .catch(error => console.error('Error loading footer:', error));
                 }
+            };
+
+            // --- 3. Run the loaders ---
+            loadHeader();
+            loadFooter();
+
+            // --- 4. Initialize All Other Page-Specific Functionality ---
+            // This is the logic from your original template file, now running safely.
+
+            // Intersection Observer for animations
+            const observerOptions = { root: null, rootMargin: '0px', threshold: 0.1 };
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            document.querySelectorAll('.tool-hero__left, .tool-hero__right, .blog-section').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(20px)';
+                el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+                observer.observe(el);
             });
-        }, observerOptions);
 
-        // Observe elements with animation classes
-        document.querySelectorAll('.tool-hero__left, .tool-hero__right, .blog-section').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
-            observer.observe(el);
-        });
-
-        // Tool Display Functionality
-        document.addEventListener('DOMContentLoaded', function() {
+            // Tool Display Functionality
             const fileInput = document.querySelector('.tool-display__file-input');
             const fileLabel = document.querySelector('.tool-display__file-label span');
             const processButton = document.querySelector('.tool-display__button');
             const resetButton = document.querySelector('.tool-display__button--secondary');
             const textarea = document.querySelector('.tool-display__textarea');
             const result = document.querySelector('.tool-display__result');
+            const dropZone = document.querySelector('.tool-display__file-upload');
 
-            // File input change handler
-            fileInput.addEventListener('change', function(e) {
+            if (fileInput) fileInput.addEventListener('change', (e) => {
                 const fileName = e.target.files[0]?.name || 'Choose a file or drag it here';
                 fileLabel.textContent = fileName;
             });
-
-            // Process button click handler
-            processButton.addEventListener('click', function() {
-                // Add your tool's processing logic here
-                const inputText = textarea.value;
-                if (inputText) {
-                    result.textContent = `Processing: ${inputText}`;
+            if (processButton) processButton.addEventListener('click', () => {
+                if (textarea.value) {
+                    result.textContent = `Processing: ${textarea.value}`;
                 } else {
                     result.textContent = 'Please enter some text or upload a file.';
                 }
             });
-
-            // Reset button click handler
-            resetButton.addEventListener('click', function() {
+            if (resetButton) resetButton.addEventListener('click', () => {
                 textarea.value = '';
-                fileInput.value = '';
+                if(fileInput) fileInput.value = '';
                 fileLabel.textContent = 'Choose a file or drag it here';
                 result.textContent = 'Your processed result will appear here...';
             });
-
-            // Drag and drop functionality
-            const dropZone = document.querySelector('.tool-display__file-upload');
-
-            ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
-                dropZone.addEventListener(eventName, preventDefaults, false);
-            });
-
-            function preventDefaults(e) {
-                e.preventDefault();
-                e.stopPropagation();
+            if (dropZone) {
+                const preventDefaults = e => { e.preventDefault(); e.stopPropagation(); };
+                ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(ev => dropZone.addEventListener(ev, preventDefaults, false));
+                ['dragenter', 'dragover'].forEach(ev => dropZone.addEventListener(ev, () => dropZone.classList.add('highlight'), false));
+                ['dragleave', 'drop'].forEach(ev => dropZone.addEventListener(ev, () => dropZone.classList.remove('highlight'), false));
+                dropZone.addEventListener('drop', (e) => {
+                    const files = e.dataTransfer.files;
+                    if (fileInput) fileInput.files = files;
+                    fileLabel.textContent = files[0].name;
+                }, false);
             }
 
-            ['dragenter', 'dragover'].forEach(eventName => {
-                dropZone.addEventListener(eventName, highlight, false);
-            });
-
-            ['dragleave', 'drop'].forEach(eventName => {
-                dropZone.addEventListener(eventName, unhighlight, false);
-            });
-
-            function highlight(e) {
-                dropZone.classList.add('highlight');
-            }
-
-            function unhighlight(e) {
-                dropZone.classList.remove('highlight');
-            }
-
-            dropZone.addEventListener('drop', handleDrop, false);
-
-            function handleDrop(e) {
-                const dt = e.dataTransfer;
-                const files = dt.files;
-                fileInput.files = files;
-                fileLabel.textContent = files[0].name;
-            }
-        });
-    </script>
-
-    <script src="../../faq.js"></script>
-    <script src="../../view.js"></script>
-    <script>
-        // Initialize FAQ functionality
-        document.addEventListener('DOMContentLoaded', function() {
             // FAQ Accordion
             const faqItems = document.querySelectorAll('.faq-item');
-            
             faqItems.forEach(item => {
                 const question = item.querySelector('.faq-question');
-                
-                question.addEventListener('click', () => {
-                    // Close all other FAQ items
-                    faqItems.forEach(otherItem => {
-                        if (otherItem !== item) {
-                            otherItem.classList.remove('active');
-                        }
+                if (question) {
+                    question.addEventListener('click', () => {
+                        const isActive = item.classList.contains('active');
+                        faqItems.forEach(otherItem => {
+                            if (otherItem !== item) otherItem.classList.remove('active');
+                        });
+                        if (!isActive) item.classList.add('active');
                     });
-                    
-                    // Toggle current FAQ item
-                    item.classList.toggle('active');
-                });
-
-                // Add keyboard navigation
-                question.addEventListener('keydown', (e) => {
-                    if (e.key === 'Enter' || e.key === ' ') {
-                        e.preventDefault();
-                        question.click();
-                    }
-                });
-
-                // Make the question focusable
-                question.setAttribute('tabindex', '0');
-                question.setAttribute('role', 'button');
-                question.setAttribute('aria-expanded', 'false');
-                
-                // Update ARIA attributes when toggled
-                question.addEventListener('click', () => {
-                    const isActive = item.classList.contains('active');
-                    question.setAttribute('aria-expanded', isActive);
-                });
-            });
-
-            // Initialize device view manager
-            const viewManager = new DeviceViewManager();
-            
-            // Subscribe to device changes
-            viewManager.subscribe((deviceInfo) => {
-                // Update FAQ section based on device type
-                const faqSection = document.querySelector('.faq-section');
-                if (deviceInfo.type === 'mobile') {
-                    faqSection.style.padding = '2rem 0';
-                } else {
-                    faqSection.style.padding = '4rem 0';
                 }
             });
         });
     </script>
+
+<script>
+    // =====================================================================
+    // ====== START: MAGIC BLOCK TO COPY FOR EVERY NEW PAGE ======
+    // =====================================================================
+        document.addEventListener('DOMContentLoaded', () => {
+    
+    const loadScript = (src) => {
+        return new Promise((resolve, reject) => {
+            const script = document.createElement('script');
+            script.src = src;
+            script.onload = () => resolve(script);
+            script.onerror = () => reject(new Error(`Script load error for ${src}`));
+            document.body.appendChild(script);
+        });
+    };
+    
+    const loadHeader = () => {
+        const headerPlaceholder = document.getElementById('header-placeholder');
+        if (!headerPlaceholder) return;
+    
+        // *** IMPORTANT: ADJUST THIS PATH BASED ON YOUR FILE'S LOCATION ***
+        fetch('/header.html') 
+            .then(response => {
+                if (!response.ok) throw new Error('Network response for header.html was not ok.');
+                return response.text();
+            })
+            .then(html => {
+                headerPlaceholder.innerHTML = html;
+                return loadScript('https://cdn.jsdelivr.net/npm/fuse.js@6.6.2');
+            })
+            .then(() => {
+                // *** IMPORTANT: ADJUST THIS PATH BASED ON YOUR FILE'S LOCATION ***
+                return loadScript('/header-search.js');
+            })
+            .then(() => {
+                if (typeof initializeHeader === 'function') {
+                    initializeHeader(); 
+                } else {
+                    throw new Error('initializeHeader function not found.');
+                }
+            })
+            .catch(error => {
+                console.error('CRITICAL ERROR during header loading process:', error);
+            });
+    };
+    
+    const loadFooter = () => {
+        const footerPlaceholder = document.getElementById('footer-placeholder');
+        if (footerPlaceholder) {
+            // *** IMPORTANT: ADJUST THIS PATH BASED ON YOUR FILE'S LOCATION ***
+            fetch('/footer.html')
+                .then(response => response.ok ? response.text() : Promise.reject('Failed to load footer'))
+                .then(html => { footerPlaceholder.innerHTML = html; })
+                .catch(error => console.error('Error loading footer:', error));
+        }
+    };
+    
+    loadHeader();
+    loadFooter();
+    });
+    
+        </script>
+    
+    <!-- External scripts can be loaded at the end -->
+    <script src="../../faq.js" defer></script>
+    <script src="../../view.js" defer></script>
+
+    <!-- ====== END: FINAL CORRECTED SCRIPT LOGIC ====== -->
 
 </body>
 </html>

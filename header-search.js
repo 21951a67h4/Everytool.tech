@@ -1,9 +1,3 @@
-// --- START OF FILE header-search.js ---
-
-'use strict';
-
-// --- START: Global State & Utilities ---
-
 let fuse;
 let searchData = [];
 let isSearchInitialized = false;

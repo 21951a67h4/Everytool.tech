@@ -36,23 +36,24 @@
   },
   {
     "title": "Health Tools",
-    "url": "/tools/health-tools.html",
+    "url": "/categories-pages/health-tools.html",
     "content": "Health Tools"
   },
   {
     "title": "Education Tools",
-    "url": "/tools/education-tools.html",
+    "url": "/categories-pages/education-tools.html",
     "content": "Education Tools"
   },
   {
     "title": "Math Tools",
-    "url": "/tools/math-tools.html",
+    "url": "/category-pages/math-tools.html",
     "content": "Math Tools"
   },
   {
     "title": "Data & Time Tools",
-    "url": "/tools/data-time-tools.html",
-    "content": "Data & Time Tools"
+    "url": "/categories-pages/data-time-tools.html",
+    "content": "Data & Time Tools",
+    "category": "Data & Time"
   },
   {
     "title": "Age Calculator",

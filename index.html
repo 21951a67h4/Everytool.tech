@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <!-- Content Security Policy -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self' https: data: 'unsafe-inline' 'unsafe-eval';">
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' https://cdnjs.cloudflare.com https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://cdnjs.cloudflare.com; img-src 'self' data:; font-src 'self' https://cdnjs.cloudflare.com; connect-src 'self';">
     <title>Everytool - Your All-in-One Solution</title>
     
     <!-- Favicon -->
@@ -56,13 +56,172 @@
             flex: 1;
             padding-top: 80px;
         }
-    </style>  
+    </style>
+    <!-- start of popup -->
+    <style>
+        /* Paste this into your <style> tag or CSS file */
+
+/* --- NO-FLASH LOGIC (Unchanged) --- */
+.popup-overlay {
+    display: none; /* Hidden by default */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(17, 24, 39, 0.85); /* Slightly darker for more focus */
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    transition: opacity 0.4s cubic-bezier(0.25, 0.8, 0.25, 1); /* Smoother transition */
+}
+
+.popup-overlay.visible {
+    display: flex;
+    opacity: 1;
+}
+
+/* --- MODERN POPUP STYLES --- */
+.popup-content {
+    background: #FFFFFF;
+    padding: 1.5rem 2.5rem 2rem 2.5rem; /* Adjusted padding */
+    border-radius: 24px; /* Softer, larger radius */
+    box-shadow: 0 15px 35px #00000026, 0 5px 15px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 480px;
+    text-align: center;
+    transform: scale(0.9) translateY(10px); /* Start smaller and lower */
+    transition: transform 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
+    /* Flexbox for vertical alignment */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.popup-overlay.visible .popup-content {
+    transform: scale(1) translateY(0); /* Final animation state */
+}
+
+/* NEW: Logo Styling */
+.popup-logo {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 1rem; /* Space between logo and headline */
+}
+
+/* NEW: Modern Gradient Headline */
+.popup-headline {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+    /* The gradient magic */
+    background: linear-gradient(45deg, #4361EE, #F72585);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.popup-subheading {
+    color: #6B7280;
+    font-size: 1rem;
+    margin-top: 0;
+    margin-bottom: 2rem;
+    max-width: 90%; /* Prevent text from being too wide */
+}
+
+/* Tip section remains functionally the same, with minor tweaks */
+.popup-tip {
+    background-color: #F8F9FA;
+    border-left: 5px solid #F72585;
+    border-right: 5px solid #F72585;
+    padding: 0.75rem 1rem;
+    margin: 0 0 2rem 0; /* Adjusted margins */
+    text-align: left;
+    border-radius: 8px;
+    width: 100%;
+}
+.popup-tip:hover {
+    border-left: 5px solid rgb(247, 37, 133);
+    border-right: 5px solid rgb(247, 37, 133);
+    border-top: 1.5px solid rgb(247, 37, 133);
+    border-bottom: 1.5px solid rgb(247, 37, 133);
+    background: linear-gradient(45deg, #F8F9FA, #f0f2ff);
+    transform: translateY(-5px);
+    transition: transform 0.3s ease;
+    box-shadow: 0 4px 15px rgba(247, 37, 133, 0.3);
+}
+
+.popup-tip p {
+    margin: 0;
+    color: #000000;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+kbd {
+    background-color: #E5E7EB;
+    border-radius: 4px;
+    padding: 0.2rem 0.5rem;
+    font-family: monospace;
+    font-size: 0.85rem;
+    border: 1px solid #D1D5DB;
+    box-shadow: inset 0 -1px 0 #D1D5DB;
+}
+
+/* NEW: Modern Gradient Button */
+.popup-button {
+    background:rgb(83, 110, 230); /* Subtle gradient */
+    color: #FFFFFF;
+    font-size: 1.1rem;
+    font-weight: 600;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    width: 100%;
+    margin-top: 0.5rem;
+    box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+    transition: all 0.3s ease;
+}
+
+.popup-button:hover {
+    transition: transform 0.3s ease;
+    background:rgb(67, 97, 238);
+    transform: translateY(-3px); /* Lifts the button */
+    box-shadow: 0 7px 25px rgba(67, 97, 238, 0.4); /* Stronger glow */
+}
+    </style>
+    <!-- end of popup -->
 </head>
 
 <body>
     <!-- Header Section (will be loaded via fetch) -->
     <div id="header-placeholder"></div>
-    <!-- Main Content -->
+
+    <!-- start of popup -->
+    <div id="welcome-popup-overlay" class="popup-overlay">
+        <div class="popup-content">
+            <!-- Favicon/Logo added here -->
+            <img src="assets/SVG/favicon.svg" alt="Everytool.tech Logo" class="popup-logo">
+    
+            <!-- Content Section -->
+            <h1 class="popup-headline">Welcome to Everytool.tech!</h1>
+            <p class="popup-subheading">All the tools you need, in one place. And it's completely FREE!</p>
+            
+            <!-- Tip Section -->
+            <div class="popup-tip">
+                <p><strong>Tip:</strong> Press <kbd>Alt</kbd> + <kbd>S</kbd> anytime, anywhere on the website to open the Global Search.</p>
+            </div>
+            
+            <!-- Button Section -->
+            <button id="get-started-btn" class="popup-button">Get Started</button>
+        </div>
+    </div>
+    <!-- end of popup -->
+    
+    <!-- start of main content -->
     <main class="main-content">
         <section class="hero hero-modern" aria-label="Hero section">
             <div class="hero__container hero__container-modern">
@@ -83,7 +242,7 @@
                         <div class="hero__profile-card improved-profile-card">
                             <div class="hero__profile-img-wrap simple-rounded-profile">
                                 <img src="assets/varshith.jpg" alt="Gubba Varshith" class="hero__profile-img rounded-square-img">
-                                <a href="creators.html">
+                                <a href="/categories-pages/math-tools.html"
                                     <button class="hero__profile-status" aria-label="Online Status">click me</button>
                                 </a>
                             </div>
@@ -130,88 +289,91 @@
                         <div class="category-card__icon-wrapper">
                             <i class="fas fa-calculator category-card__icon"></i>
                         </div>
-                        <h3 class="category-card__title">Calculators</h3>
+                        <h3 class="category-card__title">Finance Tools</h3>
                         <p class="category-card__description">Financial, health, and math solutions for everyday calculations</p>
                         <div class="category-card__tools">
-                            <a href="tools/loan-calculator.html" class="category-card__tool">Mortgage</a>
-                            <a href="tools/bmi-calculator.html" class="category-card__tool">BMI</a>
-                            <a href="coming-soon(without countdown).html" class="category-card__tool">Currency</a>
+                            <a href="tools/loan-calculator.html" class="category-card__tool">Loan</a>
+                            <a href="tools/Compound-interest-calculator.html" class="category-card__tool">Compound Interest</a>
+                            <a href="tools/Inflation-Calculator.html" class="category-card__tool">Inflation</a>
                         </div>
-                        <a href="tools-hub-page/index.html?category=calculators" class="category-card__button">Explore Tools</a>
+                        <a href="tools/finance-tools.html" class="category-card__button">Explore Tools</a>
                     </article>
 
                     <article class="category-card">
                         <div class="category-card__icon-wrapper">
-                            <i class="fas fa-exchange-alt category-card__icon"></i>
+                            <i class="fas fa-heartbeat category-card__icon"></i>
                         </div>
-                        <h3 class="category-card__title">Converters</h3>
-                        <p class="category-card__description">Transform files and formats with precision and ease</p>
+                        <h3 class="category-card__title">Health Tools</h3>
+                        <p class="category-card__description">Track and calculate your health metrics</p>
                         <div class="category-card__tools">
-                            <a href="coming-soon(without countdown).html" class="category-card__tool">PDF to Word</a>
-                            <a href="coming-soon(without countdown).html" class="category-card__tool">Image Format</a>
-                            <a href="coming-soon(without countdown).html" class="category-card__tool">Unit Converter</a>
+                            <a href="tools/bmi-calculator.html" class="category-card__tool">BMI Calculator</a>
+                            <a href="tools/age-calculator.html" class="category-card__tool">Age Calculator</a>
+                            <a href="categories-pages/health-tools.html" class="category-card__tool">More...</a>
                         </div>
-                        <a href="tools-hub-page/index.html?category=converters" class="category-card__button">Explore Tools</a>
+                        <a href="categories-pages/health-tools.html" class="category-card__button">Explore Tools</a>
                     </article>
 
                     <article class="category-card">
                         <div class="category-card__icon-wrapper">
-                            <i class="fas fa-magic category-card__icon"></i>
+                            <i class="fas fa-graduation-cap category-card__icon"></i>
                         </div>
-                        <h3 class="category-card__title">Generators</h3>
-                        <p class="category-card__description">Create passwords, QR codes, and more with advanced options</p>
+                        <h3 class="category-card__title">Education Tools</h3>
+                        <p class="category-card__description">Resources for learning and teaching</p>
                         <div class="category-card__tools">
-                            <a href="coming-soon(without countdown).html" class="category-card__tool">Password</a>
-                            <a href="coming-soon(without countdown).html" class="category-card__tool">QR Code</a>
-                            <a href="coming-soon(without countdown).html" class="category-card__tool">Lorem Ipsum</a>
+                            <a href="tools/words-count.html" class="category-card__tool">Word Counter</a>
+                            <a href="categories-pages/education-tools.html" class="category-card__tool">More Tools</a>
+                            <a href="tools/percentage-calculator.html" class="category-card__tool">Percentage</a>
                         </div>
-                        <a href="tools-hub-page/index.html?category=generators" class="category-card__button">Explore Tools</a>
+                        <a href="categories-pages/education-tools.html" class="category-card__button">Explore Tools</a>
                     </article>
 
                     <article class="category-card">
                         <div class="category-card__icon-wrapper">
-                            <i class="fas fa-code category-card__icon"></i>
+                            <i class="fas fa-square-root-alt category-card__icon"></i>
                         </div>
-                        <h3 class="category-card__title">Developer Tools</h3>
-                        <p class="category-card__description">Essential utilities for developers and programmers</p>
+                        <h3 class="category-card__title">Math Tools</h3>
+                        <p class="category-card__description">Essential math calculators and converters</p>
                         <div class="category-card__tools">
-                            <a href="coming-soon(without countdown).html" class="category-card__tool">JSON Formatter</a>
-                            <a href="coming-soon(without countdown).html" class="category-card__tool">Code Minifier</a>
-                            <a href="coming-soon(without countdown).html" class="category-card__tool">Color Picker</a>
+                            <a href="tools/percentage-calculator.html" class="category-card__tool">Percentage</a>
+                            <a href="category-pages/math-tools.html" class="category-card__tool">More Tools</a>
+                            <a href="tools/Compound-interest-calculator.html" class="category-card__tool">Interest</a>
                         </div>
-                        <a href="tools-hub-page/index.html?category=developer" class="category-card__button">Explore Tools</a>
+                        <a href="category-pages/math-tools.html" class="category-card__button">Explore Tools</a>
                     </article>
 
                     <article class="category-card">
                         <div class="category-card__icon-wrapper">
-                            <i class="fas fa-search category-card__icon"></i>
+                            <i class="fas fa-clock category-card__icon"></i>
                         </div>
-                        <h3 class="category-card__title">SEO Tools</h3>
-                        <p class="category-card__description">Optimize your online presence and improve rankings</p>
+                        <h3 class="category-card__title">Data & Time Tools</h3>
+                        <p class="category-card__description">Time calculations and data management</p>
                         <div class="category-card__tools">
-                            <a href="coming-soon(without countdown).html" class="category-card__tool">Meta Tags</a>
-                            <a href="coming-soon(without countdown).html" class="category-card__tool">Keyword Density</a>
-                            <a href="coming-soon(without countdown).html" class="category-card__tool">Sitemap</a>
+                            <a href="tools/age-calculator.html" class="category-card__tool">Age Calculator</a>
+                            <a href="categories-pages/data-time-tools.html" class="category-card__tool">More Tools</a>
+                            <a href="categories-pages/data-time-tools.html" class="category-card__tool">View All</a>
                         </div>
-                        <a href="tools-hub-page/index.html?category=seo" class="category-card__button">Explore Tools</a>
+                        <a href="categories-pages/data-time-tools.html" class="category-card__button">Explore Tools</a>
                     </article>
 
                     <article class="category-card">
                         <div class="category-card__icon-wrapper">
-                            <i class="fas fa-file-alt category-card__icon"></i>
+                            <i class="fas fa-tools category-card__icon"></i>
                         </div>
-                        <h3 class="category-card__title">Text & File Tools</h3>
-                        <p class="category-card__description">Edit, format, and manage your documents efficiently</p>
+                        <h3 class="category-card__title">All Tools</h3>
+                        <p class="category-card__description">Browse our complete collection of tools</p>
                         <div class="category-card__tools">
-                            <a href="coming-soon(without countdown).html" class="category-card__tool">Text Editor</a>
-                            <a href="coming-soon(without countdown).html" class="category-card__tool">File Compressor</a>
-                            <a href="coming-soon(without countdown).html" class="category-card__tool">PDF Tools</a>
+                            <a href="tools-hub-page/index.html" class="category-card__tool">View All</a>
+                            <a href="tools-hub-page/index.html" class="category-card__tool">Browse</a>
+                            <a href="tools-hub-page/index.html" class="category-card__tool">Explore</a>
                         </div>
-                        <a href="tools-hub-page/index.html?category=text" class="category-card__button">Explore Tools</a>
+                        <a href="tools-hub-page/index.html" class="category-card__button">Explore Tools</a>
                     </article>
                 </div>
             </div>
         </section>
+
+        <!-- Placeholder for the dynamically loaded Top Tools Scroller -->
+        <div id="top-tools-scroller-placeholder"></div>
 
         <section class="cta-section">
             <div class="cta-section__container">
@@ -222,7 +384,7 @@
                         Get instant access to all our premium tools and start working smarter, not harder.
                     </p>
                     <div class="cta-section__buttons">
-                        <a href="support-us.html" class="cta-button cta-button--primary">
+                        <a href="/tools-hub-page/index.html" class="cta-button cta-button--primary">
                             <i class="fas fa-rocket"></i>
                             Get Started Free
                         </a>
@@ -358,19 +520,15 @@
             </div>
         </section>
     </main>
-
+    <!-- end of main content -->
     <!-- Footer Section -->
     <div id="footer-placeholder"></div>
 
     <!-- Scripts -->
-    <script src="script.js" defer></script> 
+    <script src="script.js" type="module" defer></script> 
     <script src="view.js" defer></script>
     <script src="FAQ section/faq.js" defer></script>
-    <script src="top-tool-scroller.js" defer></script>
-    <script src="header-search.js" defer></script>
-    <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
     <!-- (Your other scripts like script.js, view.js, etc. can remain above this) -->
-    <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.6.2"></script>
 
     <!-- ✅ REPLACE YOUR OLD LOADING SCRIPT WITH THIS NEW, SMARTER ONE -->
     <script>
@@ -506,6 +664,51 @@ const loadFooter = () => {
 
 loadHeader();
 loadFooter();
+});
+    </script>
+
+    <script>
+        // Paste this inside a <script> tag at the end of your <body>
+document.addEventListener('DOMContentLoaded', () => {
+    const popupOverlay = document.getElementById('welcome-popup-overlay');
+    const closeButton = document.getElementById('get-started-btn');
+    const visitedFlagKey = 'everytoolWelcomePopupShown';
+
+    if (!popupOverlay || !closeButton) {
+        return; // Exit if popup elements aren't found
+    }
+
+    // Check localStorage to see if the user has visited before.
+    const hasVisited = localStorage.getItem(visitedFlagKey);
+
+    // If the user has NOT visited, show the popup.
+    if (!hasVisited) {
+        // Add the 'visible' class to make the popup appear with a fade-in effect.
+        popupOverlay.classList.add('visible');
+    }
+
+    // Function to close the popup and set the visited flag.
+    const closePopupAndSetFlag = () => {
+        popupOverlay.classList.remove('visible'); // Fade out
+        try {
+            localStorage.setItem(visitedFlagKey, 'true');
+        } catch (e) {
+            console.error("Failed to save to localStorage.", e);
+        }
+    };
+
+    // Add event listeners to close the popup.
+    closeButton.addEventListener('click', closePopupAndSetFlag);
+    popupOverlay.addEventListener('click', (event) => {
+        if (event.target === popupOverlay) {
+            closePopupAndSetFlag();
+        }
+    });
+    document.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape' && popupOverlay.classList.contains('visible')) {
+            closePopupAndSetFlag();
+        }
+    });
 });
     </script>
 </body>
