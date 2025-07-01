@@ -56,6 +56,23 @@
             flex: 1;
             padding-top: 80px;
         }
+
+        /* --- Product Hunt Badge Animation --- */
+        .product-hunt-badge {
+            display: inline-block; /* Necessary for transform to work correctly */
+            transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+            border-radius: 8px; /* Match badge's rounded corners for a clean shadow */
+            margin-top: 1rem; /* Add some space above the badge */
+        }
+
+        .product-hunt-badge:hover {
+            transform: translateY(-4px); /* Lifts the badge up slightly */
+            box-shadow: 0 8px 20px rgba(253, 108, 38, 0.25); /* A soft orange glow, matching PH colors */
+        }
+
+        .product-hunt-badge img {
+            display: block; /* Prevents any extra space below the image */
+        }
     </style>
     <!-- start of popup -->
     <style>
@@ -237,7 +254,9 @@ kbd {
                         <p class="hero__subtitle hero__subtitle-modern">
                             One platform, endless possibilities. Access over 50+ professional tools to streamline your workflow and boost productivity.
                         </p>
-                        <a href="https://www.producthunt.com/products/everytool-tech?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-everytool-tech" target="_blank"><img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=986537&theme=light&t=1751366643219" alt="Everytool.tech - 50+ free online tools in one place – no logins, no limits. | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" /></a>
+                        <a href="https://www.producthunt.com/products/everytool-tech?embed=true&utm_source=badge-featured&utm_medium=badge&utm_source=badge-everytool-tech" target="_blank" class="product-hunt-badge">
+                            <img src="https://api.producthunt.com/widgets/embed-image/v1/featured.svg?post_id=986537&theme=light&t=1751366643219" alt="Everytool.tech - 50+ free online tools in one place – no logins, no limits. | Product Hunt" style="width: 250px; height: 54px;" width="250" height="54" />
+                        </a>
                     </div>
                     <div class="hero__visual hero__visual-modern animate-slide-in improved-profile-float">
                         <div class="hero__profile-card improved-profile-card">
