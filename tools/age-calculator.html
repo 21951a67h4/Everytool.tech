@@ -344,11 +344,22 @@
     <!-- Footer Placeholder -->
     <div id="footer-placeholder"></div>
 
+    <!-- CRITICAL: Universal Search Script - DO NOT REMOVE -->
+    <script src="../universal-search-deploy.js"></script>
+    
     <script>
-        // Fetch and insert header/footer
-        document.addEventListener('DOMContentLoaded', () => {
-            fetch('../../header.html').then(r => r.text()).then(h => document.getElementById('header-placeholder').innerHTML = h);
-            fetch('../../footer.html').then(r => r.text()).then(h => document.getElementById('footer-placeholder').innerHTML = h);
+        // Backup simple loader for footer only
+        document.addEventListener('DOMContentLoaded', function() {
+            // Footer loading backup (header handled by universal script)
+            var footerPlaceholder = document.getElementById('footer-placeholder');
+            if (footerPlaceholder && !footerPlaceholder.innerHTML.trim()) {
+                fetch('../footer.html')
+                    .then(function(r) { return r.text(); })
+                    .then(function(h) { footerPlaceholder.innerHTML = h; })
+                    .catch(function(error) {
+                        console.error('Error loading footer:', error);
+                    });
+            }
         });
 
         // Age Calculator Logic

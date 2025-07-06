@@ -31,17 +31,17 @@
   },
   {
     "title": "Finance Tools",
-    "url": "/tools/finance-tools.html",
+    "url": "/category-pages/finance-tools.html",
     "content": "Finance Tools"
   },
   {
     "title": "Health Tools",
-    "url": "/categories-pages/health-tools.html",
+    "url": "/category-pages/health-tools.html",
     "content": "Health Tools"
   },
   {
     "title": "Education Tools",
-    "url": "/categories-pages/education-tools.html",
+    "url": "/category-pages/education-tools.html",
     "content": "Education Tools"
   },
   {
@@ -51,7 +51,7 @@
   },
   {
     "title": "Data & Time Tools",
-    "url": "/categories-pages/data-time-tools.html",
+    "url": "/category-pages/date-time-tools.html",
     "content": "Data & Time Tools",
     "category": "Data & Time"
   },

@@ -262,7 +262,7 @@ kbd {
                         <div class="hero__profile-card improved-profile-card">
                             <div class="hero__profile-img-wrap simple-rounded-profile">
                                 <img src="assets/varshith.jpg" alt="Gubba Varshith" class="hero__profile-img rounded-square-img">
-                                <a href="/categories-pages/math-tools.html"
+                                <a href="/category-pages/math-tools.html"
                                     <button class="hero__profile-status" aria-label="Online Status">click me</button>
                                 </a>
                             </div>
@@ -316,7 +316,7 @@ kbd {
                             <a href="tools/Compound-interest-calculator.html" class="category-card__tool">Compound Interest</a>
                             <a href="tools/Inflation-Calculator.html" class="category-card__tool">Inflation</a>
                         </div>
-                        <a href="tools/finance-tools.html" class="category-card__button">Explore Tools</a>
+                        <a href="category-pages/finance-tools.html" class="category-card__button">Explore Tools</a>
                     </article>
 
                     <article class="category-card">
@@ -328,9 +328,9 @@ kbd {
                         <div class="category-card__tools">
                             <a href="tools/bmi-calculator.html" class="category-card__tool">BMI Calculator</a>
                             <a href="tools/age-calculator.html" class="category-card__tool">Age Calculator</a>
-                            <a href="categories-pages/health-tools.html" class="category-card__tool">More...</a>
+                            <a href="category-pages/health-tools.html" class="category-card__tool">More...</a>
                         </div>
-                        <a href="categories-pages/health-tools.html" class="category-card__button">Explore Tools</a>
+                        <a href="category-pages/health-tools.html" class="category-card__button">Explore Tools</a>
                     </article>
 
                     <article class="category-card">
@@ -341,10 +341,10 @@ kbd {
                         <p class="category-card__description">Resources for learning and teaching</p>
                         <div class="category-card__tools">
                             <a href="tools/words-count.html" class="category-card__tool">Word Counter</a>
-                            <a href="categories-pages/education-tools.html" class="category-card__tool">More Tools</a>
+                            <a href="category-pages/education-tools.html" class="category-card__tool">More Tools</a>
                             <a href="tools/percentage-calculator.html" class="category-card__tool">Percentage</a>
                         </div>
-                        <a href="categories-pages/education-tools.html" class="category-card__button">Explore Tools</a>
+                        <a href="category-pages/education-tools.html" class="category-card__button">Explore Tools</a>
                     </article>
 
                     <article class="category-card">
@@ -369,10 +369,10 @@ kbd {
                         <p class="category-card__description">Time calculations and data management</p>
                         <div class="category-card__tools">
                             <a href="tools/age-calculator.html" class="category-card__tool">Age Calculator</a>
-                            <a href="categories-pages/data-time-tools.html" class="category-card__tool">More Tools</a>
-                            <a href="categories-pages/data-time-tools.html" class="category-card__tool">View All</a>
+                            <a href="category-pages/date-time-tools.html" class="category-card__tool">More Tools</a>
+                            <a href="category-pages/date-time-tools.html" class="category-card__tool">View All</a>
                         </div>
-                        <a href="categories-pages/data-time-tools.html" class="category-card__button">Explore Tools</a>
+                        <a href="category-pages/date-time-tools.html" class="category-card__button">Explore Tools</a>
                     </article>
 
                     <article class="category-card">
@@ -392,8 +392,6 @@ kbd {
             </div>
         </section>
 
-        <!-- Placeholder for the dynamically loaded Top Tools Scroller -->
-        <div id="top-tools-scroller-placeholder"></div>
 
         <section class="cta-section">
             <div class="cta-section__container">
@@ -545,146 +543,184 @@ kbd {
     <div id="footer-placeholder"></div>
 
     <!-- Scripts -->
-    <script src="script.js" type="module" defer></script> 
+    <script src="script.js" defer></script>
     <script src="view.js" defer></script>
     <script src="FAQ section/faq.js" defer></script>
     <!-- (Your other scripts like script.js, view.js, etc. can remain above this) -->
 
-    <!-- ✅ REPLACE YOUR OLD LOADING SCRIPT WITH THIS NEW, SMARTER ONE -->
+    <!-- CRITICAL: Search Functionality - DO NOT REMOVE -->
+    <style>
+        /* Header Styles */
+        #header-placeholder {
+            min-height: 130px;
+            position: relative; 
+            z-index: 2000;      
+        }
+        @media (max-width: 768px) {
+            #header-placeholder {
+                min-height: 64px;
+            }
+        }
+    </style>
+
     <script>
-        /**
-         * Loads a full component HTML file, separates its parts, and forces its script to execute.
-         * This works even if the component's script uses "DOMContentLoaded".
-         * @param {string} componentUrl - Path to the component file (e.g., 'top-tools-scroller.html').
-         * @param {string} placeholderId - ID of the div to inject the HTML content into.
-         */
-        async function loadAndExecuteComponent(componentUrl, placeholderId) {
-            try {
-                // Step 1: Fetch the entire component file as text.
-                const response = await fetch(componentUrl);
-                if (!response.ok) throw new Error(`HTTP Error: ${response.status}`);
-                const htmlText = await response.text();
-
-                // Step 2: Use the browser's parser to create a temporary document in memory.
-                const parser = new DOMParser();
-                const componentDoc = parser.parseFromString(htmlText, 'text/html');
-
-                // Step 3: Inject the component's HTML content.
-                // We take only the content from inside the <body> tag of the component file.
-                const componentBodyContent = componentDoc.body.innerHTML;
-                const placeholder = document.getElementById(placeholderId);
-                if (!placeholder) {
-                    console.error(`Error: Placeholder element #${placeholderId} not found.`);
-                    return;
+    // =====================================================================
+    // ====== SEARCH FUNCTIONALITY - UNIVERSAL FOR ALL PAGES ======
+    // =====================================================================
+    
+    // Polyfills for older browsers
+    (function() {
+        // Promise polyfill for IE
+        if (typeof Promise === 'undefined') {
+            window.Promise = function(executor) {
+                var self = this;
+                self.state = 'pending';
+                self.value = undefined;
+                self.handlers = [];
+                
+                function resolve(result) {
+                    if (self.state === 'pending') {
+                        self.state = 'fulfilled';
+                        self.value = result;
+                        self.handlers.forEach(handle);
+                        self.handlers = null;
+                    }
                 }
-                placeholder.innerHTML = componentBodyContent;
-
-                // Step 4: Inject the component's CSS.
-                // We find the <style> tag, get its content, and add it to the main page's <head>.
-                const styleContent = componentDoc.querySelector('style')?.textContent;
-                if (styleContent) {
-                    const styleElement = document.createElement('style');
-                    styleElement.textContent = styleContent;
-                    document.head.appendChild(styleElement);
+                
+                function reject(error) {
+                    if (self.state === 'pending') {
+                        self.state = 'rejected';
+                        self.value = error;
+                        self.handlers.forEach(handle);
+                        self.handlers = null;
+                    }
                 }
-
-                // Step 5: Find, re-create, and execute the component's script.
-                // This is the key to bypassing the "innerHTML doesn't run scripts" and "DOMContentLoaded" issues.
-                const originalScript = componentDoc.querySelector('script');
-                if (originalScript) {
-                    const newScript = document.createElement('script');
-                    newScript.textContent = originalScript.textContent; // Copy the code
-                    document.body.appendChild(newScript); // Append to the body to execute it
+                
+                function handle(handler) {
+                    if (self.state === 'pending') {
+                        self.handlers.push(handler);
+                    } else {
+                        if (self.state === 'fulfilled' && typeof handler.onFulfilled === 'function') {
+                            handler.onFulfilled(self.value);
+                        }
+                        if (self.state === 'rejected' && typeof handler.onRejected === 'function') {
+                            handler.onRejected(self.value);
+                        }
+                    }
                 }
-
-            } catch (error) {
-                console.error(`Failed to load and execute component from ${componentUrl}:`, error);
+                
+                this.then = function(onFulfilled, onRejected) {
+                    return new Promise(function(resolve, reject) {
+                        handle({
+                            onFulfilled: function(result) {
+                                try {
+                                    resolve(onFulfilled ? onFulfilled(result) : result);
+                                } catch (ex) {
+                                    reject(ex);
+                                }
+                            },
+                            onRejected: function(error) {
+                                try {
+                                    resolve(onRejected ? onRejected(error) : error);
+                                } catch (ex) {
+                                    reject(ex);
+                                }
+                            }
+                        });
+                    });
+                };
+                
+                executor(resolve, reject);
+            };
+        }
+        
+        // forEach polyfill for IE8
+        if (!Array.prototype.forEach) {
+            Array.prototype.forEach = function(callback, thisArg) {
+                var T, k;
+                if (this == null) {
+                    throw new TypeError('Array.prototype.forEach called on null or undefined');
+                }
+                var O = Object(this);
+                var len = parseInt(O.length) || 0;
+                if (typeof callback !== "function") {
+                    throw new TypeError(callback + ' is not a function');
+                }
+                if (arguments.length > 1) {
+                    T = thisArg;
+                }
+                k = 0;
+                while (k < len) {
+                    var kValue;
+                    if (k in O) {
+                        kValue = O[k];
+                        callback.call(T, kValue, k, O);
+                    }
+                    k++;
+                }
+            };
+        }
+    })();
+    
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        function loadScript(src) {
+            return new Promise(function(resolve, reject) {
+                var script = document.createElement('script');
+                script.src = src;
+                script.onload = function() { resolve(script); };
+                script.onerror = function() { reject(new Error('Script load error for ' + src)); };
+                document.body.appendChild(script);
+            });
+        }
+        
+        function loadHeader() {
+            var headerPlaceholder = document.getElementById('header-placeholder');
+            if (!headerPlaceholder) return;
+        
+            fetch('/header.html') 
+                .then(function(response) {
+                    if (!response.ok) throw new Error('Network response for header.html was not ok.');
+                    return response.text();
+                })
+                .then(function(html) {
+                    headerPlaceholder.innerHTML = html;
+                    return loadScript('https://cdn.jsdelivr.net/npm/fuse.js@6.6.2');
+                })
+                .then(function() {
+                    return loadScript('/header-search.js');
+                })
+                .then(function() {
+                    if (typeof initializeHeader === 'function') {
+                        initializeHeader(); 
+                    } else {
+                        throw new Error('initializeHeader function not found.');
+                    }
+                })
+                .catch(function(error) {
+                    console.error('CRITICAL ERROR during header loading process:', error);
+                });
+        }
+        
+        function loadFooter() {
+            var footerPlaceholder = document.getElementById('footer-placeholder');
+            if (footerPlaceholder) {
+                fetch('/footer.html')
+                    .then(function(response) {
+                        return response.ok ? response.text() : Promise.reject('Failed to load footer');
+                    })
+                    .then(function(html) {
+                        footerPlaceholder.innerHTML = html;
+                    })
+                    .catch(function(error) {
+                        console.error('Error loading footer:', error);
+                    });
             }
         }
-
-        // Generic function to load simple HTML snippets (like your header/footer).
-        async function loadHTML(url, elementId) {
-            try {
-                const response = await fetch(url);
-                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
-                const html = await response.text();
-                // A simple parser to avoid loading full <html><head> etc. from header/footer files
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(html, 'text/html');
-                document.getElementById(elementId).innerHTML = doc.body.innerHTML;
-            } catch (error) {
-                console.error(`Error loading ${url}:`, error);
-            }
-        }
-
-        // --- Main execution ---
-        document.addEventListener('DOMContentLoaded', () => {
-            // Load your simple components
-            loadHTML('header.html', 'header-placeholder');
-            loadHTML('footer.html', 'footer-placeholder');
-
-            // Load your complex, self-contained scroller component
-            loadAndExecuteComponent('top-tools-scroller.html', 'top-tools-scroller-placeholder');
-        });
-// =====================================================================
-// ====== START: MAGIC BLOCK TO COPY FOR EVERY NEW PAGE ======
-// =====================================================================
-    document.addEventListener('DOMContentLoaded', () => {
-
-const loadScript = (src) => {
-    return new Promise((resolve, reject) => {
-        const script = document.createElement('script');
-        script.src = src;
-        script.onload = () => resolve(script);
-        script.onerror = () => reject(new Error(`Script load error for ${src}`));
-        document.body.appendChild(script);
+        
+        loadHeader();
+        loadFooter();
     });
-};
-
-const loadHeader = () => {
-    const headerPlaceholder = document.getElementById('header-placeholder');
-    if (!headerPlaceholder) return;
-
-    // *** IMPORTANT: ADJUST THIS PATH BASED ON YOUR FILE'S LOCATION ***
-    fetch('/header.html') 
-        .then(response => {
-            if (!response.ok) throw new Error('Network response for header.html was not ok.');
-            return response.text();
-        })
-        .then(html => {
-            headerPlaceholder.innerHTML = html;
-            return loadScript('https://cdn.jsdelivr.net/npm/fuse.js@6.6.2');
-        })
-        .then(() => {
-            // *** IMPORTANT: ADJUST THIS PATH BASED ON YOUR FILE'S LOCATION ***
-            return loadScript('/header-search.js');
-        })
-        .then(() => {
-            if (typeof initializeHeader === 'function') {
-                initializeHeader(); 
-            } else {
-                throw new Error('initializeHeader function not found.');
-            }
-        })
-        .catch(error => {
-            console.error('CRITICAL ERROR during header loading process:', error);
-        });
-};
-
-const loadFooter = () => {
-    const footerPlaceholder = document.getElementById('footer-placeholder');
-    if (footerPlaceholder) {
-        // *** IMPORTANT: ADJUST THIS PATH BASED ON YOUR FILE'S LOCATION ***
-        fetch('/footer.html')
-            .then(response => response.ok ? response.text() : Promise.reject('Failed to load footer'))
-            .then(html => { footerPlaceholder.innerHTML = html; })
-            .catch(error => console.error('Error loading footer:', error));
-    }
-};
-
-loadHeader();
-loadFooter();
-});
     </script>
 
     <script>

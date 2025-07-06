@@ -1,5 +1,3 @@
-import { initTopToolsScroller } from './scroller-init.js';
-
 function animateNumbers() {
     const numbers = document.querySelectorAll('.trust__number');
     const animatedNumbers = new Set();
@@ -65,7 +63,6 @@ function animateNumbers() {
 
 document.addEventListener('DOMContentLoaded', () => {
     loadHeader();
-    loadTopToolsScroller();
     // Always run trust section animation
     animateNumbers();
 
@@ -578,85 +575,8 @@ async function loadHeader() {
     }
 }
 
-async function loadTopToolsScroller() {
-    try {
-        const response = await fetch('/top-tools-scroller.html');
-        const scrollerHTML = await response.text();
-        const scrollerPlaceholder = document.getElementById('scroller-placeholder'); // Assuming you have a placeholder div
-        
-        if (scrollerPlaceholder) {
-            scrollerPlaceholder.innerHTML = scrollerHTML;
-            
-            // Find the container element that was just injected
-            const scrollerContainer = scrollerPlaceholder.querySelector('.tools-scroller-section');
-            
-            if (scrollerContainer) {
-                // Initialize the scroller logic on the new element
-                initTopToolsScroller(scrollerContainer);
-            }
-        }
-    } catch (error) {
-        console.error('Failed to load top tools scroller:', error);
-    }
-}
 
 // =====================================================================
 // ====== END: MAGIC BLOCK TO COPY FOR EVERY NEW PAGE ======
 // =====================================================================
 
-    document.addEventListener('DOMContentLoaded', () => {
-
-        const loadScript = (src) => {
-            return new Promise((resolve, reject) => {
-                const script = document.createElement('script');
-                script.src = src;
-                script.onload = () => resolve(script);
-                script.onerror = () => reject(new Error(`Script load error for ${src}`));
-                document.body.appendChild(script);
-            });
-        };
-
-        const loadHeader = () => {
-            const headerPlaceholder = document.getElementById('header-placeholder');
-            if (!headerPlaceholder) return;
-
-            // *** IMPORTANT: ADJUST THIS PATH BASED ON YOUR FILE'S LOCATION ***
-            fetch('/header.html') 
-                .then(response => {
-                    if (!response.ok) throw new Error('Network response for header.html was not ok.');
-                    return response.text();
-                })
-                .then(html => {
-                    headerPlaceholder.innerHTML = html;
-                    return loadScript('https://cdn.jsdelivr.net/npm/fuse.js@6.6.2');
-                })
-                .then(() => {
-                    // *** IMPORTANT: ADJUST THIS PATH BASED ON YOUR FILE'S LOCATION ***
-                    return loadScript('/header-search.js');
-                })
-                .then(() => {
-                    if (typeof initializeHeader === 'function') {
-                        initializeHeader(); 
-                    } else {
-                        throw new Error('initializeHeader function not found.');
-                    }
-                })
-                .catch(error => {
-                    console.error('CRITICAL ERROR during header loading process:', error);
-                });
-        };
-        
-        const loadFooter = () => {
-            const footerPlaceholder = document.getElementById('footer-placeholder');
-            if (footerPlaceholder) {
-                // *** IMPORTANT: ADJUST THIS PATH BASED ON YOUR FILE'S LOCATION ***
-                fetch('/footer.html')
-                    .then(response => response.ok ? response.text() : Promise.reject('Failed to load footer'))
-                    .then(html => { footerPlaceholder.innerHTML = html; })
-                    .catch(error => console.error('Error loading footer:', error));
-            }
-        };
-
-        loadHeader();
-        loadFooter();
-    });
