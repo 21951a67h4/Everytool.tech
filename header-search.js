@@ -259,7 +259,18 @@ function initializeHeader() {
         var feedback = document.getElementById('searchPopupFeedback');
 
         if (!searchTrigger || !popup || !closeBtn || !input || !clearBtn || !resultsList || !feedback) {
-            throw new Error("One or more search popup elements are missing from the DOM.");
+            console.error('SEARCH POPUP DEBUG:', {
+                searchTrigger: !!searchTrigger,
+                popup: !!popup,
+                closeBtn: !!closeBtn,
+                input: !!input,
+                clearBtn: !!clearBtn,
+                resultsList: !!resultsList,
+                feedback: !!feedback,
+                allPopupElements: document.querySelectorAll('[id*="searchPopup"], [class*="search-popup"]'),
+                headerHTML: document.querySelector('#header-placeholder') ? document.querySelector('#header-placeholder').innerHTML.length : 'No header placeholder'
+            });
+            throw new Error("One or more search popup elements are missing from the DOM. Check console for details.");
         }
 
         function openPopup() {

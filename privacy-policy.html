@@ -528,10 +528,13 @@
                 if (!response.ok) throw new Error('Network response for header.html was not ok.');
                 return response.text();
             })
-            .then(html => {
-                headerPlaceholder.innerHTML = html;
-                return loadScript('https://cdn.jsdelivr.net/npm/fuse.js@6.6.2');
-            })
+                .then(html => {
+                    headerPlaceholder.innerHTML = html;
+                    console.log('HEADER DEBUG: Header HTML loaded, length:', html.length);
+                    console.log('HEADER DEBUG: Search popup in DOM?', !!document.getElementById('searchPopup'));
+                    console.log('HEADER DEBUG: Search button in DOM?', !!document.querySelector('.header__search-btn'));
+                    return loadScript('https://cdn.jsdelivr.net/npm/fuse.js@6.6.2');
+                })
             .then(() => {
                 // *** IMPORTANT: ADJUST THIS PATH BASED ON YOUR FILE'S LOCATION ***
                 return loadScript('/header-search.js');

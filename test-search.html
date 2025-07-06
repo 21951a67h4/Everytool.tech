@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Popup Test</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: #f5f5f5;
+            min-height: 100vh;
+        }
+        
+        .test-content {
+            padding: 100px 20px;
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            margin-top: 50px;
+        }
+        
+        .test-button {
+            background: #4361EE;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="header-placeholder"></div>
+    
+    <div class="test-content">
+        <h1>Search Popup Test Page</h1>
+        <p>This is a minimal test page to debug search popup issues.</p>
+        
+        <div>
+            <button class="test-button" onclick="testSearchPopup()">Test Search Popup</button>
+            <button class="test-button" onclick="debugElements()">Debug Elements</button>
+            <button class="test-button" onclick="debugStyles()">Debug Styles</button>
+        </div>
+        
+        <div id="debug-output" style="margin-top: 20px; padding: 10px; background: #f0f0f0; border-radius: 5px; white-space: pre-wrap; font-family: monospace;"></div>
+    </div>
+
+    <script>
+        function log(message) {
+            const output = document.getElementById('debug-output');
+            output.textContent += new Date().toLocaleTimeString() + ': ' + message + '\n';
+        }
+        
+        function testSearchPopup() {
+            log('Testing search popup...');
+            const popup = document.getElementById('searchPopup');
+            if (popup) {
+                log('Search popup found in DOM');
+                popup.classList.add('is-open');
+                document.body.classList.add('search-popup-open');
+                log('Added is-open and search-popup-open classes');
+            } else {
+                log('ERROR: Search popup not found in DOM');
+            }
+        }
+        
+        function debugElements() {
+            log('Debugging DOM elements...');
+            const searchElements = [
+                'searchPopup',
+                'searchPopupClose', 
+                'searchPopupInput',
+                'searchPopupClearBtn',
+                'searchPopupResultsList',
+                'searchPopupFeedback'
+            ];
+            
+            searchElements.forEach(id => {
+                const element = document.getElementById(id);
+                log(`${id}: ${element ? 'FOUND' : 'MISSING'}`);
+            });
+            
+            const searchBtn = document.querySelector('.header__search-btn');
+            log(`Search button: ${searchBtn ? 'FOUND' : 'MISSING'}`);
+            
+            const allSearchElements = document.querySelectorAll('[id*="searchPopup"], [class*="search-popup"]');
+            log(`Total search-related elements: ${allSearchElements.length}`);
+        }
+        
+        function debugStyles() {
+            log('Debugging styles...');
+            const popup = document.getElementById('searchPopup');
+            if (popup) {
+                const styles = window.getComputedStyle(popup);
+                log(`Search popup styles:`);
+                log(`  display: ${styles.display}`);
+                log(`  position: ${styles.position}`);
+                log(`  z-index: ${styles.zIndex}`);
+                log(`  opacity: ${styles.opacity}`);
+                log(`  visibility: ${styles.visibility}`);
+                log(`  top: ${styles.top}`);
+                log(`  left: ${styles.left}`);
+                log(`  width: ${styles.width}`);
+                log(`  height: ${styles.height}`);
+            } else {
+                log('Cannot debug styles - popup not found');
+            }
+        }
+        
+        // Load header
+        document.addEventListener('DOMContentLoaded', () => {
+            log('DOM loaded, loading header...');
+            
+            const loadScript = (src) => {
+                return new Promise((resolve, reject) => {
+                    const script = document.createElement('script');
+                    script.src = src;
+                    script.onload = () => resolve(script);
+                    script.onerror = () => reject(new Error(`Script load error for ${src}`));
+                    document.body.appendChild(script);
+                });
+            };
+            
+            const loadHeader = () => {
+                const headerPlaceholder = document.getElementById('header-placeholder');
+                if (!headerPlaceholder) {
+                    log('ERROR: No header placeholder found');
+                    return;
+                }
+            
+                fetch('/header.html') 
+                    .then(response => {
+                        if (!response.ok) throw new Error('Network response for header.html was not ok.');
+                        return response.text();
+                    })
+                    .then(html => {
+                        log(`Header HTML loaded, length: ${html.length}`);
+                        headerPlaceholder.innerHTML = html;
+                        log(`Search popup in DOM after header load: ${!!document.getElementById('searchPopup')}`);
+                        log(`Search button in DOM after header load: ${!!document.querySelector('.header__search-btn')}`);
+                        return loadScript('https://cdn.jsdelivr.net/npm/fuse.js@6.6.2');
+                    })
+                    .then(() => {
+                        log('Fuse.js loaded');
+                        return loadScript('/header-search.js');
+                    })
+                    .then(() => {
+                        log('header-search.js loaded');
+                        if (typeof initializeHeader === 'function') {
+                            log('Calling initializeHeader...');
+                            initializeHeader(); 
+                            log('initializeHeader completed');
+                        } else {
+                            log('ERROR: initializeHeader function not found');
+                        }
+                    })
+                    .catch(error => {
+                        log(`ERROR during header loading: ${error.message}`);
+                    });
+            };
+            
+            loadHeader();
+        });
+    </script>
+</body>
+</html>

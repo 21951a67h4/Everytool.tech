@@ -82,12 +82,6 @@ body {
     animation: fadeInUp 1s ease-out;
 }
 
-.tool-hero__right {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    animation: fadeInUp 1s ease-out;
-}
 
 .tool-hero__title {
     font-size: 3rem;

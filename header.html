@@ -367,6 +367,7 @@
         position: relative !important;
         width: 100% !important;
         max-width: 640px !important;
+        min-height: 400px !important;
         background: #fff !important;
         border-radius: 12px !important;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2) !important;
@@ -379,6 +380,7 @@
         padding-top: 1.5rem !important;
         z-index: 100000 !important;
         box-sizing: border-box !important;
+        margin: auto !important;
     }
     .search-popup.is-open .search-popup__content {
         transform: scale(1);
@@ -495,13 +497,18 @@
     }
     
     .search-popup__footer {
-        padding: 0.75rem 1.5rem;
-        border-top: 1px solid #E5E7EB; /* gray-200 */
-        font-size: 0.875rem;
-        color: #6B7280; /* gray-500 */
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
+        padding: 0.75rem 1.5rem !important;
+        border-top: 1px solid #E5E7EB !important; /* gray-200 */
+        font-size: 0.875rem !important;
+        color: #6B7280 !important; /* gray-500 */
+        display: flex !important;
+        align-items: center !important;
+        gap: 0.5rem !important;
+        flex-shrink: 0 !important;
+        margin-top: auto !important;
+        background: #fff !important;
+        border-bottom-left-radius: 12px !important;
+        border-bottom-right-radius: 12px !important;
     }
 
     .search-popup__footer kbd {
