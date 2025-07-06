@@ -67,7 +67,7 @@
     /* Z-index layers */
     --z-header: 1000;
     --z-mobile-menu: 1001;
-    --z-search-popup: 9999;
+    --z-search-popup: 99999;
     --z-modal: 1000;
     --z-tooltip: 1500;
     --z-overlay: 2000;

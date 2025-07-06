@@ -30,8 +30,18 @@
             background: var(--bg-primary);
             color: var(--text-primary);
             min-height: 100vh;
+        }
+        
+        /* Use a wrapper div for flex layout instead of body to avoid search popup conflicts */
+        .page-wrapper {
             display: flex;
             flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        /* Ensure search popup works correctly */
+        body.search-popup-open {
+            overflow: hidden !important;
         }
 
         .main-content {
@@ -121,9 +131,10 @@
     </style>
 </head>
 <body>
-    <div id="header-placeholder"></div>
+    <div class="page-wrapper">
+        <div id="header-placeholder"></div>
 
-    <main class="main-content policy-page">
+        <main class="main-content policy-page">
         <div class="policy-container">
             <h1 class="policy-title">Cookie Policy</h1>
 
@@ -237,9 +248,10 @@
                 </div>
             </section>
         </div>
-    </main>
+        </main>
 
-    <div id="footer-placeholder"></div>
+        <div id="footer-placeholder"></div>
+    </div>
 
     <script src="/script.js"></script>
     <script src="/FAQ section/faq.js"></script>

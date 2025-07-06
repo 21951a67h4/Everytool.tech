@@ -46,6 +46,7 @@
     --z-base: 1;
     --z-above: 2;
     --z-modal: 1000;
+    --z-search-popup: 99999;
 }
 
 /* Common FAQ Section Styles */

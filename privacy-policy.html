@@ -30,8 +30,18 @@
             background: var(--bg-primary);
             color: var(--text-primary);
             min-height: 100vh;
+        }
+        
+        /* Use a wrapper div for flex layout instead of body to avoid search popup conflicts */
+        .page-wrapper {
             display: flex;
             flex-direction: column;
+            min-height: 100vh;
+        }
+        
+        /* Ensure search popup works correctly */
+        body.search-popup-open {
+            overflow: hidden !important;
         }
 
         /* Main Content Styles */
@@ -298,10 +308,11 @@
     </style>
 </head>
 <body>
-    <!-- Header Section -->
-    <div id="header-placeholder"></div>
+    <div class="page-wrapper">
+        <!-- Header Section -->
+        <div id="header-placeholder"></div>
 
-    <main class="main-content">
+        <main class="main-content">
         <div class="privacy-container">
             <!-- Introduction Section -->
             <section class="privacy-section">
@@ -461,8 +472,9 @@
         </div>
     </section>
 
-    <!-- Footer Section -->
-    <div id="footer-placeholder"></div>
+        <!-- Footer Section -->
+        <div id="footer-placeholder"></div>
+    </div>
 
     <!-- Scripts -->
     <script src="FAQ section/faq.js"></script>
