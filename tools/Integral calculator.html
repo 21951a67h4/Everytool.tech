@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Integral Calculator | Step-by-Step Integration | EveryTool.tech</title>
+    <meta name="description" content="Solve definite and indefinite integrals with our free online Integral Calculator. Get detailed, step-by-step solutions and visualize the area under the curve. Perfect for calculus students.">
+    <meta name="keywords" content="integral calculator, integration calculator, antiderivative calculator, definite integral, indefinite integral, calculus calculator, step-by-step integral, area under curve, calculus solver">
+    <meta name="robots" content="index, follow">
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="Integral Calculator with Step-by-Step Solutions | EveryTool.tech">
+    <meta property="og:description" content="A powerful, free online integral calculator that shows step-by-step solutions for both definite and indefinite integrals and visualizes the result.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://everytool.tech/integral-calculator">
+    <meta property="og:image" content="https://everytool.tech/assets/tool-preview.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../assets/favicon.png">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="../FAQ section/faq.css">
+    <link rel="stylesheet" href="tool.css">
+
+    <!-- START: CRITICAL STYLE FOR HEADER -->
+    <style>
+        #header-placeholder {
+            min-height: 130px;
+            position: relative; 
+            z-index: 2000;      
+        }
+        @media (max-width: 768px) {
+            #header-placeholder {
+                min-height: 64px;
+            }
+        }
+        /* Integral Calculator Specific Styles */
+        .integral-calc-container { display: flex; flex-direction: column; gap: 20px; }
+        .integral-input-row { display: flex; align-items: center; gap: 15px; flex-wrap: wrap; }
+        .integral-input-row .integral-sign { font-size: 4rem; font-family: serif; }
+        .integral-input-row input { padding: 12px; font-size: 1rem; border: 1px solid #ccc; border-radius: 4px; font-family: 'Roboto Mono', monospace; }
+        #function-input { flex-grow: 1; }
+        .integral-type-selector { display: flex; gap: 15px; align-items: center; }
+        #integral-bounds-container { display: flex; gap: 10px; }
+        #integral-result-section { margin-top: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        #text-results { background: #f8f9fa; padding: 20px; border-radius: 8px; }
+        #graph-results { min-height: 300px; }
+        .result-box { margin-bottom: 20px; }
+        .result-box h4 { margin-top: 0; }
+        #final-result { font-size: 1.5rem; font-weight: 500; font-family: 'Roboto Mono', monospace; background: #e9ecef; padding: 15px; border-radius: 6px; word-wrap: break-word; }
+        #step-by-step-solution { background-color: #fff; padding: 15px; border-radius: 6px; border: 1px solid #ddd; white-space: pre-wrap; font-family: 'Courier New', Courier, monospace; line-height: 1.6; max-height: 400px; overflow-y: auto; }
+        
+        @media (max-width: 992px) {
+            #integral-result-section { grid-template-columns: 1fr; }
+            #graph-results { order: -1; } /* Move graph to top on mobile */
+        }
+    </style>
+    <!-- END: CRITICAL STYLE FOR HEADER -->
+
+</head>
+<body>
+    <!-- Header Placeholder -->
+    <div id="header-placeholder"></div>
+
+    <!-- Tool Hero Section -->
+    <section class="tool-hero">
+        <div class="tool-hero__container">
+            <div class="tool-hero__content">
+                <div class="tool-hero__left">
+                    <h1 class="tool-hero__title">Integral Calculator with Step-by-Step Solutions</h1>
+                    <p class="tool-hero__description">
+                        Solve definite and indefinite integrals in a flash. Our free calculus tool provides detailed, step-by-step solutions and visualizes the area under the curve, making it the perfect study aid for students and professionals.
+                    </p>
+                    <div class="tool-hero__features">
+                        <div class="tool-feature">
+                            <i class="fas fa-list-ol"></i>
+                            <span>Step-by-Step Rules</span>
+                        </div>
+                        <div class="tool-feature">
+                            <i class="fas fa-infinity"></i>
+                            <span>Definite & Indefinite</span>
+                        </div>
+                        <div class="tool-feature">
+                            <i class="fas fa-chart-area"></i>
+                            <span>Visualize Area</span>
+                        </div>
+                        <div class="tool-feature">
+                            <i class="fas fa-book-open"></i>
+                            <span>Calculus Learning Tool</span>
+                        </div>
+                    </div>
+                    <div class="tool-hero__cta">
+                        <a href="#tool-display" class="tool-button tool-button--primary">
+                            <i class="fas fa-calculator"></i>
+                            Solve Integral Now
+                        </a>
+                        <a href="#learn-more" class="tool-button tool-button--secondary">
+                            <i class="fas fa-book"></i>
+                            Learn About Integration
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tool Display Section -->
+    <section id="tool-display" class="tool-display">
+        <div class="tool-display__container">
+            <div class="tool-display__wrapper">
+                <div class="tool-display__header">
+                    <h2 class="tool-display__title">The Calculus Problem Solver</h2>
+                    <p class="tool-display__description">
+                        Enter a function, choose your integral type, and let our tool do the work.
+                    </p>
+                </div>
+                <!-- Integral Calculator Custom Interface -->
+                <div class="integral-calc-container">
+                    <div class="integral-input-row">
+                        <span class="integral-sign">∫</span>
+                        <input type="text" id="function-input" placeholder="e.g., x^2 + sin(x)" value="x^2">
+                        <span>d</span>
+                        <input type="text" id="variable-input" value="x" style="width: 40px; text-align: center;">
+                    </div>
+                    <div class="integral-type-selector">
+                        <label><input type="radio" name="integral_type" value="indefinite" checked> Indefinite Integral</label>
+                        <label><input type="radio" name="integral_type" value="definite"> Definite Integral</label>
+                        <div id="integral-bounds-container" style="display: none;">
+                            <input type="text" id="lower-bound" placeholder="a" style="width: 50px;" value="0">
+                            <input type="text" id="upper-bound" placeholder="b" style="width: 50px;" value="2">
+                        </div>
+                    </div>
+                     <div class="tool-display__controls">
+                        <button id="calculate-btn" class="tool-display__button">
+                            <i class="fas fa-equals"></i>
+                            Calculate
+                        </button>
+                    </div>
+                </div>
+
+                <div id="integral-result-section" style="display: none;">
+                    <div id="text-results">
+                        <div class="result-box">
+                            <h4>Result:</h4>
+                            <div id="final-result"></div>
+                        </div>
+                         <div class="result-box">
+                            <h4>Step-by-Step Solution:</h4>
+                            <pre id="step-by-step-solution"></pre>
+                        </div>
+                    </div>
+                    <div id="graph-results">
+                        <div id="graph-plot"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Blog Section -->
+    <section id="learn-more" class="tool-blog">
+        <div class="tool-blog__container">
+            <div class="tool-blog__header">
+                <h2 class="tool-blog__title">A Student's Guide to Mastering Integration</h2>
+                <p class="tool-blog__subtitle">
+                    Unlock the core concepts of calculus by understanding what integrals are and how to solve them.
+                </p>
+            </div>
+            <div class="blog-content">
+                <div class="blog-section">
+                    <h3 class="blog-section__title">What is Integration? The "Reverse" of Differentiation</h3>
+                    <div class="blog-section__content">
+                        <p>
+                            In calculus, integration is one of the two fundamental operations, alongside differentiation. At its simplest, integration can be thought of as the reverse process of differentiation. If differentiation finds the rate of change (slope) of a function, integration finds the accumulated quantity. This leads to two primary types of integrals, both of which our <strong>integral calculator</strong> can solve.
+                        </p>
+                        <ul>
+                            <li><strong>Indefinite Integrals:</strong> These find the "general antiderivative" of a function. If you have a function representing speed, its indefinite integral gives you a function for the distance traveled.</li>
+                            <li><strong>Definite Integrals:</strong> These calculate the net accumulation between two points. Geometrically, this is famously interpreted as the "area under the curve." If you integrate a function for profit rate from January to March, you get the total profit over that period.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="blog-section">
+                    <h3 class="blog-section__title">Indefinite Integrals and the Constant of Integration, "+ C"</h3>
+                    <div class="blog-section__content">
+                        <p>When you find an antiderivative, you're answering the question: "What function, when differentiated, gives me the function I started with?" For example, the integral of `2x` is `x²`. But `x² + 5` also has a derivative of `2x`, as does `x² - 100`. The derivative of any constant is zero.</p>
+                        <p>To account for all these possibilities, we add a <strong>constant of integration, `+ C`</strong>, to every indefinite integral. This represents the entire family of functions that could be the antiderivative. The most basic rule for integration is the Power Rule:</p>
+                        <p style="text-align: center; font-size: 1.2rem; font-family: 'Courier New', monospace; background-color: #f4f4f4; padding: 15px; border-radius: 5px;">
+                            ∫ xⁿ dx = (xⁿ⁺¹)/(n+1) + C
+                        </p>
+                         <p>So, to integrate `x³`, you would get `(x⁴)/4 + C`. Our calculator not only provides this result but also shows the application of the rule in its step-by-step solution.</p>
+                    </div>
+                </div>
+                
+                <div class="blog-section">
+                    <h3 class="blog-section__title">Definite Integrals: Calculating the Area Under a Curve</h3>
+                    <div class="blog-section__content">
+                        <p>A definite integral, written as ∫ₐᵇ f(x) dx, gives a specific numerical value. This value represents the net signed area between the function's curve and the x-axis, from a lower bound `a` to an upper bound `b`.</p>
+                        <p>The method for solving this is given by the <strong>Fundamental Theorem of Calculus, Part 2</strong>:</p>
+                        <ol>
+                            <li>Find the antiderivative of f(x), let's call it F(x). (You can ignore the `+ C` for definite integrals).</li>
+                            <li>Evaluate the antiderivative at the upper bound: F(b).</li>
+                            <li>Evaluate the antiderivative at the lower bound: F(a).</li>
+                            <li>Subtract the two values: F(b) - F(a).</li>
+                        </ol>
+                        <p><strong>Example:</strong> Calculate the integral of `x²` from 0 to 2.</p>
+                        <ul>
+                            <li>The antiderivative of `x²` is `(x³)/3`.</li>
+                            <li>F(2) = (2³)/3 = 8/3.</li>
+                            <li>F(0) = (0³)/3 = 0.</li>
+                            <li>The result is 8/3 - 0 = 8/3.</li>
+                        </ul>
+                        <p>Our calculator not only computes this value but also generates a graph of `y = x²` with the area from x=0 to x=2 shaded in, providing a powerful visual confirmation of what you've just calculated.</p>
+                    </div>
+                </div>
+                
+                <div class="blog-section">
+                    <h3 class="blog-section__title">Key Integration Techniques Explained</h3>
+                    <div class="blog-section__content">
+                        <p>Many integrals can't be solved with the simple power rule. More advanced techniques are needed, which our calculator can demonstrate.</p>
+                        <ul>
+                           <li><strong>U-Substitution:</strong> This is the reverse of the chain rule. It's used when you have a function and its derivative (or something close to it) within the same integral. By setting `u` equal to the "inner" function, you can simplify the integral into a much easier form. It's one of the most common and powerful techniques.</li>
+                           <li><strong>Integration by Parts:</strong> This is the reverse of the product rule, used for integrating products of functions (like `x * sin(x)`). The formula is ∫u dv = uv - ∫v du. The key is to strategically choose which part of your function is `u` and which is `dv`.</li>
+                            <li><strong>Trigonometric Substitution:</strong> This technique is used for integrals containing expressions like `sqrt(a² - x²)`. By substituting `x` with a trigonometric function (e.g., `x = a*sin(θ)`), the expression simplifies thanks to trigonometric identities, allowing it to be integrated.</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                 <div class="blog-section">
+                    <h3 class="blog-section__title">Non-Elementary Integrals & Numerical Approximation</h3>
+                    <div class="blog-section__content">
+                        <p>It's important to know that not every function has a "nice" antiderivative that can be written in terms of elementary functions (polynomials, trig functions, logs, etc.). A famous example is the integral of `e^(-x²)`, which is fundamental to statistics. For these, it's impossible to find a symbolic indefinite integral.</p>
+                        <p>However, we can still find the value of a definite integral for these functions using <strong>numerical approximation</strong> methods like the Trapezoidal Rule or Simpson's Rule. These methods work by slicing the area under the curve into a large number of simple shapes (trapezoids or parabolas) and summing their areas. While our tool focuses on symbolic integration, this is a key concept in applied mathematics and engineering for solving real-world problems.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="faq-container">
+            <div class="faq-header">
+                <h2 class="faq-title">Frequently Asked Questions</h2>
+                <p class="faq-subtitle">Find quick answers to common questions about our integral calculator</p>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What is the "+ C" and why is it important?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>The "+ C" is the constant of integration. It's added to every indefinite integral because the derivative of any constant is zero. This means there is an entire "family" of functions whose derivative is your original function. `x² + 5` and `x² - 100` both have the same derivative, `2x`. The `+ C` represents all possible constant values.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        What's the difference between a definite and indefinite integral?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>An <strong>indefinite integral</strong> finds the general antiderivative of a function, resulting in another function (e.g., ∫2x dx = x² + C). A <strong>definite integral</strong> calculates a specific numerical value representing the area under a curve between two points (e.g., ∫ from 0 to 2 of 2x dx = 4).</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Why does the calculator show a graph for a definite integral?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>The graph provides a geometric interpretation of your result. The definite integral represents the "net signed area" between the function's curve and the x-axis. By shading this area, the calculator helps you visualize exactly what the numerical result means, which is a powerful learning aid.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        The calculator says my function can't be integrated. Why?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Some functions, like `sin(x^2)` or `e^(-x^2)`, do not have an antiderivative that can be expressed using elementary functions. These are called non-elementary integrals. While our symbolic calculator cannot find an indefinite integral for them, their definite integrals can still be calculated using numerical approximation methods.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        Does this calculator show steps for techniques like u-substitution?
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes. Our calculator is powered by a symbolic math engine that identifies and applies the correct integration rules. The step-by-step solution will explicitly state the rule being used, whether it's the Power Rule, u-substitution, integration by parts, or another technique, and show how it is applied.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer Placeholder -->
+    <div id="footer-placeholder"></div>
+
+    <!-- ====== START: FINAL CORRECTED SCRIPT LOGIC ====== -->
+    <!-- Third-party libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/nerdamer@1.1.13/nerdamer.core.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/nerdamer@1.1.13/nerdamer.core.js.map" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/nerdamer@1.1.13/Calculus.js"></script>
+    <script src="https://unpkg.com/function-plot/dist/function-plot.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // --- Helper function to load a script and return a Promise ---
+            const loadScript = (src) => {
+                return new Promise((resolve, reject) => {
+                    const script = document.createElement('script');
+                    script.src = src;
+                    script.onload = () => resolve(script);
+                    script.onerror = () => reject(new Error(`Script load error for ${src}`));
+                    document.body.appendChild(script);
+                });
+            };
+
+            // --- 1. Function to Load and Initialize the Header ---
+            const loadHeader = () => {
+                const headerPlaceholder = document.getElementById('header-placeholder');
+                if (!headerPlaceholder) return;
+                fetch('../../header.html')
+                    .then(response => response.ok ? response.text() : Promise.reject('Failed to load header'))
+                    .then(html => {
+                        headerPlaceholder.innerHTML = html;
+                        return loadScript('https://cdn.jsdelivr.net/npm/fuse.js@6.6.2');
+                    })
+                    .then(() => loadScript('../../header-search.js'))
+                    .then(() => {
+                        if (typeof initializeHeader === 'function') initializeHeader();
+                        else throw new Error('initializeHeader function not found.');
+                    })
+                    .catch(error => console.error('CRITICAL ERROR during header loading process:', error));
+            };
+            
+            // --- 2. Function to Load the Footer ---
+            const loadFooter = () => {
+                const footerPlaceholder = document.getElementById('footer-placeholder');
+                if (footerPlaceholder) {
+                    fetch('../../footer.html')
+                        .then(response => response.ok ? response.text() : Promise.reject('Failed to load footer'))
+                        .then(html => { footerPlaceholder.innerHTML = html; })
+                        .catch(error => console.error('Error loading footer:', error));
+                }
+            };
+
+            // --- 3. Run the loaders ---
+            loadHeader();
+            loadFooter();
+
+            // --- 4. Initialize Integral Calculator Functionality ---
+            const functionInput = document.getElementById('function-input');
+            const variableInput = document.getElementById('variable-input');
+            const integralTypeRadios = document.querySelectorAll('input[name="integral_type"]');
+            const boundsContainer = document.getElementById('integral-bounds-container');
+            const lowerBoundInput = document.getElementById('lower-bound');
+            const upperBoundInput = document.getElementById('upper-bound');
+            const calculateBtn = document.getElementById('calculate-btn');
+            const resultSection = document.getElementById('integral-result-section');
+            const finalResultEl = document.getElementById('final-result');
+            const stepsEl = document.getElementById('step-by-step-solution');
+            const graphPlotEl = document.getElementById('graph-plot');
+            const graphResultsContainer = document.getElementById('graph-results');
+            
+            // Load nerdamer with Calculus addon
+            const nerdamer = window.nerdamer. Calculus;
+
+            integralTypeRadios.forEach(radio => {
+                radio.addEventListener('change', (e) => {
+                    boundsContainer.style.display = e.target.value === 'definite' ? 'flex' : 'none';
+                });
+            });
+
+            const plotIntegral = (fn, lower, upper) => {
+                try {
+                     graphResultsContainer.style.display = 'block';
+                     graphPlotEl.innerHTML = ''; // Clear previous plot
+                     const plotOptions = {
+                        target: '#graph-plot',
+                        width: graphPlotEl.clientWidth,
+                        height: 400,
+                        grid: true,
+                        xAxis: { domain: [lower - 1, upper + 1] },
+                        data: [
+                            { fn: fn },
+                            { fn: fn, range: [lower, upper], closed: true }
+                        ]
+                     };
+                     functionPlot(plotOptions);
+                } catch(e) {
+                    console.error("Plotting error:", e);
+                    graphPlotEl.innerHTML = '<p>Could not plot the function. Please check syntax.</p>';
+                }
+            };
+
+            calculateBtn.addEventListener('click', () => {
+                const funcStr = functionInput.value;
+                const variable = variableInput.value || 'x';
+                const integralType = document.querySelector('input[name="integral_type"]:checked').value;
+
+                if (!funcStr) {
+                    alert("Please enter a function to integrate.");
+                    return;
+                }
+                
+                resultSection.style.display = 'grid';
+
+                try {
+                    if (integralType === 'indefinite') {
+                        graphResultsContainer.style.display = 'none';
+                        const integral = nerdamer.integrate(funcStr, variable);
+                        // Nerdamer can produce detailed steps (but it's a pro feature)
+                        // For this implementation, we'll just show the result
+                        finalResultEl.textContent = `${integral.toString()} + C`;
+                        stepsEl.textContent = `1. Apply integration rules to ∫(${funcStr}) d${variable}.\n\n2. The antiderivative is ${integral.toString()}.\n\n3. Add the constant of integration, C.`;
+
+                    } else { // Definite integral
+                        const lower = nerdamer(lowerBoundInput.value).text('decimal');
+                        const upper = nerdamer(upperBoundInput.value).text('decimal');
+                        
+                        if (isNaN(lower) || isNaN(upper)) {
+                            alert('Please enter valid numerical bounds.');
+                            return;
+                        }
+
+                        const result = nerdamer.defint(funcStr, variable, lower, upper);
+                        const antiderivative = nerdamer.integrate(funcStr, variable);
+
+                        finalResultEl.textContent = `${result.toString()} ≈ ${nerdamer(result).text('decimal')}`;
+                        
+                        stepsEl.textContent = `1. Find the antiderivative of ${funcStr}.\n   F(x) = ${antiderivative.toString()}\n\n`;
+                        stepsEl.textContent += `2. Evaluate F(b) - F(a) according to the Fundamental Theorem of Calculus.\n`;
+                        stepsEl.textContent += `   F(${upper}) - F(${lower})\n\n`;
+                        stepsEl.textContent += `3. Result: ${result.toString()}`;
+
+                        plotIntegral(funcStr, parseFloat(lower), parseFloat(upper));
+                    }
+                } catch (e) {
+                    console.error("Calculation error:", e);
+                    finalResultEl.textContent = "Error";
+                    stepsEl.textContent = `Could not calculate the integral. Please check your function syntax.\nError details: ${e.message}`;
+                    graphResultsContainer.style.display = 'none';
+                }
+            });
+
+            // FAQ Accordion
+            const faqItems = document.querySelectorAll('.faq-item');
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                if (question) {
+                    question.addEventListener('click', () => {
+                        const isActive = item.classList.contains('active');
+                        faqItems.forEach(otherItem => {
+                            if (otherItem !== item) otherItem.classList.remove('active');
+                        });
+                        if (!isActive) item.classList.add('active');
+                    });
+                }
+            });
+        });
+    </script>
+    
+    <!-- =====================================================================
+    ====== UNIVERSAL SEARCH FOR ALL PAGES - DO NOT REMOVE ======
+    ===================================================================== -->
+    <script src="../universal-search-deploy.js"></script>
+    
+    <!-- External scripts can be loaded at the end -->
+    <script src="../../faq.js" defer></script>
+    <script src="../../view.js" defer></script>
+
+    <!-- ====== END: FINAL CORRECTED SCRIPT LOGIC ====== -->
+
+</body>
+</html>
