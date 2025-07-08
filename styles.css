@@ -55,9 +55,12 @@
     --space-16: 4rem;
     
     /* Transitions */
-    --transition-all: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-transform: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    --transition-opacity: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-duration: 0.3s;
+    --transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-transform: transform var(--transition-duration) var(--transition-timing);
+    --transition-opacity: opacity var(--transition-duration) var(--transition-timing);
+    --transition-colors: background-color var(--transition-duration) var(--transition-timing), color var(--transition-duration) var(--transition-timing), border-color var(--transition-duration) var(--transition-timing);
+    --transition-shadow: box-shadow var(--transition-duration) var(--transition-timing);
     
     /* Glass Effect */
     --glass-bg: rgba(255, 255, 255, 0.7);
@@ -101,10 +104,10 @@ body {
     right: 0;
     z-index: var(--z-header);
     z-index: 1000; /* Fallback for browsers that don't support CSS variables */
-    -webkit-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    -moz-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    -o-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    -webkit-transition: background-color var(--transition-duration) var(--transition-timing), box-shadow var(--transition-duration) var(--transition-timing);
+    -moz-transition: background-color var(--transition-duration) var(--transition-timing), box-shadow var(--transition-duration) var(--transition-timing);
+    -o-transition: background-color var(--transition-duration) var(--transition-timing), box-shadow var(--transition-duration) var(--transition-timing);
+    transition: background-color var(--transition-duration) var(--transition-timing), box-shadow var(--transition-duration) var(--transition-timing);
     min-height: 48px;
     height: 48px;
 }
@@ -213,10 +216,10 @@ body {
     padding: 0.5rem 1rem;
     border-radius: 8px;
     position: relative;
-    -webkit-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    -moz-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    -o-transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    -webkit-transition: color var(--transition-duration) var(--transition-timing), transform var(--transition-duration) var(--transition-timing);
+    -moz-transition: color var(--transition-duration) var(--transition-timing), transform var(--transition-duration) var(--transition-timing);
+    -o-transition: color var(--transition-duration) var(--transition-timing), transform var(--transition-duration) var(--transition-timing);
+    transition: color var(--transition-duration) var(--transition-timing), transform var(--transition-duration) var(--transition-timing);
 }
 
 .header__nav-link::before {
@@ -251,6 +254,12 @@ body {
     -ms-transform: translateY(-2px);
     -o-transform: translateY(-2px);
     transform: translateY(-2px);
+    padding: 1rem 1.5rem;
+    font-weight: 600;
+    border-radius: 50px;
+    transition: var(--transition-colors), var(--transition-transform), var(--transition-shadow);
+    text-decoration: none;
+    border: none;
 }
 
 .header__nav-link:hover::before {
@@ -674,17 +683,15 @@ main {
 }
 
 .hero__popular-tag {
-    background: rgba(255, 255, 255, 0.1);
-    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--text-secondary);
+    background-color: var(--bg-secondary);
     padding: 0.5rem 1rem;
-    border-radius: 6px;
-    color: #fff;
+    border-radius: 20px;
     font-size: 0.9rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    transition: all 0.3s ease;
+    font-weight: 500;
     cursor: pointer;
+    transition: var(--transition-colors), var(--transition-transform), var(--transition-shadow);
+    border: 1px solid var(--border-light);
 }
 
 .hero__popular-tag:hover {
@@ -751,26 +758,26 @@ main {
 }
 
 .hero__profile-status {
-    position: absolute;
-    bottom: 8px;
-    right: 8px;
-    background: #22c55e;
-    color: #fff;
-    font-size: 0.85rem;
-    padding: 0.22rem 0.9rem;
-    border-radius: 14px;
-    border: 2px solid #fff;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background-color: var(--bg-primary);
+    border: 1px solid var(--border-light);
+    border-radius: 20px;
+    padding: 0.5rem 1rem;
     font-weight: 600;
-    z-index: 2;
-    box-shadow: 0 2px 8px rgba(34,197,94,0.10);
+    transition: var(--transition-transform), var(--transition-shadow);
     cursor: pointer;
-    transition: all 0.3s ease;
 }
 
 .hero__profile-status:hover {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(34,197,94,0.20);
     background: #16a34a;
+    background-color: #e2e8f0;
+    border-radius: 50%;
+    color: var(--text-secondary);
+    transition: var(--transition-colors), var(--transition-transform);
 }
 
 .hero__profile-status:active {
@@ -810,6 +817,13 @@ main {
 .hero__profile-social-link:hover {
     color: #fff;
     transform: translateY(-2px);
+    background-color: var(--primary);
+    box-shadow: var(--shadow-md);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: var(--transition-transform), var(--transition-shadow);
+    text-decoration: none;
+    background-color: var(--bg-primary);
 }
 
 .hero__floating-elements {
@@ -1171,15 +1185,13 @@ main {
 }
 
 .category-card {
-    background: var(--glass-bg);
-    backdrop-filter: blur(10px);
-    border: 1px solid var(--glass-border);
+    background-color: var(--bg-primary);
     border-radius: var(--radius-lg);
-    padding: 2.5rem;
-    transition: var(--transition-all);
-    transform-style: preserve-3d;
-    transform: translateZ(0);
-    height: 100%;
+    padding: var(--space-8);
+    text-align: center;
+    border: 1px solid transparent;
+    transition: var(--transition-transform), var(--transition-shadow), border-color var(--transition-duration) var(--transition-timing);
+    box-shadow: var(--shadow-md);
     display: flex;
     flex-direction: column;
 }
@@ -1405,11 +1417,11 @@ main {
 .popular-tool-card {
     background: var(--bg-primary);
     border-radius: var(--radius-lg);
-    padding: 2rem;
-    border: 1px solid rgba(0, 0, 0, 0.05);
-    position: relative;
-    transform-style: preserve-3d;
-    transition: all 0.3s ease;
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    transition: var(--transition-transform), var(--transition-shadow);
+    display: flex;
+    flex-direction: column;
 }
 
 .popular-tool-card:hover {
@@ -1648,10 +1660,16 @@ main {
 }
 
 .testimonial-card {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
+    background: var(--bg-primary);
     border-radius: var(--radius-lg);
-    padding: 2rem;
+    padding: var(--space-8);
+    box-shadow: var(--shadow-md);
+    transition: var(--transition-transform), var(--transition-shadow);
+}
+
+.testimonial-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
 }
 
 .testimonial-card__content {
@@ -2066,17 +2084,22 @@ main {
 }
 
 .cta-feature {
-    text-align: center;
+    display: flex;
+    align-items: start;
+    gap: 1rem;
     padding: 1.5rem;
-    background: rgba(255, 255, 255, 0.1);
-    border-radius: 12px;
-    backdrop-filter: blur(5px);
-    transition: all 0.3s ease;
+    border-radius: var(--radius-md);
+    transition: background-color var(--transition-duration) var(--transition-timing), var(--transition-transform);
+    cursor: pointer;
 }
 
 .cta-feature:hover {
     transform: translateY(-5px);
     background: rgba(255, 255, 255, 0.15);
+    border: 1px solid var(--border-light);
+    border-radius: 50px;
+    padding-left: 1.5rem;
+    transition: var(--transition-shadow), border-color var(--transition-duration) var(--transition-timing);
 }
 
 .cta-feature__icon {
@@ -2325,11 +2348,13 @@ main {
 }
 
 .tools-faq-item {
-    border: 1px solid #e2e8f0;
-    border-radius: 12px;
-    overflow: hidden;
     background: white;
-    transition: all 0.3s ease;
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    margin-bottom: 1rem;
+    transition: var(--transition-shadow), var(--transition-transform);
+    border: 1px solid transparent;
+    position: relative;
 }
 
 .tools-faq-item:hover {

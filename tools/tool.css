@@ -22,7 +22,12 @@
     --radius-sm: 0.375rem;
     --radius-md: 0.75rem;
     --radius-lg: 1.5rem;
-    --transition-all: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-duration: 0.3s;
+    --transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-transform: transform var(--transition-duration) var(--transition-timing);
+    --transition-opacity: opacity var(--transition-duration) var(--transition-timing);
+    --transition-colors: background-color var(--transition-duration) var(--transition-timing), color var(--transition-duration) var(--transition-timing), border-color var(--transition-duration) var(--transition-timing);
+    --transition-shadow: box-shadow var(--transition-duration) var(--transition-timing);
 }
 
 /* Reset and Base Styles */
@@ -126,7 +131,7 @@ body {
     border-radius: var(--radius-md);
     font-weight: 600;
     text-decoration: none;
-    transition: var(--transition-all);
+    transition: var(--transition-colors), var(--transition-transform), var(--transition-shadow);
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
@@ -248,7 +253,7 @@ body {
     color: var(--primary);
     text-decoration: none;
     border-bottom: 2px solid var(--primary-light);
-    transition: var(--transition-all);
+    transition: var(--transition-colors);
 }
 
 .blog-section__content a:hover {
@@ -416,7 +421,7 @@ body {
     font-weight: 600;
     border: none;
     cursor: pointer;
-    transition: var(--transition-all);
+    transition: var(--transition-colors), var(--transition-transform);
     display: inline-flex;
     align-items: center;
     gap: 0.5rem;
@@ -453,11 +458,12 @@ body {
 
 .tool-display__input {
     width: 100%;
-    padding: 0.75rem;
-    border: 2px solid var(--bg-accent);
-    border-radius: var(--radius-md);
+    padding: 0.75rem 1rem;
     font-size: 1rem;
-    transition: var(--transition-all);
+    border: 1px solid #ced4da;
+    border-radius: var(--radius-md);
+    background-color: white;
+    transition: var(--transition-colors), var(--transition-shadow);
 }
 
 .tool-display__input:focus {
@@ -469,11 +475,12 @@ body {
 .tool-display__textarea {
     width: 100%;
     min-height: 150px;
-    padding: 0.75rem;
-    border: 2px solid var(--bg-accent);
-    border-radius: var(--radius-md);
+    padding: 1rem;
     font-size: 1rem;
-    transition: var(--transition-all);
+    border: 1px solid #ced4da;
+    border-radius: var(--radius-md);
+    background-color: white;
+    transition: var(--transition-colors), var(--transition-shadow);
     resize: vertical;
 }
 
@@ -509,7 +516,7 @@ body {
     border: 2px dashed var(--primary-light);
     border-radius: var(--radius-md);
     color: var(--text-secondary);
-    transition: var(--transition-all);
+    transition: var(--transition-colors), var(--transition-transform);
 }
 
 .tool-display__file-label:hover {
