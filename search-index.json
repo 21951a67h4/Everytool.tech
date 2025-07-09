@@ -15,6 +15,11 @@
     "content": "About"
   },
   {
+    "title": "Blog",
+    "url": "https://blog.everytool.tech",
+    "content": "Blog"
+  },
+  {
     "title": "Contact",
     "url": "https://contact.everytool.tech",
     "content": "Contact"
